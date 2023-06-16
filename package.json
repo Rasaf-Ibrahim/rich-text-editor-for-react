@@ -7,7 +7,13 @@
   },
   "author": "Rasaf Ibrahim",
   "license": "MIT",
+  "dependencies": {
+
+  },
   "devDependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.5",
     "@rollup/plugin-commonjs": "^25.0.1",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-terser": "^0.4.3",

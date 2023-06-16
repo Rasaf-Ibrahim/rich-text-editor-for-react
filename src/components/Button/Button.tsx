@@ -1,13 +1,29 @@
 import React from "react";
-import "./button.css";
+import Button from '@mui/material/Button'
 
 export interface ButtonProps{
-    label: string;
+    label: string
+    variant: 'contained' | 'outlined'
+
 }
 
-const Button = ( {label}: ButtonProps) => {
-    return <button className="btn">{label}</button>
+
+export default function MuiButton(props: ButtonProps){
+
+    const {label, variant} = props
+
+
+    return (
+
+        <>
+
+            <Button variant={variant}>{label}</Button>
+
+        </>
+
+
+    )
+    
 }
 
 
-export default Button;
