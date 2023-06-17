@@ -1,36 +1,35 @@
 import React from "react"
 import Button from '@mui/material/Button'
-import Theme from "../theme/theme";
+import MuiTheme, { PrimaryColorType } from "../theme/theme"
 
 
-export interface MuiButtonProps{
+export interface MuiButtonProps {
     dark: boolean,
+    primaryColor: PrimaryColorType
     label: string
     variant: 'contained' | 'outlined'
 }
 
 
-export default function MuiButton(props: MuiButtonProps){
+export default function MuiButton(props: MuiButtonProps) {
 
-    const {dark, label, variant} = props
+    const { dark, primaryColor, label, variant } = props
 
 
     return (
 
         <>
 
-            <Theme dark={dark}>
+            <MuiTheme dark={dark} primaryColor={primaryColor}>
 
                 <Button variant={variant}>{label}</Button>
 
-            </Theme>
-
+            </MuiTheme>
 
         </>
 
-
     )
-    
+
 }
 
 

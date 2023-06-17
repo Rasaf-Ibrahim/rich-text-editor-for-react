@@ -15,13 +15,11 @@ export default [
       output: [
         {
           file: packageJson.main,
-          format: "cjs",
-          
+          format: "cjs"
         },
         {
           file: packageJson.module,
-          format: "esm",
-          
+          format: "esm"
         },
       ],
       plugins: [
@@ -30,6 +28,12 @@ export default [
         commonjs(),
         typescript({
             tsconfig: "./tsconfig.json",
+
+            "include": [
+                    "src/**/*.ts",
+                    "src/**/*.tsx", 
+                    "global.d.ts"
+             ],
 
             // excluding the documentation folder
             exclude: ["documentation/**"]
