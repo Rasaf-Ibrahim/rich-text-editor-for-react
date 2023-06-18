@@ -12,23 +12,23 @@ const config: DocsThemeConfig = {
     //  SEO
     useNextSeoProps() {
         return {
-            titleTemplate: '%s – wysiwyg-react'
+            titleTemplate: '%s – rich-text-editor-for-react'
         }
     },
 
 
     // logo
-    logo:  <span className='logo_text'>wysiwyg-react</span>,
+    logo: <span className='logo_text'>rich-text-editor-for-react</span>,
 
 
     // repo base link
     project: {
-      link: 'https://github.com/Rasaf-Ibrahim/wysiwyg-react',
+        link: 'https://github.com/Rasaf-Ibrahim/rich-text-editor-for-react',
     },
-  
+
     // base path of the documentation site
-    docsRepositoryBase: 'https://github.com/Rasaf-Ibrahim/wysiwyg-react/blob/main/documentation',
-  
+    docsRepositoryBase: 'https://github.com/Rasaf-Ibrahim/rich-text-editor-for-react/blob/main/documentation',
+
 
 
     //sidebar
@@ -48,15 +48,15 @@ const config: DocsThemeConfig = {
     // footer
     footer: {
         text: (
-            <p style={{fontSize:'14px'}}>
-                © {new Date().getFullYear()} wysiwyg-react
+            <p style={{ fontSize: '14px' }}>
+                © {new Date().getFullYear()} rich-text-editor-for-react
             </p>
         )
     },
 
 
 
-  
+
 }
 
 export default config
