@@ -1,0 +1,15 @@
+---
+title: 'Common Erros & Solution'
+---
+
+import { Callout } from 'nextra-theme-docs'
+
+
+<Callout type='error' emoji="️🚫">
+  `ReactTextEditor` cannot be used as a JSX component
+</Callout>
+
+
+- Note that this error is not a bug of this package.
+- This error can happen when you use TypeScript with React. It is caused by a mismatch of `@types/react` and `@types/react-dom` versions in your project or its dependencies. 
+- To find out more about this error and how to fix it, you can google "`component` cannot be used as a JSX component".
