@@ -1,0 +1,42 @@
+---
+title: 'How to Import'
+---
+
+import { Tab, Tabs } from 'nextra-theme-docs'
+ 
+
+<Tabs items={['NextJS', 'React with Vite']}>
+
+
+  <Tab>
+
+   ```ts copy
+        const RichTextEditor = dynamic(
+            () => import('rich-text-editor-for-react').then((module) => module.RichTextEditor),
+            {
+                ssr: false,
+                loading: () => <p>Loading...</p>,
+            }
+        )
+   ```
+
+   > Also, you must use `use client` directive.
+
+  </Tab>
+
+
+
+  <Tab>
+
+    ```ts copy
+        import RichTextEditor from 'rich-text-editor-for-react'
+    ```
+
+    > If you want to use `React.lazy` and `React.Suspense`. You can use them.
+
+  </Tab>
+
+    
+
+</Tabs>
+
