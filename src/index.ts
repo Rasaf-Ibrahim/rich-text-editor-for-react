@@ -1,5 +1,7 @@
-import MuiButton from "./components/mui-button/mui-button"
-import MuiAlert from "./components/mui-alert/mui-alert"
+import RichTextEditor from "./components/rte/rich-text-editor"
+import useRichTextEditor from "./components/rte/rich-text-editor-hook"
 
 
-export {MuiButton, MuiAlert}
+
+// hook can't be imported dynamically and set ssr:false in nextJS! so not exporting the hook. maybe I will remove the hook later
+export { RichTextEditor}
