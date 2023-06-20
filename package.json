@@ -1,14 +1,15 @@
 {
     "name": "rich-text-editor-for-react",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A Rich Text Editor for React",
-    "scripts": {
-        "build": "rollup -c",
-        "watch": "rollup -c -w"
-    },
     "author": "Rasaf Ibrahim",
     "license": "MIT",
-    "dependencies": {},
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "rollup -c -w",
+        "login": "npm adduser",
+        "publish": "npm publish"
+    },
     "devDependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
@@ -42,10 +43,28 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
-    "main": "dist/cjs/index.js",
-    "module": "dist/esm/index.js",
+    "exports": {
+        ".": "./dist/index.js",
+        "./hook": "./dist/hook.js"
+    },
+    "typesVersions": {
+        "*": {
+            "*": [
+                "./dist/types/dist/index.d.ts"
+            ],
+            "hook": [
+                "./dist/types/dist/hook.d.ts"
+            ]
+        }
+    },
     "files": [
         "dist"
     ],
-    "types": "dist/index.d.ts"
+    "keywords": [
+        "react",
+        "quill",
+        "rich-text-editor",
+        "wysiwyg",
+        "rte"
+    ]
 }

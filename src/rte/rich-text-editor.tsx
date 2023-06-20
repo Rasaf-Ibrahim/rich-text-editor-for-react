@@ -29,7 +29,7 @@ ____________________________________________*/
 
 
 
-type richTextEditorPropsType = {
+export type richTextEditorPropsType = {
 
 
     dark: boolean,

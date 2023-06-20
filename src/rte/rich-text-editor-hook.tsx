@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
 
+import { useState } from 'react'
 
 
 export default function useRichTextEditor() {
@@ -21,9 +20,6 @@ export default function useRichTextEditor() {
 
 
 
-
-
-
     const [utils, fetchUtils] = useState({
 
         resetEditor: (): void => { },
@@ -35,17 +31,11 @@ export default function useRichTextEditor() {
 
 
 
-
-
-
     const [editorStatus, fetchEditorStatus] = useState({
 
         totalWords: 0,
         hasFocus: false
     })
-
-
-
 
 
 

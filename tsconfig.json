@@ -32,7 +32,9 @@
     "outDir": "dist",         
 
     /* Specify the output directory for generated declaration files. */
-    "declarationDir": "types",  
+
+    /*  🔖 we don't need the following option and we must not use the following option */
+    // "declarationDir": "types",  
     
     
     /* Allow 'import x from y' when a module doesn't have a default export. */
