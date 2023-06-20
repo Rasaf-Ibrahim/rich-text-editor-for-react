@@ -12,7 +12,7 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 
    ```ts copy
         const RichTextEditor = dynamic(
-            () => import('rich-text-editor-for-react').then((module) => module.RichTextEditor),
+            () => import('rich-text-editor-for-react'),
             {
                 ssr: false,
                 loading: () => <p>Loading...</p>,
