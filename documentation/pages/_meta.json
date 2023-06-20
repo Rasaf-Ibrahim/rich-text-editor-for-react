@@ -1,5 +1,12 @@
 {
-  "index": "Demo",
-  "getting-started": "Getting Started",
-  "common-errors": "Common Errors & Solution"
+   "index": "Demo",
+   "installation": "Installation",
+   "import": "How to Import",
+   "render": "Render Rich Text Editor",
+   "ui-customization": "UI Customization",
+   "utils": "Utils",
+   "editor-status": "Editor Status",
+   "validation-in-form": "Validation in Form",
+   "upload-image-in-cloudinary": "Upload Image in Cloudinary",
+   "common-errors": "Common Errors & Solution"
 }
