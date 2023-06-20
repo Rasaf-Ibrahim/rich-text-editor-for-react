@@ -4,6 +4,10 @@ import { DocsThemeConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
 
 
+    // theme
+    nextThemes: {
+        defaultTheme: 'dark',
+    },
 
 
     // theme color
