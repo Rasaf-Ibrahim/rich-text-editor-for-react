@@ -14,47 +14,13 @@ const RichTextEditor:any = dynamic(
 )
 
 
+import useRichTextEditor  from 'rich-text-editor-for-react/hook'
 
 
 export default function RICH_TEXT_EDITOR___COMPONENT() {
 
 
-
-      const [output, fetchOutput] = useState('')
-
-
-
-    const [imageInfo, fetchImageInfo] = useState({
-
-        uploadedImages: [],
-
-        removedImages: []
-
-    })
-
-
-
-
-
-
-    const [utils, fetchUtils] = useState({
-
-        resetEditor: (): void => { },
-
-        focusOnEditor: (): void => { },
-
-        removeFocusFromEditor: (): void => { },
-    })
-
-
-
-    const [editorStatus, fetchEditorStatus] = useState({
-
-        totalWords: 0,
-        hasFocus: false
-    })
-
-
+    const {fetchOutput, fetchImageInfo, fetchUtils, fetchEditorStatus} = useRichTextEditor()
 
 
 
