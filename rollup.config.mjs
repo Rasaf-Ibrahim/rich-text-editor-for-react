@@ -1,82 +1,108 @@
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
-import packageJson from "./package.json" assert { type: "json" };
-
-import postcss from "rollup-plugin-postcss";
-
-import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from '@rollup/plugin-typescript'
+import dts from "rollup-plugin-dts";
+import postcss from "rollup-plugin-postcss";
+import terser from "@rollup/plugin-terser";
+
+
+
+
+
+const plugins_for_bundling = [
+
+    peerDepsExternal(),
+    resolve(),
+    commonjs(),
+    typescript({
+
+        tsconfig: './tsconfig.json',
+
+        compilerOptions: {
+            outDir: "dist",  
+            declaration: true,
+            emitDeclarationOnly: true,
+        }, 
+    
+        include: [
+                "src/**/*.ts",
+                "src/**/*.tsx", 
+                "global.d.ts"
+        ],
+
+        exclude: ["documentation/**"]
+    }),
+
+    postcss({
+      plugins: []
+    }),
+
+    terser()
+]
+
+
 
 export default [
 
-    //  🥪 bundling 
+
+    //  🥪 bundling - src/index.ts
     {
-      input: ["src/index.ts", "src/hook.ts"],
-      output: [
-
-        {
-          
-          // dir option is mandatory as we have multiple file as input
-          dir: "dist",
-          format: "esm"
-        }
-
-        /* 🔖 Nowadays, literally no one uses cjs in react! 
-         
-              To make the bundle size half, removing the cjs. 
-
-              So, also removing the following option from packageJson:
-
-              "main": "dist/cjs/index.js",
-        */
-        // {
-        //   file: packageJson.main,
-        //   format: "cjs"
-        // },
-
-      ],
-
-
-      plugins: [
-        peerDepsExternal(),
-        resolve(),
-        commonjs(),
-        typescript({
-            tsconfig: "./tsconfig.json",
-
-            "include": [
-                    "src/**/*.ts",
-                    "src/**/*.tsx", 
-                    "global.d.ts"
-             ],
-
-            // excluding the documentation folder
-            exclude: ["documentation/**"]
-        }),
-        postcss({
-          plugins: []
-        }),
-        terser(),
-      ],
+        input: 'src/index.ts',
+        output: {
+            file: 'dist/index.js',
+            format: 'esm'
+        },
+        plugins: plugins_for_bundling,
     },
 
 
- 
-    // 🥪 after bundling, we are generating type declaration files
+    //  🥪 bundling - src/hook.ts
     {
-        input: ["dist/index.d.ts", "dist/hook.d.ts"],
-        output: { dir: "dist/types", format: "esm" },
+        input: 'src/hook.ts',
+        output: {
+            file: 'dist/hook.js',
+            format: 'esm',
+        },
+        plugins: plugins_for_bundling,
+    },
+
+
+    
+    //🥪 after bundling, we are generating type declaration files
+    {
+        input: 'dist/hook.d.ts',
+        output: { file: "dist/types/hook.d.ts", format: "esm" },
         plugins: [dts()],
         external: [/\.(css|less|scss)$/],
     },
-];
+  
+ 
+    // 🥪 after bundling, we are generating type declaration files
+    {
+        input: 'dist/index.d.ts',
+        output: { file: "dist/types/index.d.ts", format: "esm" },
+        plugins: [dts()],
+        external: [/\.(css|less|scss)$/],
+    },
+
+]
 
 
 
 
 
+
+
+/* 🔖 
+    
+     If we bundle in cjs along with esm, then the bundle size will get double. 
+
+     And nowadays literally no one uses cjs in react
+     
+     So, we will not use cjs
+
+*/
 
 
 

@@ -80,7 +80,7 @@ ____________________________________________*/
 
 
 // 🥪 Functional component 
-const RichTextEditor: React.FC<richTextEditorPropsType> = (props) => {
+const RichTextEditor: React.ComponentType<richTextEditorPropsType> = (props) => {
 
 
     // 🥪 props
