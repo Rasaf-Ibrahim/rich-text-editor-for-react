@@ -1,8 +1,9 @@
 {
-   "index": "Demo",
+   "index": "Demo & Features",
    "installation": "Installation",
-   "import": "How to Import",
+   "import": "Import",
    "render": "Render Rich Text Editor",
+   "display": "Display Generated HTML",
    "ui-customization": "UI Customization",
    "utils": "Utils",
    "editor-status": "Editor Status",
