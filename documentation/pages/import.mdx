@@ -5,12 +5,12 @@ title: 'How to Import'
 import { Tab, Tabs } from 'nextra-theme-docs'
  
 
-<Tabs items={['NextJS', 'React with Vite']}>
+<Tabs items={['Next.js', 'React+Vite']}>
 
 
   <Tab>
 
-   ```ts copy
+   ```ts showLineNumbers copy
         const RichTextEditor = dynamic(
             () => import('rich-text-editor-for-react'),
             {
@@ -18,6 +18,8 @@ import { Tab, Tabs } from 'nextra-theme-docs'
                 loading: () => <p>Loading...</p>,
             }
         )
+
+        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
    ```
 
    > Also, you must use `use client` directive.
@@ -28,8 +30,10 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 
   <Tab>
 
-    ```ts copy
+    ```ts showLineNumbers copy
         import RichTextEditor from 'rich-text-editor-for-react'
+        
+        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
     ```
 
     > If you want to use `React.lazy` and `React.Suspense`. You can use them.
