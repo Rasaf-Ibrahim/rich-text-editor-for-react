@@ -5,10 +5,92 @@ title: 'Render Rich Text Editor'
 import { Callout } from 'nextra-theme-docs'
 
 
+&nbsp;
+
+### Render with Required Props
+
+&nbsp;
+
+To render the RichTextEditor component with only the required props, use the following code:
 
 
+```ts showLineNumbers copy  
+// import
+//...
+
+export default function Demo() {
 
 
+  const {output, fetchOutput} = useRichTextEditor()
+
+
+    return (
+
+        <RichTextEditor
+
+            fetchOutput={fetchOutput}
+
+            dark={true}
+
+            primaryColor='red'
+
+            toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'sub_script', 'super_script', 'binary_image']}
+
+        />
+
+    )
+}
+```
+
+&nbsp;
+
+#### `fetchOutput`
+
+
+In the line 7, we have used the "useRichTextEditor" hook and destructured  `output` and `fetchOutput`. We are passing the "fetchOutput" as a prop. 
+
+The rich text editor generates html and the "output" variable contains the generated HTML.
+
+
+&nbsp;
+
+#### `toolbarOptions`
+
+The toolbarOptions prop controls which toolbar options are visible. You can include or exclude specific options based on your requirements. Here are the available options:
+
+```ts copy
+'clear_format',
+'undo',
+'redo', 
+'font', 
+'header', 
+'bold', 
+'italic',
+'underline',
+'strikethrough',
+'text_color',
+'highlight_color',
+'numbered_list', 
+'bulleted_list',
+'align',
+'decrease_indent', 
+'increase_indent',
+'direction', 
+'blockquote', 
+'code_block',
+'link',
+'embed_youtube_video', 
+'sub_script', 
+'super_script', 
+'binary_image'
+```
+
+
+&nbsp;
+
+#### `dark` and `primaryColor`
+
+The "dark" and "primaryColor" props are not discussed on this page.  These props are discussed in the [UI Customization](http://localhost:3001/ui-customization) page.
 
 
 
