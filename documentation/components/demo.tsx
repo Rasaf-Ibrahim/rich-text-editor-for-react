@@ -23,9 +23,6 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
     const {fetchOutput, fetchImageInfo, fetchUtils, fetchEditorStatus} = useRichTextEditor()
 
 
-
-
-
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -61,7 +58,7 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
 
             <RichTextEditor
 
-                
+
 
                 fetchOutput={fetchOutput}
 
@@ -70,14 +67,15 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
                 fetchEditorStatus={fetchEditorStatus}
 
 
-                dark={pickTheme()}
+                customizeUI={{
+                    dark: pickTheme(),
+                    primaryColor:'red',
+                    stickyToolbarOnScroll: false
+                }}
+            
 
-                primaryColor='red'
+                toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'sub_script', 'super_script', 'image_base64']}
 
-
-                toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'sub_script', 'super_script', 'binary_image']}
-
-    
 
             />
 

@@ -30,11 +30,12 @@ export default function Demo() {
 
             fetchOutput={fetchOutput}
 
-            dark={true}
+            toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'sub_script', 'super_script', 'image_base64']}
 
-            primaryColor='red'
-
-            toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'sub_script', 'super_script', 'binary_image']}
+            customizeUI={{
+                dark: true,
+                primaryColor:'red'
+            }}
 
         />
 
@@ -79,18 +80,19 @@ The toolbarOptions prop controls which toolbar options are visible. You can incl
 'blockquote', 
 'code_block',
 'link',
+'image_base64',
+'image_cloudinary',
 'embed_youtube_video', 
 'sub_script', 
 'super_script', 
-'binary_image'
 ```
 
 
 &nbsp;
 
-#### `dark` and `primaryColor`
+#### `customizeUI`
 
-The "dark" and "primaryColor" props are not discussed on this page.  These props are discussed in the [UI Customization](http://localhost:3001/ui-customization) page.
+The "customizedUI" props is not discussed on this page.  This prop is  discussed in the [UI Customization](/ui-customization) page.
 
 
 
