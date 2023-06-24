@@ -10,7 +10,10 @@ import { useImmer } from 'use-immer';
 import { useLogger, useUpdateEffect } from 'react-use';
 
 //theme
-import MuiTheme, { PrimaryColorType } from "../theme/theme"
+import MuiTheme from "../theme/theme"
+
+// types
+import { RichTextEditorPropsType } from './types/types-for-the-users'
 
 // components
 import Box from '@mui/material/Box';
@@ -21,55 +24,8 @@ import { useRef } from 'react'
 
 
 
-/*__________________________________________
-
- ✅ types
-____________________________________________*/
 
 
-
-
-export type richTextEditorPropsType = {
-
-
-    dark: boolean,
-    primaryColor: PrimaryColorType,
-
-    toolbarOptions: Array<
-        'clear_format' |
-        'undo' |
-        'redo' |
-        'font' |
-        'header' |
-        'bold' |
-        'italic' |
-        'underline' |
-        'strikethrough' |
-        'text_color' |
-        'highlight_color' |
-        'numbered_list' |
-        'bulleted_list' |
-        'align' |
-        'decrease_indent' |
-        'increase_indent' |
-        'direction' |
-        'blockquote' |
-        'code_block' |
-        'link' |
-        'image' |
-        'embed_youtube_video' |
-        'sub_script' |
-        'super_script' |
-        'binary_image'
-    >,
-
-
-    fetchOutput: any
-    fetchImageInfo?: any
-    fetchUtils?: any
-    fetchEditorStatus?: any
-
-}
 
 
 
@@ -80,19 +36,27 @@ ____________________________________________*/
 
 
 // 🥪 Functional component 
-const RichTextEditor: React.ComponentType<richTextEditorPropsType> = (props) => {
+const RichTextEditor: React.ComponentType<RichTextEditorPropsType> = (props) => {
 
 
     // 🥪 props
     const {
-        dark,
-        primaryColor,
+        customizeUI,
         toolbarOptions,
         fetchOutput,
         fetchImageInfo,
         fetchUtils,
         fetchEditorStatus
     } = props
+
+
+    const {
+        dark,
+        primaryColor,
+        stickyToolbarOnScroll = false
+    } = customizeUI
+
+
 
 
 
@@ -322,6 +286,7 @@ const RichTextEditor: React.ComponentType<richTextEditorPropsType> = (props) => 
                         wysiwyg_state={wysiwyg_state}
                         update_wysiwyg_state={update_wysiwyg_state}
                         display_these_toolbar_options_in_the_parent_form={toolbarOptions}
+                        customizeUI={customizeUI}
                     />
 
                 </Box>

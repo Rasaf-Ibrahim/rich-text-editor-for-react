@@ -79,6 +79,7 @@ import Select from '@mui/material/Select'
 
 // toolbar components
 import IMAGE_CLOUDINARY___COMPONENT from "./toolbar-components/image-cloudinary";
+import IMAGE_BASE64___COMPONENT from './toolbar-components/image-base64';
 import EMBED_YOUTUBE_VIDEO___COMPONENT from './toolbar-components/embed-youtube-video';
 
 // reusable components
@@ -286,7 +287,7 @@ export default function WYSIWYG_TOOLBAR___COMPONENT({ quillRef, display_these_to
         },
 
         {
-            name: 'image',
+            name: 'image_cloudinary',
             component: IMAGE_CLOUDINARY___COMPONENT
         },
 
@@ -311,8 +312,8 @@ export default function WYSIWYG_TOOLBAR___COMPONENT({ quillRef, display_these_to
         /* We don't have any plan to use the following component right now */
 
         {
-            name: 'base64_image',
-            component: BASE64_IMAGE___SECTION
+            name: 'image_base64',
+            component: IMAGE_BASE64___COMPONENT
         }
 
 
@@ -1940,219 +1941,6 @@ const CLEAR_FORMAT___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state,
 
 
 
-
-/*__________________________________________
- ✅ Section of <WYSIWYG_TOOLBAR___COMPONENT/>
-____________________________________________*/
-
-
-/* 🔖 We don't have any plan to use the following component right now, otherwise we would make the following component better, for example, currently we are not using:  
-
-    - the correct cursor position, every time adding the image on the cursor 1 position. 
-    - Also, not giving the image a initial width which we provided on <IMAGE___SECTION/> component. */
-
-
-const BASE64_IMAGE___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => {
-
-    const initial_state = {
-        open_image_insert_modal: false,
-
-        trigger_quill_to_insert_the_image: false,
-    }
-
-
-    const [image_state, update_image_state] = useImmer(initial_state)
-
-
-
-    const handle_click_on_the_image_button = () => {
-
-        update_image_state(draft => {
-            draft.open_image_insert_modal = true
-        })
-    }
-
-
-    //  handleCloseModal
-    const handleCloseModal = () => {
-
-        update_image_state(draft => {
-            draft.open_image_insert_modal = false
-        })
-    }
-
-
-
-    // 🍪 form state management (1/3 Steps) - form_configuration 🍪
-    const form_configuration: type_of_form_configuration = {
-
-        selected_image: {
-
-            component_type: 'image',
-
-            value: '',
-
-            additionally_tracking: {
-                preview_link: null
-            },
-
-            is_required: true,
-
-            validation: {
-
-                is_validating: true,
-
-                'accepted_file_formats': ['png', 'jpg', 'jpeg'],
-
-                'accepted_maximum_file_size': 512,  //kb
-
-                error_message: function () {
-
-                    return (
-
-                        `Image must have one of these extensions: ${JSON.stringify(this.accepted_file_formats)}. 
-                            
-                        Image size must be lower than ${this.accepted_maximum_file_size}kb.`
-                    )
-                }
-
-            }
-
-
-
-        }
-    }
-
-
-    // 🍪 form state management (2/2 Steps) - FORM_MANAGEMENT___HOOK 🍪
-    const {
-        formState,
-        updateFormState,
-        actions,
-        validation_info,
-        validation_before_form_submission_func
-
-    } = FORM_MANAGEMENT___HOOK(form_configuration)
-
-
-    useLogger('image', formState)
-
-
-
-    // 🍪 form state management (7/7 Steps) - handleSubmit 🍪
-    const handleSubmit = (event) => {
-
-        // 🍔🍔 stop refreshing the page on reload 🍔🍔
-        event.preventDefault();
-
-
-        /* 🍔🍔 if 'validation_before_form_submission_func' function returns true, that means there is at least one validation error in the form and we can not submit the form🍔🍔 */
-        if (validation_before_form_submission_func() === true) return;
-
-
-        /* 🍔🍔 submit the form's all the inputted data 🍔🍔 */
-        console.log('😃 submitting data', {
-            ...formState.form_data
-        })
-
-
-        // 🍔🍔 Trigger quill to insert the image 🍔🍔
-        update_image_state(draft => {
-            draft.open_image_insert_modal = false
-
-            draft.trigger_quill_to_insert_the_image = !draft.trigger_quill_to_insert_the_image
-        })
-
-
-    }
-
-
-
-
-    // inserting image on the editor after successfully uploading and fetching  it
-    useUpdateEffect(() => {
-
-
-        let base64String
-        const reader = new FileReader();
-        reader.readAsDataURL(formState.form_data.selected_image.value);
-
-        reader.onload = () => {
-            base64String = reader.result;
-            console.log(base64String)
-
-            quillRef.current.insertEmbed(1, 'image', base64String);
-
-        }
-
-
-
-
-
-    }, [image_state.trigger_quill_to_insert_the_image])
-
-
-
-    return (
-
-        <>
-            <Tooltip title="BINARY Image" placement="top">
-                <FormControl margin='dense'>
-                    <IconButton onClick={handle_click_on_the_image_button}>
-                        <ImageRounded sx={(theme) => ({
-                            fontSize: '1.2rem',
-                        })} />
-                    </IconButton>
-                </FormControl>
-            </Tooltip>
-
-
-
-
-            <Modal
-                open={image_state.open_image_insert_modal}
-                onClose={handleCloseModal}
-            >
-
-
-                <MODAL_CONTENT___STYLED>
-
-                    <WRAPPER_OF_FORM___STYLED>
-
-                        <WRAPPER_OF_FORM_CONTENT___STYLED onSubmit={handleSubmit}>
-
-
-                            <FORM_IMAGE___REUSABLE
-
-                                label='Image'
-
-                                input_name='selected_image'
-
-                                state={formState}
-
-                                update_state={updateFormState}
-
-                                actions={actions}
-
-                                validation_info={validation_info}
-
-                            />
-
-
-                            <Button type="submit" variant='contained'>Submit</Button>
-
-
-                        </WRAPPER_OF_FORM_CONTENT___STYLED>
-
-                    </WRAPPER_OF_FORM___STYLED>
-
-                </MODAL_CONTENT___STYLED>
-
-            </Modal>
-
-        </>
-    )
-}
 
 
 

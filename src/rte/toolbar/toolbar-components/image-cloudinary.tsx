@@ -34,9 +34,9 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 
-import Modal from  '@mui/material/Modal'
+import Modal from '@mui/material/Modal'
 
-import Tooltip from  '@mui/material/Tooltip'
+import Tooltip from '@mui/material/Tooltip'
 
 import FormControl from '@mui/material/FormControl'
 
@@ -167,7 +167,7 @@ export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_image_cloudi
     return (
 
         <>
-            <Tooltip title="Image" placement="top">
+            <Tooltip title="Image (Cloudinary)" placement="top">
                 <FormControl margin='dense'>
                     <IconButton onClick={handle_click_on_the_image_button}>
                         <ImageRounded sx={(theme) => ({
@@ -199,8 +199,8 @@ const INSERT_IMAGE___SECTION = ({ update_wysiwyg_state, wysiwyg_state, image_sta
 
 
 
-    //  handleCloseModal
-    const handleCloseModal = () => {
+    //  handle_close_modal
+    const handle_close_modal = () => {
 
         update_image_state(draft => {
             draft.open_image_insert_modal = false
@@ -215,7 +215,7 @@ const INSERT_IMAGE___SECTION = ({ update_wysiwyg_state, wysiwyg_state, image_sta
 
             <Modal
                 open={image_state.open_image_insert_modal}
-                onClose={handleCloseModal}
+                onClose={handle_close_modal}
             >
 
 

@@ -24,9 +24,9 @@ import { theme_breakpoints } from './customized-theme-properties/breakpoints/bre
 
 import { theme_component_button } from './customized-theme-properties/components/button'
 
+// types
+import { PrimaryColorType } from "../rte/types/types-for-the-users";
 
-
-export type PrimaryColorType = 'red' | 'amber' | 'light_green' | 'cyan' | 'indigo'
 
 
 export interface ThemeProps {

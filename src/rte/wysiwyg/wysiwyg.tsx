@@ -113,8 +113,13 @@ export default function WYSIWYG___COMPONENT({
     wysiwyg_initial_state,
     wysiwyg_state,
     update_wysiwyg_state,
-    display_these_toolbar_options_in_the_parent_form
+    display_these_toolbar_options_in_the_parent_form,
+    customizeUI
 }) {
+
+
+    const {primaryColor, stickyToolbarOnScroll} = customizeUI
+
 
     // mui theme 
     const theme = useTheme()
@@ -179,8 +184,7 @@ export default function WYSIWYG___COMPONENT({
                     parchment: Quill.import('parchment'),
 
 
-                    /* 🔖 if you check the README.md of the quill-image-resize-module package, you will understand the there is another module. It's the 'Toolbar' module. It has image alignment option. I don't want that. Because I want to align the image with quill's toolbar, not with quill-image-resize-module package's toolbar */
-                    modules: ['Resize', 'DisplaySize'],
+                    modules: ['Resize', 'DisplaySize', 'Toolbar'],
 
 
                     /* 🔖 the 'Resize' module adds handles to the image's corners which can be dragged with the mouse to resize the image.
@@ -188,8 +192,8 @@ export default function WYSIWYG___COMPONENT({
                     we can provide css style to this with the following object
                     */
                     handleStyles: {
-                        backgroundColor: theme.palette.primary.main,
-                        border: `0.3rem solid ${theme.palette.primary.main}`
+                        backgroundColor: primaryColor,
+                        border: `0.3rem solid ${primaryColor}`
                     },
 
                     /* 🔖 the 'DisplaySize' module shows the size of the image in pixels near the bottom right of the image. 
@@ -198,8 +202,8 @@ export default function WYSIWYG___COMPONENT({
                     */
 
                     displayStyles: {
-                        backgroundColor: theme.palette.primary.light,
-                        color: theme.palette.text.primary
+                        backgroundColor: 'black',
+                        color: 'white'
                     }
 
 
@@ -375,6 +379,7 @@ export default function WYSIWYG___COMPONENT({
 
 
     /*__________________________________________
+
      ✅ JSX 
     ____________________________________________*/
     return (
@@ -382,7 +387,7 @@ export default function WYSIWYG___COMPONENT({
         <Box>
 
             {/*making the toolbar sticky at top when we scroll down */}
-            <Box sx={{ position: 'sticky', top: 0, zIndex: 999 }} >
+            <Box sx={stickyToolbarOnScroll? { position: 'sticky', top: 0, zIndex: 999 }: {}} >
 
                 <WYSIWYG_TOOLBAR___COMPONENT
                     quillRef={quillRef}
