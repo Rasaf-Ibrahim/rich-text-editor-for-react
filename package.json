@@ -1,6 +1,6 @@
 {
     "name": "rich-text-editor-for-react",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "A Rich Text Editor for React",
     "author": "Rasaf Ibrahim",
     "license": "MIT",
@@ -24,7 +24,6 @@
         "immer": "^10.0.2",
         "postcss": "^8.4.24",
         "quill": "^1.3.7",
-        "quill-image-resize": "^3.0.9",
         "react": "^18.2.0",
         "react-color": "^2.19.3",
         "react-dom": "^18.2.0",

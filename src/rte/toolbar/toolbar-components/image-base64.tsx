@@ -77,6 +77,11 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary
         open_image_insert_modal: false,
 
         trigger_quill_to_insert_the_image: false,
+
+
+
+        // the necessity of the following property is discussed in the embed-youtube-video option's component.
+        remembering_cursor_position: 0,
     }
 
 
@@ -98,6 +103,26 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary
             draft.open_image_insert_modal = false
         })
     }
+
+
+
+
+    /*
+        - updating the value of 'remembering_cursor_position' 'video_state' state
+        
+        - when 'open_modal' value of the 'video_state' state changes, the following effect occurs
+    */
+    useUpdateEffect(() => {
+
+        // only when the modal is open, we want to update the value
+        if (image_state.open_image_insert_modal) {
+
+            update_image_state(draft => {
+                draft.remembering_cursor_position = wysiwyg_state.editor_cursor.position
+            })
+        }
+
+    }, [image_state.open_image_insert_modal])
 
 
 
@@ -204,17 +229,25 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary
             if (quillRef.current) {
 
                 if (wysiwyg_state.editor_cursor.position !== '') {
-    
+
                     const range = quillRef.current.getSelection(true);
-    
+
                     quillRef.current.clipboard.dangerouslyPasteHTML(
                         wysiwyg_state.editor_cursor.position,
-    
+
                         // when we insert an image, initially the image's width would be 250px
-                        `<img width="250" src="${base64String}">`
+                        `<img width="250" 
+                         src="${base64String}">`
                     )
-    
-                    quillRef.current.setSelection(range.index + 1);
+
+
+                    /* updating the cursor position */
+                    update_wysiwyg_state(draft => {
+                        draft.editor_cursor.position = image_state.remembering_cursor_position + 1
+                    })
+
+                    //  moving the cursor after the embedded video
+                    quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
                 }
             }
 
@@ -291,11 +324,4 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary
 }
 
 
-
-
-
-/* 🔖 We don't have any plan to use the following component right now, otherwise we would make the following component better, for example, currently we are not using:  
-
-    - the correct cursor position, every time adding the image on the cursor 1 position. 
-    - Also, not giving the image a initial width which we provided on <IMAGE___SECTION/> component. */
 

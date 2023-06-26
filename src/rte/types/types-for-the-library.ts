@@ -1,8 +1,5 @@
 
-
-
-
-  export type type_of_wysiwyg_state = {
+export type type_of_wysiwyg_state = {
 
     quill_generated_html: string
 
@@ -38,3 +35,14 @@
 
   }
   
+
+
+export type type_of_toolbar_option_component_props = {
+
+    quillRef: any
+    wysiwyg_state: type_of_wysiwyg_state
+    update_wysiwyg_state: type_of_func_prop_with_no_rule
+}
+
+
+

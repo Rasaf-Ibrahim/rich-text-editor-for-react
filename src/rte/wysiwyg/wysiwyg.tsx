@@ -2,10 +2,13 @@
 
  ✅ import
 ____________________________________________*/
+
+// react
 import React from 'react'
+
 // hook
 import { useRef } from 'react';
-import { useMount, useUpdateEffect } from 'react-use';
+import { useLogger, useMount, useUpdateEffect } from 'react-use';
 import { useTheme } from '@mui/material/styles';
 
 // quillRef Library
@@ -23,54 +26,12 @@ import 'highlight.js/styles/monokai-sublime.css';
 import { CSS_FOR_QUILL_EDITOR____STYLED } from '../toolbar/styled-components/styled-components';
 
 // components
-import Box from '@mui/material/Box';
+import { Box } from '../toolbar/mui/components';
 import WYSIWYG_TOOLBAR___COMPONENT from '../toolbar/toolbar';
 
 
-/* 🔖 The official library for resizing image is the 'quill-image-resize-module' but why are we using 'quill-image-resize' library:
 
-There is bug in the 'quill-image-resize-module' library. 
- 
-🍗The library's documentation says to import the library like this:
-import { ImageResize } from 'quill-image-resize-module';
-
-🍗 But importing the library like this will not work.
-
-🍗 The library has last been updated back in 2017. So, there is no intention of solving this bug!
-
-🍗 Many people are providing many solutions on this topic: https://github.com/kensnyder/quill-image-resize-module/issues/7
-
-
-🍗 The following code has worked for me in the CRA(Create React App) Setup:
-
-    window.Quill = Quill
-    const ImageResize = require('quill-image-resize-module').default
-    Quill.register('modules/imageResize', ImageResize)
-
-🍗 ChatGPT has explained why the above code is fixing the import bug:
-
-    -  The issue with importing the ImageResize module may be due to conflicts with the webpack configuration or dependencies, which can result in errors such as "moduleClass is not a constructor.
-
-    - By using the window object to make the Quill object globally accessible, we are able to register the ImageResize module with it, thereby fixing the bug. 
-    
-    - Additionally, by using require instead of import, we are able to bypass any issues with webpack configuration or dependencies that may have caused errors with importing the module.
-
-
-🍗 But with the Vite Setup, I can't use require(commonJS) by default. Even after installing commonJS plugin for Vite, I was getting other error.
-
-
-🍗 Anyway, there were more solutions on the above mentioned link(https://github.com/kensnyder/quill-image-resize-module/issues/7), one of the popular solution was to use 'quill-image-resize' package instead which is built on top of 'quill-image-resize-module' package. 
-
-
-*/
-
-
-/*  🍔 importing and registering the 'quill-image-resize' library 🍔 */
-
-import ImageResize from 'quill-image-resize'
-
-
-// assigning the Quill object to the window object to make it globally 
+/*🥪 assigning the Quill object to the window object to make it globally */
 window.Quill = Quill
 
 
@@ -81,26 +42,36 @@ declare global {
   }
   
 
-// registering the ImageResize module with the Quill object using the Quill.register() method
-Quill.register({
-    'modules/imageResize': ImageResize,
-})
 
-
-/*  🍔 importing and registering font  */
+/*  🥪 importing and registering font  */
 let fonts = Quill.import("attributors/style/font");
 fonts.whitelist = ["sans-serif", "serif", "monospace"];
 Quill.register(fonts, true);
 
 
-/*  🍔 importing and registering font size but I have no intension to use font size now. Heading is enough!  */
-// importing font size, But I have no intension to use font size now.
+/*  🥪 importing and registering font size but I have no intension to use font size now. Heading is enough!  */
 const fontSizeArr = ['10px', '11px', '12px', '14px', '18px', '24px'];
 var Size = Quill.import('attributors/style/size');
 Size.whitelist = fontSizeArr;
 Quill.register(Size, true);
 
 
+
+
+/*  🔖 After version 0.1.0, I have removed the "quill-image-resize-module/quill-image-resize" package.
+
+If I ever need to use the quill-image-resize package again, I can check version 0.1.0's this file(path at that time: src/rte/wysiwyg/wysiwyg.tsx). Because all the "quill-image-resize" package's code was in this file.
+
+
+But I don't think that I will ever go back to use the package again. Because:
+
+
+    - the package use 'px'. So, the resized image is not responsive. They will have a fixed width.
+
+    - resizing doesn't work in the touch screen because the package only works with mouse event!
+
+
+*/
 
 
 
@@ -178,47 +149,6 @@ export default function WYSIWYG___COMPONENT({
 
 
 
-                imageResize: {
-
-                    // this is needed, I don't know why!
-                    parchment: Quill.import('parchment'),
-
-
-                    modules: ['Resize', 'DisplaySize', 'Toolbar'],
-
-
-                    /* 🔖 the 'Resize' module adds handles to the image's corners which can be dragged with the mouse to resize the image.
-
-                    we can provide css style to this with the following object
-                    */
-                    handleStyles: {
-                        backgroundColor: primaryColor,
-                        border: `0.3rem solid ${primaryColor}`
-                    },
-
-                    /* 🔖 the 'DisplaySize' module shows the size of the image in pixels near the bottom right of the image. 
-                    
-                    we can provide css style to this with the following object
-                    */
-
-                    displayStyles: {
-                        backgroundColor: 'black',
-                        color: 'white'
-                    }
-
-
-                    /* 🔖 resize limit: 
-
-                     In the css, with '.ql-editor img', we have set max-width:90% and min-width:100px. So, any image can resized to maximum 90% of editor size and it can be resized to minimum 100px. 
-
-                     If we don't use this min and max width, image can be resized to even 0px!
-
-                    */
-
-                }
-
-
-
                 /* 🔖 We are not having any module for resizing imbedded video because:
                 
                 Resizing images in a rich text editor is important because images can have pixelation issues if they are stretched or resized improperly. This can lead to a degradation in the quality of the image, which can negatively impact the user's experience.
@@ -253,6 +183,8 @@ export default function WYSIWYG___COMPONENT({
         })
 
     }, [quillRef.current])
+
+
 
 
     // updating 'editor_cursor' property of the 'wysiwyg_state' state
@@ -317,6 +249,8 @@ export default function WYSIWYG___COMPONENT({
         }
 
 
+
+        
     }, [quillRef.current]);
 
 
@@ -378,10 +312,36 @@ export default function WYSIWYG___COMPONENT({
 
 
 
-    /*__________________________________________
 
-     ✅ JSX 
-    ____________________________________________*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+      
+
+
+
+
+
+
+
+
+
+
+    // ✅ JSX 
     return (
 
         <Box>

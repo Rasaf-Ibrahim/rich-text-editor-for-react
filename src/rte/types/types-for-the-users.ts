@@ -34,6 +34,7 @@ export type RichTextEditorPropsType = {
         'link' |
         'image_cloudinary' |
         'image_base64' |
+        'image_edit' |
         'embed_youtube_video' |
         'sub_script' |
         'super_script'

@@ -1,9 +1,14 @@
+// react
 import React from 'react'
 
-import { styled } from '@mui/material/styles';
+// styled components
 import media_queries from './media-queries';
-import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
+// mui components
+import Box from '@mui/material/Box'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem';
 
 
 /* 🥪 */
@@ -22,6 +27,38 @@ const MODAL_CONTENT___STYLED = styled((props: type_of_obj_with_any_values) =>
     box-shadow: 2rem;
     padding: 2rem;
 `)
+
+
+
+
+const SELECT___STYLED = styled((props: type_of_obj_with_any_values) =>
+
+
+    <Select {...props} variant="standard" disableUnderline />
+
+
+)(({ theme }) => `
+
+   font-size: ${theme.typography.overline.fontSize};
+`)
+
+
+
+
+
+const MENU_ITEM___STYLED = styled((props: type_of_obj_with_any_values) =>
+
+    <MenuItem {...props} />
+
+
+)(({ theme }) => `
+
+   font-size: ${theme.typography.overline.fontSize}
+
+`)
+
+
+
 
 
 
@@ -90,7 +127,7 @@ const CSS_FOR_QUILL_EDITOR____STYLED = styled((props: type_of_obj_with_any_value
 )(({ theme }) => `
 
 
-   ${/* 🔖 Whatever CSS classnames you are seeing in this styled component are all copied from quill.snow.css file.
+   ${/* 🔖 Whatever CSS classnames you are seeing in this styled component, most of them  are  copied from quill.snow.css file.
 
 
     🍗 the official quill css file(quill.snow.css) has all the styles
@@ -944,6 +981,88 @@ const CSS_FOR_QUILL_EDITOR____STYLED = styled((props: type_of_obj_with_any_value
       }
 
 
+
+
+
+
+
+
+
+
+      ${/* 🍔 custom - the following classes are necessary for resizing image  🍔 
+      
+
+       I have tested all the following classes. How did I test?
+
+       when I was selecting, 'xs' as the size of the image. That would put '.ql-image-size-xs' class on the image. So, I would check how the image is looking on different screen size when it is xs.
+
+       Similarly, I checked for 'sm', 'md', 'lg' and 'xl'
+       
+
+      */''}
+
+      .ql-editor .ql-image-size-xs{
+
+            ${media_queries.name_xs_sm_md_lg_xl('width', '35%', '25%', '20%', '15%', '10%')}
+        }
+
+
+      .ql-editor .ql-image-size-sm{
+
+            ${media_queries.name_xs_sm_md_lg_xl('width', '45%', '35%', '30%', '25%', '20%')}
+        }
+
+
+       .ql-editor .ql-image-size-md{
+
+            ${media_queries.name_xs_sm_md_lg_xl('width', '60%', '45%', '40%', '35%', '30%')}
+        }
+
+
+        .ql-editor .ql-image-size-lg{
+
+            ${media_queries.name_xs_sm_md_lg_xl('width', '75%', '55%', '50%', '45%', '40%')}
+        }
+
+
+        .ql-editor .ql-image-size-xl{
+
+            ${media_queries.name_xs_sm_md_lg_xl('width', '90%', '65%', '60%', '55%', '50%')}
+        }
+
+
+
+
+
+
+
+        ${/* 🍔 custom - the following classes are necessary for aligning image  🍔 */ ''}
+
+        .ql-editor .ql-image-align-center {
+
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .ql-editor .ql-image-align-right {
+
+            width: 100%;
+            display: flex;
+            justify-content: right;
+        }
+
+
+        .ql-editor .ql-image-align-left {
+
+            width: 100%;
+            display: flex;
+            justify-content: left;
+        }
+
+
+
 `)
 
 
@@ -1057,6 +1176,8 @@ const CSS_FOR_QUILL_GENERATED_HTML___STYLED = styled((props: type_of_obj_with_an
 
 export {
     MODAL_CONTENT___STYLED,
+    SELECT___STYLED,
+    MENU_ITEM___STYLED,
     WRAPPER_OF_FORM___STYLED,
     WRAPPER_OF_FORM_CONTENT___STYLED,
 

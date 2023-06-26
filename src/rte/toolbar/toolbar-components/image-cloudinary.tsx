@@ -147,7 +147,7 @@ export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_image_cloudi
                     wysiwyg_state.editor_cursor.position,
 
                     // when we insert an image, initially the image's width would be 250px
-                    `<img width="250" src="${wysiwyg_state.images.last_uploaded_image_link}">`
+                    `<img width="250"  src="${wysiwyg_state.images.last_uploaded_image_link}">`
                 )
 
                 quillRef.current.setSelection(range.index + 1);

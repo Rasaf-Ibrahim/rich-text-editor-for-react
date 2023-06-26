@@ -15,10 +15,6 @@ import { useTheme } from '@mui/material/styles';
 // color-picker library
 import { ChromePicker } from 'react-color';
 
-// form management
-import FORM_MANAGEMENT___HOOK, { type_of_form_configuration } from "./form-management/use-form-management";
-
-
 
 // icons
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -44,18 +40,16 @@ import CodeRounded from "@mui/icons-material/CodeRounded";
 import FormatColorTextRounded from "@mui/icons-material/FormatColorTextRounded";
 import FormatColorFillRounded from "@mui/icons-material/FormatColorFillRounded";
 import LinkRounded from "@mui/icons-material/LinkRounded";
-import ImageRounded from "@mui/icons-material/ImageRounded";
 import SubscriptRounded from "@mui/icons-material/SubscriptRounded";
 import SuperscriptRounded from "@mui/icons-material/SuperscriptRounded";
 import FormatClearRounded from "@mui/icons-material/FormatClearRounded";
 
 
 // styled components
-import { styled } from '@mui/material/styles';
 import {
     MODAL_CONTENT___STYLED,
-    WRAPPER_OF_FORM___STYLED,
-    WRAPPER_OF_FORM_CONTENT___STYLED
+    SELECT___STYLED,
+    MENU_ITEM___STYLED,
 } from "./styled-components/styled-components";
 
 
@@ -73,17 +67,13 @@ import Tooltip from  '@mui/material/Tooltip'
 
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
 
 
 // toolbar components
 import IMAGE_CLOUDINARY___COMPONENT from "./toolbar-components/image-cloudinary";
 import IMAGE_BASE64___COMPONENT from './toolbar-components/image-base64';
 import EMBED_YOUTUBE_VIDEO___COMPONENT from './toolbar-components/embed-youtube-video';
-
-// reusable components
-import FORM_IMAGE___REUSABLE from "./reusable-components/form-image";
+import IMAGE_EDIT___COMPONENT from './toolbar-components/edit-image';
 
 
 
@@ -287,10 +277,19 @@ export default function WYSIWYG_TOOLBAR___COMPONENT({ quillRef, display_these_to
         },
 
         {
+            name: 'image_base64',
+            component: IMAGE_BASE64___COMPONENT
+        },
+
+        {
             name: 'image_cloudinary',
             component: IMAGE_CLOUDINARY___COMPONENT
         },
 
+        {
+            name: 'image_edit',
+            component: IMAGE_EDIT___COMPONENT
+        },
 
         {
             name: 'embed_youtube_video',
@@ -309,12 +308,7 @@ export default function WYSIWYG_TOOLBAR___COMPONENT({ quillRef, display_these_to
         },
 
 
-        /* We don't have any plan to use the following component right now */
-
-        {
-            name: 'image_base64',
-            component: IMAGE_BASE64___COMPONENT
-        }
+        
 
 
         /*⚠️⚠️⚠️  I have just skipped 1 toolbar option, that is 'formula'. In no way, currently I need it! So, I am not in hurry to add it. Read the documentation, I will maybe need an additional library to install for formula, it's called 'katex'. Maybe, the setup is kind of like the syntax highlighter setup. I am not sure actually, explore in the future when you have time!
@@ -1958,40 +1952,6 @@ const CLEAR_FORMAT___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state,
 
 
 
-
-
-
-
-/*__________________________________________
-✅ Styled Components for Multiple 'Section' Components
-____________________________________________*/
-
-
-const SELECT___STYLED = styled((props: type_of_obj_with_any_values) =>
-
-
-    <Select {...props} variant="standard" disableUnderline />
-
-
-)(({ theme }) => `
-
-   font-size: ${theme.typography.overline.fontSize};
-`)
-
-
-
-
-
-const MENU_ITEM___STYLED = styled((props: type_of_obj_with_any_values) =>
-
-    <MenuItem {...props} />
-
-
-)(({ theme }) => `
-
-   font-size: ${theme.typography.overline.fontSize}
-
-`)
 
 
 
