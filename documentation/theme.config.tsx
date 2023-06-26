@@ -10,8 +10,9 @@ const config: DocsThemeConfig = {
     },
 
 
+
     // theme color
-    primaryHue: 40,
+    primaryHue: 200,
 
     //  SEO
     useNextSeoProps() {

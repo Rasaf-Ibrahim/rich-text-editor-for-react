@@ -1,0 +1,54 @@
+---
+title: 'Underlying Technologies'
+---
+
+
+
+
+&nbsp;
+
+### Used Technologies
+
+&nbsp;
+
+`Quill.js`
+
+We are utilizing the popular JavaScript library Quill under the hood. However, you do not need to install Quill separately, as it is already integrated into and bundled with this library. 
+
+
+&nbsp;
+
+
+`Material Design`
+
+For the UI, we are following Material Design.
+
+
+
+
+&nbsp;
+
+
+`Highlight.js`
+
+To highlight the code written in the editor, we are using the popular hightlight.js library. But no need to install Highlight.js, it’s already bundled with this library.
+
+
+
+
+
+&nbsp;
+
+### Avoided Technologies
+
+&nbsp;
+
+
+
+`quill-resize-image-module`
+
+This library has a built-in option for resizing inserted images. We are not using [quill-resize-image-module](https://www.npmjs.com/package/quill-image-resize-module) or [quill-resize-image](https://www.npmjs.com/package/quill-image-resize) for resizing image in the editor. At first, we considered using these libraries but these libraries have some problems:
+
+ - They use 'px' for resizing images. So, the resized image is not responsive. 
+
+- Resizing doesn't work on the touch screen because these libraries only work with mouse event
