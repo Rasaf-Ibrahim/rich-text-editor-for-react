@@ -9,12 +9,8 @@ import React from 'react'
 // hook
 import { useTheme } from '@mui/material/styles';
 
-// react-spinner library
-import RingLoader from "react-spinners/RingLoader";
-import ScaleLoader from "react-spinners/ScaleLoader";
-
 // components
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '../mui/components';
 
 
 
@@ -98,12 +94,7 @@ const FULL_SCREEN_SPINNER___SECTION = () => {
             height: '100vh'
         })}>
 
-            <RingLoader
-                color={theme.palette.primary.main}
-                size={100}
-                role="alert"
-                aria-label="Loading Spinner"
-            />
+            <CircularProgress/>
 
         </Box>
 
@@ -131,11 +122,7 @@ const NOT_FULL_SCREEN_SPINNER___SECTION = ({ margin }) => {
             alignItems: 'center',
         })}>
 
-            <ScaleLoader
-                color={theme.palette.primary.main}
-                role="alert"
-                aria-label="Loading Spinner"
-            />
+            <CircularProgress/>
 
         </Box>
 

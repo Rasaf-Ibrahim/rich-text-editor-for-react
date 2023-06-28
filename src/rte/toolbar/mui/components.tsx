@@ -12,11 +12,13 @@ import TextField from '@mui/material/TextField'
 
 import Tooltip from  '@mui/material/Tooltip'
 
+import Modal from '@mui/material/Modal'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 
+import CircularProgress from '@mui/material/CircularProgress'
 
 
 export {
@@ -27,8 +29,10 @@ export {
     FormControl,
     TextField,
     Tooltip,
+    Modal,
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogActions
+    DialogActions,
+    CircularProgress
 }

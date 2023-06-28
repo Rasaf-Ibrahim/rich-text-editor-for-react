@@ -29,16 +29,16 @@ import {
 } from "../styled-components/styled-components";
 
 
+
 // mui components
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-
-import Modal from '@mui/material/Modal'
-
-import Tooltip from '@mui/material/Tooltip'
-
-import FormControl from '@mui/material/FormControl'
+import {
+    Typography,
+    Button,
+    IconButton,
+    FormControl,
+    Tooltip,
+    Modal
+} from '../mui/components'
 
 
 // reusable components
