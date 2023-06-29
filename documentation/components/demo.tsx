@@ -69,7 +69,7 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
 
                 customizeUI={{
                     dark: pickTheme(),
-                    primaryColor:'red',
+                    primaryColor:'cyan',
                     stickyToolbarOnScroll: false
                 }}
             
