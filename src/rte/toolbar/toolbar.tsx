@@ -61,9 +61,9 @@ import IconButton from '@mui/material/IconButton'
 
 import Divider from '@mui/material/Divider'
 
-import Modal from  '@mui/material/Modal'
-import Popover from  '@mui/material/Popover'
-import Tooltip from  '@mui/material/Tooltip'
+import Modal from '@mui/material/Modal'
+import Popover from '@mui/material/Popover'
+import Tooltip from '@mui/material/Tooltip'
 
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
@@ -308,7 +308,7 @@ export default function WYSIWYG_TOOLBAR___COMPONENT({ quillRef, display_these_to
         },
 
 
-        
+
 
 
         /*⚠️⚠️⚠️  I have just skipped 1 toolbar option, that is 'formula'. In no way, currently I need it! So, I am not in hurry to add it. Read the documentation, I will maybe need an additional library to install for formula, it's called 'katex'. Maybe, the setup is kind of like the syntax highlighter setup. I am not sure actually, explore in the future when you have time!
@@ -511,7 +511,7 @@ const FONT___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => {
                     onChange={(event) => handleFont(event)}
                     value={wysiwyg_state.formats_of_selected_text.font}
                     sx={{
-                        color: wysiwyg_state.formats_of_selected_text.font === 'sans-serif' ? 'text.primary' : 'error.dark',
+                        color: wysiwyg_state.formats_of_selected_text.font === 'sans-serif' ? 'text.primary' : 'primary.dark',
 
 
 
@@ -581,7 +581,7 @@ const HEADER___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => 
                     onChange={handleHeader}
                     value={wysiwyg_state.formats_of_selected_text.header}
                     sx={{
-                        color: wysiwyg_state.formats_of_selected_text.font === 0 ? 'text.primary' : 'error.dark',
+                        color: wysiwyg_state.formats_of_selected_text.font === 0 ? 'text.primary' : 'primary.dark',
 
                         '.MuiSelect-select': {
                             paddingBottom: '0.05rem',
@@ -638,7 +638,7 @@ const BOLD___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => {
                     <FormatBoldRounded sx={(theme) => ({
 
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.bold ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.bold ? theme.palette.primary.dark : theme.palette.text.primary
 
                     })} />
                 </IconButton>
@@ -682,7 +682,7 @@ const ITALIC___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => 
                     <FormatItalicRounded sx={(theme) => ({
 
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.italic ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.italic ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
                 </IconButton>
 
@@ -728,7 +728,7 @@ const UNDERLINE___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) 
                     <FormatUnderlinedRounded sx={(theme) => ({
 
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.underline ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.underline ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -774,7 +774,7 @@ const STRIKE_THROUGH___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_stat
 
                     <FormatStrikethroughRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.strike ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.strike ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -844,7 +844,7 @@ const ORDERED_LIST___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state 
 
                     <FormatListNumberedRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.list === 'ordered' ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.list === 'ordered' ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -897,7 +897,7 @@ const UNORDERED_LIST___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_stat
 
                     <FormatListBulletedRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.list === 'bullet' ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.list === 'bullet' ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -939,7 +939,7 @@ const ALIGN___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => {
                     value={wysiwyg_state.formats_of_selected_text.align}
 
                     sx={{
-                        color: wysiwyg_state.formats_of_selected_text.align === false ? 'text.primary' : 'error.dark',
+                        color: wysiwyg_state.formats_of_selected_text.align === false ? 'text.primary' : 'primary.dark',
 
                         '.MuiSelect-select': {
                             paddingBottom: '0.05rem',
@@ -1211,7 +1211,7 @@ const DIRECTION___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) 
 
                         <FormatTextdirectionRToLRounded sx={(theme) => ({
                             fontSize: '1.2rem',
-                            color: theme.palette.error.dark
+                            color: theme.palette.primary.dark
                         })} />
 
                         :
@@ -1268,7 +1268,7 @@ const BLOCKQUOTE___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state })
 
                     <FormatQuoteRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.blockquote ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.blockquote ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -1320,7 +1320,7 @@ const CODE_BLOCK___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state })
 
                     <CodeRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text['code-block'] ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text['code-block'] ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -1584,7 +1584,7 @@ const LINK___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state }) => {
 
                         <LinkRounded sx={(theme) => ({
                             fontSize: '1.2rem',
-                            color: wysiwyg_state.formats_of_selected_text.link ? theme.palette.error.dark : theme.palette.text.primary
+                            color: wysiwyg_state.formats_of_selected_text.link ? theme.palette.primary.dark : theme.palette.text.primary
                         })} />
 
                     </IconButton>
@@ -1725,7 +1725,7 @@ const SUB_SCRIPT___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state })
 
                     <SubscriptRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.script === 'sub' ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.script === 'sub' ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
@@ -1779,7 +1779,7 @@ const SUPER_SCRIPT___SECTION = ({ quillRef, wysiwyg_state, update_wysiwyg_state 
 
                     <SuperscriptRounded sx={(theme) => ({
                         fontSize: '1.2rem',
-                        color: wysiwyg_state.formats_of_selected_text.script === 'super' ? theme.palette.error.dark : theme.palette.text.primary
+                        color: wysiwyg_state.formats_of_selected_text.script === 'super' ? theme.palette.primary.dark : theme.palette.text.primary
                     })} />
 
                 </IconButton>
