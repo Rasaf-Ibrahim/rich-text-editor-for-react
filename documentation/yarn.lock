@@ -2191,10 +2191,10 @@ remove-accents@0.4.2:
   resolved "https://registry.yarnpkg.com/remove-accents/-/remove-accents-0.4.2.tgz#0a43d3aaae1e80db919e07ae254b285d9e1c7bb5"
   integrity sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==
 
-rich-text-editor-for-react@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/rich-text-editor-for-react/-/rich-text-editor-for-react-0.2.2.tgz#4fb558cf7b67fc477a14a07d19cab1503a8380d6"
-  integrity sha512-0LjG+JWj+BG6ftpNp3vOWV41mZlAVCpWPFKrjhVX5d3nBIu6YDl3Vvqf4ny2EG/+AEN4TXCIKAPvITuZajtTkA==
+rich-text-editor-for-react@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/rich-text-editor-for-react/-/rich-text-editor-for-react-0.2.3.tgz#f3a579445ae23a4d2f8533cdb70c016bf33c702c"
+  integrity sha512-/y9HZT8B+DFkA9a0rv18GupUjKSv+kFl0PJ+EMxaaamKEfrnh0tGL0hbYCzH4xmhKQ2qtUDzuTj73glbChHoJA==
 
 robust-predicates@^3.0.0:
   version "3.0.2"

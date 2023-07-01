@@ -18,7 +18,7 @@
         "nextra-theme-docs": "latest",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "rich-text-editor-for-react": "^0.2.2"
+        "rich-text-editor-for-react": "^0.2.3"
     },
     "devDependencies": {
         "@types/node": "20.3.1",
