@@ -1,6 +1,31 @@
+import React from 'react'
+
 export type PrimaryColorType = 'red' | 'amber' | 'light_green' | 'cyan' | 'indigo'
 
 
+export type outputType = string
+
+
+export type imageInfoType = {
+
+    uploadedImages: string[]
+    removedImages: string[]
+}
+
+
+export type utilsType = {
+
+    resetEditor: () => void
+    focusOnEditor: () => void
+    removeFocusFromEditor: () => void
+}
+
+
+export type editorStatusType = {
+    
+    totalWords: number
+    hasFocus: boolean
+}
 
 
 export type RichTextEditorPropsType = {
@@ -41,10 +66,11 @@ export type RichTextEditorPropsType = {
     >,
 
 
-    fetchOutput: any
-    fetchImageInfo?: any
-    fetchUtils?: any
-    fetchEditorStatus?: any
+    fetchOutput: React.Dispatch<React.SetStateAction<outputType>>
+    fetchImageInfo?: React.Dispatch<React.SetStateAction<imageInfoType>>
+    fetchUtils?: React.Dispatch<React.SetStateAction<utilsType>>
+    fetchEditorStatus?: React.Dispatch<React.SetStateAction<editorStatusType>>
 
 }
+
 

@@ -17,20 +17,22 @@ export type type_of_wysiwyg_state = {
     }
 
     formats_of_selected_text: {
-      header: number
-      font: string
-      bold: boolean
-      italic: boolean
-      underline: boolean
-      strike: boolean
-      list: boolean
-      align: boolean
-      indent: number
-      direction: boolean
-      blockquote: boolean
-      'code-block': boolean
-      link: string
-      script: boolean
+      header?: number
+      font?: string
+      bold?: boolean
+      italic?: boolean
+      underline?: boolean
+      strike?: boolean
+      list?: 'ordered' | 'bullet' | 'none'
+      align?: boolean
+      indent?: number
+      direction?: 'rtl' | 'ltr'
+      blockquote?: boolean
+      'code-block'?: boolean,
+      color?: string,
+      background?: string,
+      link?: string
+      script?: 'sub' | 'super'  | 'none'
     }
 
   }
@@ -39,7 +41,8 @@ export type type_of_wysiwyg_state = {
 
 export type type_of_toolbar_option_component_props = {
 
-    quillRef: any
+    quillRef: any,
+    wysiwyg_initial_state: type_of_wysiwyg_state,
     wysiwyg_state: type_of_wysiwyg_state
     update_wysiwyg_state: type_of_func_prop_with_no_rule
 }

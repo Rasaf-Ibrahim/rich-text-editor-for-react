@@ -9,6 +9,10 @@ import { useImmer } from "use-immer"
 import { useMount, useUpdateEffect } from "react-use"
 
 
+// types
+import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library';
+
+
 // api
 import { useUploadImage } from "../api-calls/use-upload-image";
 
@@ -18,8 +22,7 @@ import FORM_MANAGEMENT___HOOK, { type_of_form_configuration } from "../form-mana
 
 
 // icon
-import ImageRounded from "@mui/icons-material/ImageRounded";
-
+import { ImageRounded } from '../mui/icons';
 
 // styled components
 import {
@@ -49,18 +52,6 @@ import LOADING_SPINNER___REUSABLE from "../reusable-components/loading-spinner";
 
 
 
-/*__________________________________________
-
- ✅ types
-____________________________________________*/
-
-type type_of_image_cloudinary_props = {
-
-    quillRef: any
-    wysiwyg_state: any
-    update_wysiwyg_state: type_of_func_prop_with_no_rule
-}
-
 
 
 
@@ -69,7 +60,7 @@ type type_of_image_cloudinary_props = {
  ✅ Functional Component 
 ____________________________________________*/
 
-export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_image_cloudinary_props) {
+export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
     // 🥪 props
@@ -139,19 +130,17 @@ export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_image_cloudi
 
         if (quillRef.current) {
 
-            if (wysiwyg_state.editor_cursor.position !== '') {
+            const range = quillRef.current.getSelection(true);
 
-                const range = quillRef.current.getSelection(true);
+            quillRef.current.clipboard.dangerouslyPasteHTML(
+                wysiwyg_state.editor_cursor.position,
 
-                quillRef.current.clipboard.dangerouslyPasteHTML(
-                    wysiwyg_state.editor_cursor.position,
+                // when we insert an image, initially the image's width would be 250px
+                `<img width="250"  src="${wysiwyg_state.images.last_uploaded_image_link}">`
+            )
 
-                    // when we insert an image, initially the image's width would be 250px
-                    `<img width="250"  src="${wysiwyg_state.images.last_uploaded_image_link}">`
-                )
-
-                quillRef.current.setSelection(range.index + 1);
-            }
+            quillRef.current.setSelection(range.index + 1);
+        
         }
 
 

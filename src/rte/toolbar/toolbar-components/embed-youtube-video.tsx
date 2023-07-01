@@ -9,10 +9,12 @@ import React from 'react'
 import { useUpdateEffect } from "react-use";
 import { useImmer } from "use-immer";
 
+// types
+import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library';
 
 
 // icons
-import YouTube from "@mui/icons-material/YouTube";
+import { YouTube } from '../mui/icons';
 
 
 
@@ -23,30 +25,18 @@ import {
 
 
 // mui components
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
+import {
+    Box,
+    Typography,
+    Button,
+    IconButton,
+    FormControl,
+    TextField,
+    Tooltip,
+    Modal
+} from '../mui/components'
 
-import Modal from  '@mui/material/Modal'
-import Tooltip from  '@mui/material/Tooltip'
 
-import FormControl from '@mui/material/FormControl'
-import TextField from '@mui/material/TextField'
-
-
-
-/*__________________________________________
-
- ✅ types
-____________________________________________*/
-
-type type_of_embed_youtube_video_props = {
-
-    quillRef: any
-    wysiwyg_state: any
-    update_wysiwyg_state: type_of_func_prop_with_no_rule
-}
 
 
 /*__________________________________________
@@ -55,7 +45,7 @@ type type_of_embed_youtube_video_props = {
 ____________________________________________*/
 
 
-export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_embed_youtube_video_props){
+export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_option_component_props){
 
 
 

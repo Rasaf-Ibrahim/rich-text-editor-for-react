@@ -6,8 +6,11 @@ import React from 'react'
 
 // hook
 import { useImmer } from "use-immer"
-import { useMount, useUpdateEffect } from "react-use"
+import { useUpdateEffect } from "react-use"
 
+
+// types
+import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library';
 
 
 // form management
@@ -15,8 +18,7 @@ import FORM_MANAGEMENT___HOOK, { type_of_form_configuration } from "../form-mana
 
 
 // icon
-import ImageRounded from "@mui/icons-material/ImageRounded";
-
+import { ImageRounded } from '../mui/icons';
 
 // styled components
 import {
@@ -27,15 +29,13 @@ import {
 
 
 // mui components
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-
-import Modal from '@mui/material/Modal'
-
-import Tooltip from '@mui/material/Tooltip'
-
-import FormControl from '@mui/material/FormControl'
+import {
+    Button,
+    IconButton,
+    FormControl,
+    Tooltip,
+    Modal,
+} from '../mui/components'
 
 
 // reusable components
@@ -47,25 +47,10 @@ import FORM_IMAGE___REUSABLE from "../reusable-components/form-image";
 
 /*__________________________________________
 
- ✅ types
-____________________________________________*/
-
-type type_of_image_cloudinary_props = {
-
-    quillRef: any
-    wysiwyg_state: any
-    update_wysiwyg_state: type_of_func_prop_with_no_rule
-}
-
-
-
-
-/*__________________________________________
-
  ✅ Functional Component 
 ____________________________________________*/
 
-export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary_props) {
+export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
     // 🥪 props
@@ -222,32 +207,26 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_image_cloudinary
             // console.log(base64String)
 
 
-
             // inserting in the right position
-
             if (quillRef.current) {
 
-                if (wysiwyg_state.editor_cursor.position !== '') {
+                quillRef.current.clipboard.dangerouslyPasteHTML(
+                    wysiwyg_state.editor_cursor.position,
 
-                    const range = quillRef.current.getSelection(true);
-
-                    quillRef.current.clipboard.dangerouslyPasteHTML(
-                        wysiwyg_state.editor_cursor.position,
-
-                        // when we insert an image, initially the image's width would be 250px
-                        `<img width="250" 
-                         src="${base64String}">`
-                    )
+                    // when we insert an image, initially the image's width would be 250px
+                    `<img width="250" 
+                        src="${base64String}">`
+                )
 
 
-                    /* updating the cursor position */
-                    update_wysiwyg_state(draft => {
-                        draft.editor_cursor.position = image_state.remembering_cursor_position + 1
-                    })
+                /* updating the cursor position */
+                update_wysiwyg_state(draft => {
+                    draft.editor_cursor.position = image_state.remembering_cursor_position + 1
+                })
 
-                    //  moving the cursor after the embedded video
-                    quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
-                }
+                //  moving the cursor after the embedded video
+                quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
+                
             }
 
 
