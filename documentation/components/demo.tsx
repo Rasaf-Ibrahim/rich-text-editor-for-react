@@ -1,11 +1,17 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
+/*__________________________________________
 
+ ✅ import
+____________________________________________*/
+
+// hook
+import React from 'react'
+import DARK_THEME___HOOK from '../hooks/dark-theme-hook'
+
+// next/dynamic
 import dynamic from 'next/dynamic'
 
-
-const RichTextEditor:any = dynamic(
+// rich-text-editor-for-react
+const RichTextEditor: any = dynamic(
     () => import('rich-text-editor-for-react'),
     {
         ssr: false,
@@ -13,43 +19,24 @@ const RichTextEditor:any = dynamic(
     }
 )
 
+import useRichTextEditor from 'rich-text-editor-for-react/hook'
 
-import useRichTextEditor  from 'rich-text-editor-for-react/hook'
 
 
+/*__________________________________________
+
+ ✅ Functional component
+____________________________________________*/
 export default function RICH_TEXT_EDITOR___COMPONENT() {
 
 
-    const {fetchOutput, fetchImageInfo, fetchUtils, fetchEditorStatus} = useRichTextEditor()
+    // useRichTextEditor
+    const { fetchOutput, fetchImageInfo, fetchUtils, fetchEditorStatus } = useRichTextEditor()
 
 
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
-
-  const pickTheme = ()=> {
-
-    if(theme ==='system') {
-        return true
-    }
-
-    else if(theme ==='light') {
-        return false
-    }
-
-    else if(theme === 'dark') {
-        return true
-    }
-  }
+    // theme
+    const { dark_theme } = DARK_THEME___HOOK()
 
 
     return (
@@ -57,8 +44,6 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
         <>
 
             <RichTextEditor
-
-
 
                 fetchOutput={fetchOutput}
 
@@ -68,19 +53,19 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
 
 
                 customizeUI={{
-                    dark: pickTheme(),
-                    primaryColor:'cyan',
+                    dark: dark_theme,
+                    primaryColor: 'cyan',
                     stickyToolbarOnScroll: false
                 }}
-            
 
-                toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video','image_base64', 'image_edit', 'sub_script', 'super_script']}
+
+                toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link', 'embed_youtube_video', 'image_base64', 'image_edit', 'sub_script', 'super_script']}
 
 
             />
 
 
-        
+
         </>
 
 
@@ -89,5 +74,5 @@ export default function RICH_TEXT_EDITOR___COMPONENT() {
 
     )
 }
- 
+
 
