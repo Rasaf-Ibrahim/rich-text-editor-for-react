@@ -1,18 +1,83 @@
 ---
-title: 'Demo'
+title: Rich Text Editor for React
 ---
 
-
-&nbsp;
-
+{/* import react */}
 import React from 'react'
+
+{/* import component */}
+import Link from 'next/link'
+import { Tab, Tabs } from 'nextra-theme-docs'
 import RICH_TEXT_EDITOR___COMPONENT from '../components/demo'
+import DOCUMENTATION_BUTTON from '../components/documentation-button.tsx'
+import FEATURES___COMPONENT from '../components/features.tsx'
+import LANDING_PAGE_HEADING___STYLED from '../components/styled/landing-page-heading.tsx'
 
 
-<RICH_TEXT_EDITOR___COMPONENT/>
+
+{/* Headline */}
+{
+    <LANDING_PAGE_HEADING___STYLED 
+       more_style={{marginTop:'1rem', marginBottom:'1rem'}}
+    >
+      RICH TEXT EDITOR FOR REACT
+    </LANDING_PAGE_HEADING___STYLED>
+}
 
 
-&nbsp;
 
 
->Note: In the above demo, we are using `base64 image`. But uploading the image on the Cloudinary and keeping the link of the image in a database is a better approach. Learn how to do that on this page:  [Upload Image in Cloudinary](/upload-image-in-cloudinary).
+{/* Tabs */}
+<Tabs items={
+    [
+        'Demo', 
+        'CodeSandbox (Next.js)', 
+        'CodeSandbox (React + Vite)'
+    ]
+}>
+
+
+  <Tab>
+
+        <RICH_TEXT_EDITOR___COMPONENT/>
+
+  </Tab>
+
+
+  <Tab>
+
+        <iframe
+            src="https://codesandbox.io/p/sandbox/rich-text-editor-for-react-nextjs-56zgx4"
+
+            style={{width:'100%', height:'20rem'}}
+        />
+
+  </Tab>
+
+
+
+  <Tab>
+
+        <iframe
+            src="https://codesandbox.io/p/sandbox/rich-text-editor-for-react-vite-j5mxp2"
+
+            style={{width:'100%', height:'20rem'}}
+        />
+
+  </Tab>
+
+
+</Tabs>
+
+
+
+
+
+{/* features */}
+<FEATURES___COMPONENT/>
+
+
+
+{/* Linking Documentation */}
+<DOCUMENTATION_BUTTON/>
+
