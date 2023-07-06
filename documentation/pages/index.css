@@ -3,6 +3,17 @@
 
 
 
+* {
+
+  /* 'margin:0' is needed so that when I use html tag in the MUI's Box component, <Box component='p'> </Box>, then extra margin from the html tag wouldn't get added on the ui. */
+  margin: 0;
+
+  padding: 0;
+
+}
+
+
+
 
 
 h1 {
@@ -86,8 +97,25 @@ p, .body1 {
 }
 
 
+
+
 .logo_text {
-    font-size: 22px;
+    font-size: 18px;
     font-weight:500;
-    font-family: 'Lobster Two', cursive;
+    font-family: 'Kaushan Script', cursive;
 }
+
+
+.heading {
+    margin-top: 3rem;
+
+    text-align: center;
+
+    font-family: 'Kaushan Script', cursive;
+    text-transform: uppercase;
+    font-size:1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+

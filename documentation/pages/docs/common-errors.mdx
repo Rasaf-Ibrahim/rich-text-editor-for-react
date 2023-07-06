@@ -2,17 +2,27 @@
 title: 'Common Errors & Solution'
 ---
 
+{/* import */}
 import { Callout } from 'nextra-theme-docs'
+import {
+    HORIZONTAL_LINE_SPACER___COMPONENT,
+    HEADING_TOP_SPACER___COMPONENT, 
+    HEADING_BOTTOM_SPACER___COMPONENT
+} from '../../components/spacer.tsx'
 
 
 
+{/* Page Heading */}
+### Common Errors & Solution
+<HORIZONTAL_LINE_SPACER___COMPONENT/>
 
 
-&nbsp;
 
-### `ReactTextEditor` cannot be used as a JSX component
+<HEADING_TOP_SPACER___COMPONENT/>
 
-&nbsp;
+#### `ReactTextEditor` cannot be used as a JSX component
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 - If you are using Next.js with TypeScript, you may encounter this error during the build process.
 - To resolve this error, you can use the `any` type for the "RichTextEditor" component:

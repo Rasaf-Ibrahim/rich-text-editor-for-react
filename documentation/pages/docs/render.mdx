@@ -2,14 +2,27 @@
 title: 'Render Rich Text Editor'
 ---
 
+{/* import */}
 import { Callout } from 'nextra-theme-docs'
+import { Tab, Tabs } from 'nextra-theme-docs'
+import {
+    HORIZONTAL_LINE_SPACER___COMPONENT,
+    HEADING_TOP_SPACER___COMPONENT, 
+    HEADING_BOTTOM_SPACER___COMPONENT
+} from '../../components/spacer.tsx'
 
 
-&nbsp;
 
-### Render with Required Props
+{/* Page Heading */}
+### Render Rich Text Editor
+<HORIZONTAL_LINE_SPACER___COMPONENT/>
 
-&nbsp;
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Render with Required Props
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 To render the RichTextEditor component with only the required props, use the following code:
 
@@ -43,7 +56,8 @@ export default function Demo() {
 }
 ```
 
-&nbsp;
+
+<HEADING_TOP_SPACER___COMPONENT/>
 
 #### `fetchOutput`
 
@@ -53,7 +67,7 @@ In line 7, we have used the "useRichTextEditor" hook and destructured  `output` 
 The rich text editor generates HTML and the "output" variable contains the generated HTML.
 
 
-&nbsp;
+<HEADING_TOP_SPACER___COMPONENT/>
 
 #### `toolbarOptions`
 
@@ -89,19 +103,18 @@ The "toolbarOptions" prop controls which toolbar options are visible. You can in
 ```
 
 
-&nbsp;
+<HEADING_TOP_SPACER___COMPONENT/>
 
 #### `customizeUI`
 
 The "customizedUI" prop is not discussed on this page.  This prop is discussed on the [UI Customization](/ui-customization) page.
 
 
-
-&nbsp;
+<HEADING_TOP_SPACER___COMPONENT/>
 
 ### Errors which You May Encounter
 
-&nbsp;
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 
 

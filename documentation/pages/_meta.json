@@ -1,14 +1,14 @@
 {
-   "index": "Demo & Features",
-   "underlying-technologies": "Underlying Technologies",
-   "installation": "Installation",
-   "import": "How to Import",
-   "render": "Render Rich Text Editor",
-   "display": "Display Generated HTML",
-   "ui-customization": "UI Customization",
-   "utils": "Utils",
-   "editor-status": "Editor Status",
-   "validation-in-form": "Validation in Form",
-   "upload-image-in-cloudinary": "Upload Image in Cloudinary",
-   "common-errors": "Common Errors & Solution"
+  "index": {
+    "title": "Introduction",
+    "type": "page",
+    "display": "hidden"
+  },
+
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  }
+    
 }
+
