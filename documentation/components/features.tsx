@@ -33,6 +33,7 @@ export default function FEATURES___COMPONENT() {
             @media (max-width: 600px) {
                 display: block;
                 text-align: left;
+                margin-left: 1.5rem;
             }
 
     `;
@@ -41,11 +42,13 @@ export default function FEATURES___COMPONENT() {
     
     //  features
     const features = [
+        /* not making any feature's description long so that no feature takes more than a line even in the phone */
         '25+ Toolbar Options',
         'Light & Dark Theme',
-        'Option to upload images to Cloudinary',
-        'Image resizing and code highlighting capabilities',
-        'No need to install any additional libraries'
+        'UI customizations',
+        'Image uploading to Cloudinary',
+        'Image Resizing',
+        'Auto Code highlighting',
     ]
     
 
