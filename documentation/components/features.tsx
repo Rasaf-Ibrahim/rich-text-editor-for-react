@@ -56,7 +56,7 @@ export default function FEATURES___COMPONENT() {
     return (
 
 
-        <div style={{marginTop:'3rem', marginBottom:'4rem'}}> 
+        <div style={{marginTop:'4rem', marginBottom:'4rem'}}> 
 
             <LANDING_PAGE_HEADING___STYLED>
                 Features
