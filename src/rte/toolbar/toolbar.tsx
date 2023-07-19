@@ -12,40 +12,17 @@ import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 
 
-// color-picker library
-import { ChromePicker } from 'react-color';
-
-
 // icons
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 
 
-
-
-
-
-
-// styled components
-import {
-    MODAL_CONTENT___STYLED,
-} from "./styled-components/styled-components";
-
-
 // mui components
 import  {
     Box,
-    Typography,
     Button,
-    IconButton,
-    FormControl,
-    TextField,
-    Tooltip,
-    Popover,
-    Modal,
     Divider
 } from './mui/components'
-
 
 
 // toolbar components

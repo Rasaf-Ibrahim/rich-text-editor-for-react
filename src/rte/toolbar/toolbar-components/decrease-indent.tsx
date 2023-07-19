@@ -53,11 +53,15 @@ export default function DECREASE_INDENT___COMPONENT (props:type_of_toolbar_optio
             new_indent = current_indent - 1
         }
 
-
         quillRef.current.format('indent', new_indent);
 
         update_wysiwyg_state(draft => {
             draft.formats_of_selected_text.indent = new_indent;
+
+            /*🔖 
+               The reason of decreasing the cursor position by 1 is discussed in the increase-indent.tsx file. 
+            */
+            draft.editor_cursor.position = draft.editor_cursor.position - 1
         })
     }
 

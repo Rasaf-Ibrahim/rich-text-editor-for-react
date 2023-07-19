@@ -387,11 +387,13 @@ function form_actions(initialState, updateState) {
                 draft.form_data[payload.input_name].additionally_tracking.preview_link = payload.new_preview_link
             });
         },
+
         remove_image: (payload) => {
+
             updateState(draft => {
                 draft.form_data[payload.input_name].value = initialState.form_data[payload.input_name].value
 
-                draft.form_data[payload.input_name].additionally_tracking.preview_link = payload.new_value = initialState.form_data[payload.input_name].additionally_tracking.preview_link
+                draft.form_data[payload.input_name].additionally_tracking.preview_link = initialState.form_data[payload.input_name].additionally_tracking.preview_link
             });
         },
 

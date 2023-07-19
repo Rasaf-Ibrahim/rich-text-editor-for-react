@@ -10,7 +10,7 @@ import { useUpdateEffect } from "react-use"
 
 
 // types
-import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library'
 
 
 // form management
@@ -22,7 +22,7 @@ import { ImageRounded } from '../mui/icons';
 
 // styled components
 import {
-    MODAL_CONTENT___STYLED,
+    MODAL_WRAPPER_OF_CONTENT___STYLED,
     WRAPPER_OF_FORM___STYLED,
     WRAPPER_OF_FORM_CONTENT___STYLED
 } from "../styled-components/styled-components";
@@ -34,12 +34,15 @@ import {
     IconButton,
     FormControl,
     Tooltip,
-    Modal,
+    Box,
+    Typography,
 } from '../mui/components'
 
 
 // reusable components
-import FORM_IMAGE___REUSABLE from "../reusable-components/form-image";
+import FORM_IMAGE___REUSABLE from "../reusable-components/form-image/form-image";
+import MODAL___REUSABLE from '../reusable-components/modal'
+import MODAL_CLOSE_BUTTON___REUSABLE from '../reusable-components/modal-close-button'
 
 
 
@@ -226,7 +229,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
                 //  moving the cursor after the embedded video
                 quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
-                
+
             }
 
 
@@ -254,48 +257,75 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
             </Tooltip>
 
 
+            <MODAL___REUSABLE
+
+                modal_is_open={image_state.open_image_insert_modal}
+
+                user_can_close_the_modal={true}
+
+                handle_close_modal={handle_close_modal}
+
+                modal_content_jsx={
+
+                    <MODAL_WRAPPER_OF_CONTENT___STYLED>
+
+                        <WRAPPER_OF_FORM___STYLED>
+
+                            <WRAPPER_OF_FORM_CONTENT___STYLED onSubmit={handleSubmit}>
 
 
-            <Modal
-                open={image_state.open_image_insert_modal}
-                onClose={handle_close_modal}
-            >
+                                <FORM_IMAGE___REUSABLE
+
+                                    label='Image'
+
+                                    input_name='selected_image'
+
+                                    state={formState}
+
+                                    actions={actions}
+
+                                    validation_info={validation_info}
+
+                                />
 
 
-                <MODAL_CONTENT___STYLED>
-
-                    <WRAPPER_OF_FORM___STYLED>
-
-                        <WRAPPER_OF_FORM_CONTENT___STYLED onSubmit={handleSubmit}>
+                                <Button type="submit" variant='contained'>Submit</Button>
 
 
-                            <FORM_IMAGE___REUSABLE
+                            </WRAPPER_OF_FORM_CONTENT___STYLED>
 
-                                label='Image'
+                        </WRAPPER_OF_FORM___STYLED>
 
-                                input_name='selected_image'
-
-                                state={formState}
-
-                                update_state={updateFormState}
-
-                                actions={actions}
-
-                                validation_info={validation_info}
-
-                            />
+                    </MODAL_WRAPPER_OF_CONTENT___STYLED>
+                }
 
 
-                            <Button type="submit" variant='contained'>Submit</Button>
+                modal_navbar_jsx={
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+
+                        <ImageRounded sx={{ fontSize: '1.3rem' }} />
+
+                        <Typography sx={{
+                            typography: 'body1', textAlign: 'center',
+                            fontWeight: 600
+                        }}>
+                            Insert Base64 Image
+                        </Typography>
+
+                    </Box>
+                }
 
 
-                        </WRAPPER_OF_FORM_CONTENT___STYLED>
 
-                    </WRAPPER_OF_FORM___STYLED>
+                modal_footer_jsx={
 
-                </MODAL_CONTENT___STYLED>
+                    <MODAL_CLOSE_BUTTON___REUSABLE handle_modal_close={handle_close_modal} />
 
-            </Modal>
+                }
+
+            />
+
 
         </>
     )

@@ -15,7 +15,7 @@ import { type_of_toolbar_option_component_props } from '../../types/types-for-th
 
 
 // icons
-import { AspectRatioRounded, EditIcon } from '../mui/icons';
+import { AspectRatioRounded, CloseRounded, EditIcon } from '../mui/icons';
 
 // mui components
 import {
@@ -27,10 +27,13 @@ import {
     Tooltip,
 } from '../mui/components'
 
+// styled components
+import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
 
 // reusable components
 import MODAL___REUSABLE from '../reusable-components/modal';
-
+import MODAL_CLOSE_BUTTON___REUSABLE from '../reusable-components/modal-close-button';
+import { align_children, type_of_align } from '../utils/align-children';
 
 
 
@@ -150,9 +153,9 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
         for (const className of parentElementClassNames) {
 
-            if (className.startsWith('ql-image-align-')) {
+            if (className.startsWith('ql-custom-align-')) {
 
-                imageCurrentAlign = className.substring('ql-image-align-'.length)
+                imageCurrentAlign = className.substring('ql-custom-align-'.length)
 
                 break
             }
@@ -268,12 +271,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
                 modal_footer_jsx={
 
-                    <Button
-                        onClick={handle_modal_close}
-                        variant='outlined'
-                    >
-                        Close
-                    </Button>
+                    <MODAL_CLOSE_BUTTON___REUSABLE handle_modal_close={handle_modal_close} />
                 }
 
             />
@@ -299,7 +297,7 @@ function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, wysi
     return (
 
 
-        <Box sx={{ minHeight: '10rem', minWidth: '15rem' }}>
+        <MODAL_WRAPPER_OF_CONTENT___STYLED sx={{ paddingTop: '0rem' }}>
 
 
             {image_state.image_is_selected ?
@@ -337,7 +335,7 @@ function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, wysi
 
 
 
-        </Box>
+        </MODAL_WRAPPER_OF_CONTENT___STYLED>
 
 
     )
@@ -513,76 +511,20 @@ function ALIGN_IMAGE___CHILD({ image_state, update_image_state, quillRef, wysiwy
 
 
     // 🥪 align_image function
-    type type_of_align = 'left' | 'right' | 'center'
 
 
     function align_image(align: type_of_align) {
 
+        align_children({
+            selected_align: align,
+            quillRef: quillRef,
+            wysiwyg_state: wysiwyg_state
+        })
 
-        const [leaf] = quillRef.current.getLeaf(wysiwyg_state.editor_cursor.position)
-
-        const element = leaf && leaf.domNode
-
-        const parentElement = element?.parentElement
-
-
-        function remove_ql_image_align_class() {
-
-            // Remove remove existing classes starting with "ql-image"
-
-            let classes = parentElement.className.split(" ")
-            for (let i = 0; i < classes?.length; i++) {
-                if (classes[i].startsWith("ql-image-align")) {
-                    parentElement?.classList.remove(classes[i])
-                }
-            }
-        }
-
-
-
-        // 🍔 align to 'center'
-        if (align === 'center') {
-
-            remove_ql_image_align_class()
-
-            parentElement.classList.add('ql-image-align-center')
-
-            update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
-            })
-
-        }
-
-
-        // 🍔 align to 'right'
-        else if (align === 'right') {
-
-            remove_ql_image_align_class()
-
-            parentElement.classList.add('ql-image-align-right')
-
-            update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
-            })
-
-        }
-
-
-        // 🍔 align to 'left'
-        else if (align === 'left') {
-
-            remove_ql_image_align_class()
-
-            parentElement.classList.add('ql-image-align-left')
-
-            update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
-            })
-
-        }
-
+        update_image_state(draft => {
+            draft.image_has_been_edited = !draft.image_has_been_edited
+        })
     }
-
 
 
     // ✅ JSX

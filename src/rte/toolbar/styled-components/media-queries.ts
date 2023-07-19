@@ -12,7 +12,7 @@ const min_width = {
 
 
 
-const media_queries = {
+const css_media_queries = {
 
     // 🍪
     name_xs_sm: function (property_name, xs_value, sm_value) {
@@ -108,4 +108,4 @@ const media_queries = {
 }
 
 
-export default media_queries;
+export default css_media_queries;

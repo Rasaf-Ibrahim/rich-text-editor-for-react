@@ -1,4 +1,5 @@
 import AspectRatioRounded from '@mui/icons-material/AspectRatioRounded'
+import CloseRounded from '@mui/icons-material/CloseRounded'
 import CodeRounded from "@mui/icons-material/CodeRounded"
 import EditIcon from '@mui/icons-material/Edit'
 import FormatAlignLeftRounded from "@mui/icons-material/FormatAlignLeftRounded"
@@ -30,6 +31,7 @@ import YouTube from "@mui/icons-material/YouTube"
 
 export {
     AspectRatioRounded,
+    CloseRounded,
     CodeRounded,
     EditIcon,
     FormatAlignLeftRounded,

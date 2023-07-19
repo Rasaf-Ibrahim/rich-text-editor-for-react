@@ -26,7 +26,7 @@ import { ImageRounded } from '../mui/icons';
 
 // styled components
 import {
-    MODAL_CONTENT___STYLED,
+    MODAL_WRAPPER_OF_CONTENT___STYLED,
     WRAPPER_OF_FORM___STYLED,
     WRAPPER_OF_FORM_CONTENT___STYLED
 } from "../styled-components/styled-components";
@@ -40,13 +40,15 @@ import {
     IconButton,
     FormControl,
     Tooltip,
-    Modal
+    Box
 } from '../mui/components'
 
 
 // reusable components
-import FORM_IMAGE___REUSABLE from "../reusable-components/form-image";
+import FORM_IMAGE___REUSABLE from "../reusable-components/form-image/form-image";
 import LOADING_SPINNER___REUSABLE from "../reusable-components/loading-spinner";
+import MODAL___REUSABLE from '../reusable-components/modal';
+import MODAL_CLOSE_BUTTON___REUSABLE from '../reusable-components/modal-close-button';
 
 
 
@@ -140,7 +142,7 @@ export default function IMAGE_CLOUDINARY___COMPONENT(props: type_of_toolbar_opti
             )
 
             quillRef.current.setSelection(range.index + 1);
-        
+
         }
 
 
@@ -202,21 +204,56 @@ const INSERT_IMAGE___SECTION = ({ update_wysiwyg_state, wysiwyg_state, image_sta
     return (
         <>
 
-            <Modal
-                open={image_state.open_image_insert_modal}
-                onClose={handle_close_modal}
-            >
+
+            <MODAL___REUSABLE
+
+                modal_is_open={image_state.open_image_insert_modal}
+
+                user_can_close_the_modal={true}
+
+                handle_close_modal={handle_close_modal}
+
+                modal_content_jsx={
+
+                    <MODAL_WRAPPER_OF_CONTENT___STYLED>
 
 
-                <MODAL_CONTENT___STYLED>
+                        <UPLOAD_IMAGE___SECTION
+                            update_wysiwyg_state={update_wysiwyg_state} wysiwyg_state={wysiwyg_state}
+                            image_state={image_state}
+                            update_image_state={update_image_state}
+                        />
 
-                    <UPLOAD_IMAGE___SECTION update_wysiwyg_state={update_wysiwyg_state} wysiwyg_state={wysiwyg_state} image_state={image_state} update_image_state={update_image_state}
-                    />
+                    </MODAL_WRAPPER_OF_CONTENT___STYLED>
 
-                </MODAL_CONTENT___STYLED>
+                }
 
 
-            </Modal>
+                modal_navbar_jsx={
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+
+                        <ImageRounded sx={{ fontSize: '1.3rem' }} />
+
+                        <Typography sx={{
+                            typography: 'body1', textAlign: 'center',
+                            fontWeight: 600
+                        }}>
+                            Upload and Insert Image
+                        </Typography>
+
+                    </Box>
+                }
+
+
+
+                modal_footer_jsx={
+
+                    <MODAL_CLOSE_BUTTON___REUSABLE handle_modal_close={handle_close_modal} />
+
+                }
+
+            />
 
 
         </>
@@ -378,8 +415,6 @@ const UPLOAD_IMAGE___SECTION = ({ update_wysiwyg_state, wysiwyg_state, image_sta
                                 input_name='selected_image'
 
                                 state={formState}
-
-                                update_state={updateFormState}
 
                                 actions={actions}
 

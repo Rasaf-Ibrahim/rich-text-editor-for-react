@@ -1,6 +1,3 @@
-
-
-
 /*__________________________________________
 
  ✅ import
@@ -28,7 +25,6 @@ import  {
 
 
 
-
 /*__________________________________________
 
  ✅ Functional Component
@@ -39,6 +35,7 @@ export default function INCREASE_INDENT___COMPONENT(props:type_of_toolbar_option
     const { quillRef, wysiwyg_state, update_wysiwyg_state } = props
 
 
+   
     // 🥪 handleIndent
     const handleIndent = () => {
 
@@ -56,11 +53,21 @@ export default function INCREASE_INDENT___COMPONENT(props:type_of_toolbar_option
             new_indent = current_indent + 1
         }
 
-
         quillRef.current.format('indent', new_indent);
 
+
         update_wysiwyg_state(draft => {
-            draft.formats_of_selected_text.indent = new_indent;
+            draft.formats_of_selected_text.indent = new_indent
+
+            /*🔖 
+                - Whenever we increase or decrease indent, the cursor position gets increased by 1, indentation is one kind of alignment, so I don't the reason why quill increases the cursor position by 1. 
+
+                - Just after indentation, without moving the cursor, if a user tries to align 'right', 'left' or 'center', alignment will not work. Because the cursor position is wrong as quill has increased by 1.
+
+                - To solve this issue, we are decreasing the cursor position value by 1.
+                
+            */
+            draft.editor_cursor.position = draft.editor_cursor.position - 1
         })
     }
 

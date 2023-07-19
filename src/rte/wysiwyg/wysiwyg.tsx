@@ -28,6 +28,7 @@ import { CSS_FOR_QUILL_EDITOR____STYLED } from '../toolbar/styled-components/sty
 // components
 import { Box } from '../toolbar/mui/components';
 import WYSIWYG_TOOLBAR___COMPONENT from '../toolbar/toolbar';
+import { type_of_wysiwyg_state } from '../types/types-for-the-library';
 
 
 
@@ -37,10 +38,10 @@ window.Quill = Quill
 
 declare global {
     interface Window {
-      Quill: typeof Quill;
+        Quill: typeof Quill;
     }
-  }
-  
+}
+
 
 
 /*  🥪 importing and registering font  */
@@ -74,22 +75,46 @@ But I don't think that I will ever go back to use the package again. Because:
 */
 
 
+/*__________________________________________
+
+ ✅ types 
+____________________________________________*/
+
+type type_of_wysiwyg_props = {
+
+    quillRef: type_of_anything
+
+    wysiwyg_initial_state: type_of_wysiwyg_state
+
+    wysiwyg_state: type_of_wysiwyg_state
+
+    update_wysiwyg_state: type_of_anything
+
+    display_these_toolbar_options_in_the_parent_form: type_of_anything
+
+    customizeUI: type_of_anything
+
+}
+
 
 /*__________________________________________
 
  ✅ Functional Component 
 ____________________________________________*/
-export default function WYSIWYG___COMPONENT({
-    quillRef,
-    wysiwyg_initial_state,
-    wysiwyg_state,
-    update_wysiwyg_state,
-    display_these_toolbar_options_in_the_parent_form,
-    customizeUI
-}) {
+export default function WYSIWYG___COMPONENT(props: type_of_wysiwyg_props) {
 
 
-    const {primaryColor, stickyToolbarOnScroll} = customizeUI
+    const {
+        quillRef,
+        wysiwyg_initial_state,
+        wysiwyg_state,
+        update_wysiwyg_state,
+        display_these_toolbar_options_in_the_parent_form,
+        customizeUI
+    } = props
+
+
+    const { primaryColor, stickyToolbarOnScroll } = customizeUI
 
 
     // mui theme 
@@ -187,6 +212,7 @@ export default function WYSIWYG___COMPONENT({
 
 
 
+
     // updating 'editor_cursor' property of the 'wysiwyg_state' state
     useUpdateEffect(() => {
 
@@ -243,15 +269,75 @@ export default function WYSIWYG___COMPONENT({
         return () => {
             quillRef.current.off('selection-change', update_cursor_position_on_selection_change);
             quillRef.current.off('text-change', update_cursor_position_on_text_change);
+        }
 
 
-            console.log('Cleaning up');
+    }, [quillRef.current]);
+
+
+
+
+
+    // updating 'formats_of_selected_text.custom_align' property of the 'wysiwyg_state' state, whenever wysiwyg_state.editor_cursor.position changes
+    useUpdateEffect(() => {
+
+
+        const [leaf] = quillRef.current.getLeaf(wysiwyg_state.editor_cursor.position)
+
+        const element = leaf && leaf.domNode
+
+        const parentElement = element?.parentElement
+
+
+        // array of the all the classes
+        let classes_array = parentElement?.className.split(" ")
+
+
+        for (let i = 0; i < classes_array?.length; i++) {
+
+            // if any class startsWith "ql-custom-align"
+            if (classes_array[i].startsWith("ql-custom-align")) {
+
+                // if the class endsWith "center"
+                if (classes_array[i].endsWith("center")) {
+
+                    update_wysiwyg_state(draft => {
+                        draft.formats_of_selected_text.custom_align = 'center'
+                    })
+
+                }
+
+
+                // if the class endsWith "right"
+                if (classes_array[i].endsWith("right")) {
+
+                    update_wysiwyg_state(draft => {
+                        draft.formats_of_selected_text.custom_align = 'right'
+                    })
+
+                }
+
+            }
+
+
+
+            // no ql-custom-align className
+            else {
+
+                update_wysiwyg_state(draft => {
+                    draft.formats_of_selected_text.custom_align = 'left'
+                })
+
+            }
+
         }
 
 
 
-        
-    }, [quillRef.current]);
+
+
+
+    }, [wysiwyg_state.editor_cursor.position])
 
 
 
@@ -292,6 +378,8 @@ export default function WYSIWYG___COMPONENT({
 
 
 
+
+
     // updating the 'images.all_removed_images_link' value of the wysiwyg_state when 'images.all_inserted_images_link' value of wysiwyg_state changes
     useUpdateEffect(() => {
 
@@ -327,10 +415,10 @@ export default function WYSIWYG___COMPONENT({
 
 
 
-    
 
 
-      
+
+
 
 
 
@@ -347,7 +435,7 @@ export default function WYSIWYG___COMPONENT({
         <Box>
 
             {/*making the toolbar sticky at top when we scroll down */}
-            <Box sx={stickyToolbarOnScroll? { position: 'sticky', top: 0, zIndex: 999 }: {}} >
+            <Box sx={stickyToolbarOnScroll ? { position: 'sticky', top: 0, zIndex: 999 } : {}} >
 
                 <WYSIWYG_TOOLBAR___COMPONENT
                     quillRef={quillRef}

@@ -1,3 +1,8 @@
+/*__________________________________________
+
+ ✅ import
+____________________________________________*/
+// react
 import React from 'react'
 
 // hook
@@ -5,23 +10,42 @@ import { useState, useRef } from "react";
 import { useUpdateEffect } from 'react-use';
 
 // utils
-import { form_empty_field_func } from "../form-management/form-empty-field-func";
+import { form_empty_field_func } from "../../form-management/form-empty-field-func";
 
 // icon
 import PhotoIcon from '@mui/icons-material/Photo';
 
+// selected components
+import { WRAPPER_OF_SELECTED_IMAGES___STYLED } from "../../styled-components/styled-components"
+
 // components
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import InputLabel from '@mui/material/InputLabel'
+import { Box, Button, InputLabel, Typography } from '@mui/material'
+import SELECTED_IMAGE___REUSABLE from "./_selected-image"
+import ERROR_MESSAGE___REUSABLE from "./_error-message";
+
+
+
+/*__________________________________________
+
+ ✅ types
+____________________________________________*/
+
+type types_of_mui_image = {
+    label: string
+    input_name: string
+
+    state: type_of_obj_with_any_values
+    actions: type_of_obj_with_any_values
+    validation_info: type_of_obj_with_any_values
+}
+
 
 
 /*__________________________________________
 
  ✅ Functional Component 
 ____________________________________________*/
-export default function FORM_IMAGE___REUSABLE(props) {
+export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
     // 🍪 props 🍪 
@@ -66,28 +90,46 @@ export default function FORM_IMAGE___REUSABLE(props) {
 
 
     // 🍪 When you click on the button, logically you also click on the input field 🍪
-    const handle_clicking_the_input_logically_on_button_click = () => {
+    const handle_logically_click_the_input_on_button_click = () => {
 
         return input_field_ref.current.click()
     }
 
 
-    // 🍪 handle input change on selecting an image 🍪
-    const handle_input_change_on_selecting_image = (event) => {
+    // 🍪 function to execute when input change either on selecting or dropping images
+    const execute_this_when_input_changes = (file) => {
+
 
         /* 🍔🍔 Updating Input Value 🍔🍔 */
-
         actions.update_image_value({
             input_name: [input_name],
 
-            new_value: event.target.files[0],
+            new_value: file,
 
-            new_preview_link: URL.createObjectURL(event.target.files[0])
+            new_preview_link: (URL as any).createObjectURL(file)
         })
 
 
         /* 🍔 Triggering validation check on input change 🍔 */
         set_state_trigger_validation_check(!state_trigger_validation)
+    }
+
+
+
+    // 🍪 handle input change on selecting an image 🍪
+    const handle_input_change_on_selecting_image = (event) => {
+
+        execute_this_when_input_changes(event.target.files[0])
+
+    }
+
+
+    // 🍪 handle input change on drag & dropping an image 🍪
+    const handle_input_change_on_dropping_image = (event) => {
+
+        event.preventDefault();
+
+        execute_this_when_input_changes(event.dataTransfer.files[0])
     }
 
 
@@ -96,26 +138,7 @@ export default function FORM_IMAGE___REUSABLE(props) {
         event.preventDefault();
     }
 
-    // 🍪 handle input change on drag & dropping an image 🍪
-    const handle_input_change_on_dropping_image = (event) => {
 
-        event.preventDefault();
-
-
-        /* 🍔🍔 Updating Input Value 🍔🍔 */
-        actions.update_image_value({
-            input_name: [input_name],
-
-            new_value: event.dataTransfer.files[0],
-
-            new_preview_link: URL.createObjectURL(event.dataTransfer.files[0])
-        })
-
-
-
-        /* 🍔 Triggering validation check on input change 🍔 */
-        set_state_trigger_validation_check(!state_trigger_validation)
-    }
 
 
     // 🍪 handle delete selected image  🍪
@@ -125,7 +148,6 @@ export default function FORM_IMAGE___REUSABLE(props) {
         actions.remove_image({
             input_name: [input_name]
         })
-
 
 
 
@@ -144,7 +166,6 @@ export default function FORM_IMAGE___REUSABLE(props) {
 
         console.log(validation_info)
         if (validation_info[input_name].is_required) {
-
 
 
             if (form_empty_field_func(state.form_data[input_name].value)) {
@@ -172,10 +193,8 @@ export default function FORM_IMAGE___REUSABLE(props) {
             // 🍗 file format error 
             let file_format_error = false
 
-            if (validation_info[input_name].validation.hasOwnProperty('accepted_file_formats')) 
-
-            
-            {
+             
+            if (validation_info[input_name].validation.hasOwnProperty('accepted_file_formats')) {
 
                 const accepted_file_formats = validation_info[input_name].validation.accepted_file_formats
 
@@ -193,9 +212,8 @@ export default function FORM_IMAGE___REUSABLE(props) {
             // 🍗 file size error 
             let file_size_error = false
 
-            if (validation_info[input_name].validation.hasOwnProperty('accepted_maximum_file_size'))  {
+            if (validation_info[input_name].validation.hasOwnProperty('accepted_maximum_file_size')) {
 
-                
                 const accepted_maximum_file_size = validation_info[input_name].validation.accepted_maximum_file_size
 
                 const fileSize = Math.round(state.form_data[input_name].value.size / 1024)
@@ -236,8 +254,6 @@ export default function FORM_IMAGE___REUSABLE(props) {
 
 
 
-        /* ~~~ a note type of comment has been removed from here after making this repository public ~~~ */
-
         /* ⚠️⚠️⚠️ couldn't make logic to check the selected image's dimension!*/
 
     }
@@ -254,6 +270,7 @@ export default function FORM_IMAGE___REUSABLE(props) {
 
 
     /*__________________________________________
+
         ✅ JSX
     ____________________________________________*/
     return (
@@ -265,6 +282,7 @@ export default function FORM_IMAGE___REUSABLE(props) {
             gap: '1rem'
         })}>
 
+
             <InputLabel>{label}</InputLabel>
 
 
@@ -273,14 +291,16 @@ export default function FORM_IMAGE___REUSABLE(props) {
                 handle_input_change_on_dropping_image={handle_input_change_on_dropping_image}
                 handle_input_change_on_selecting_image={handle_input_change_on_selecting_image}
                 input_field_ref={input_field_ref}
-                handle_clicking_the_input_logically_on_button_click={handle_clicking_the_input_logically_on_button_click}
+                handle_logically_click_the_input_on_button_click={handle_logically_click_the_input_on_button_click}
             />
 
 
-            <ERROR_MESSAGE___SECTION
-                state={state}
-                input_name={input_name}
-                validation_info={validation_info}
+            <ERROR_MESSAGE___REUSABLE
+
+                has_a_required_field_error={state.required_field_error[input_name] === true}
+                has_a_validation_error={state.validation_error[input_name] === true}
+                validation_error_message={validation_info[input_name].validation.error_message()}
+
             />
 
 
@@ -302,7 +322,9 @@ export default function FORM_IMAGE___REUSABLE(props) {
 
 
 /*__________________________________________
- ✅ Sections of <MUI_IMAGE___COMPONENT/>
+
+ ✅ Sections of 
+ <MUI_IMAGE___COMPONENT/>
 ____________________________________________*/
 
 
@@ -313,7 +335,7 @@ const DRAG_OR_SELECT_IMAGE___SECTION = ({
     handle_input_change_on_dropping_image,
     handle_input_change_on_selecting_image,
     input_field_ref,
-    handle_clicking_the_input_logically_on_button_click,
+    handle_logically_click_the_input_on_button_click,
 
 }) => {
 
@@ -324,7 +346,7 @@ const DRAG_OR_SELECT_IMAGE___SECTION = ({
             onDrop={handle_input_change_on_dropping_image}
             sx={(theme) => ({
                 padding: '1rem',
-                border: `0.5px dotted ${theme.palette.text.secondary}`,
+                border: `2px dotted ${theme.palette.divider}`,
                 borderRadius: '0.5rem',
 
                 textAlign: 'center',
@@ -357,7 +379,7 @@ const DRAG_OR_SELECT_IMAGE___SECTION = ({
             />
 
             <Button
-                onClick={handle_clicking_the_input_logically_on_button_click}
+                onClick={handle_logically_click_the_input_on_button_click}
                 variant='outlined'
                 size='small'
                 sx={(theme) => ({
@@ -378,39 +400,6 @@ const DRAG_OR_SELECT_IMAGE___SECTION = ({
 
 
 
-/* 🍔 */
-const ERROR_MESSAGE___SECTION = ({
-    state,
-    input_name,
-    validation_info
-
-}) => {
-
-    return (
-
-        <Box sx={{ color: 'error.main', textAlign: 'center' }}>
-
-
-            {state.required_field_error[input_name] === true &&
-                <Typography variant='body1'>
-                    You must not skip this field.
-                </Typography>
-            }
-
-
-            {/* We will not show the input validation error when there is already required field error. */}
-            {state.required_field_error[input_name] === false && state.validation_error[input_name] === true &&
-                <Typography variant='body1'>
-                    {validation_info[input_name].validation.error_message()}
-                </Typography>
-            }
-
-        </Box>
-
-    )
-
-}
-
 
 
 /* 🍔 */
@@ -426,15 +415,16 @@ const IMAGE_PREVIEW___SECTION = ({
         <>
             {!state.validation_error[input_name] && state.form_data[input_name].additionally_tracking.preview_link &&
 
-                <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <WRAPPER_OF_SELECTED_IMAGES___STYLED>
 
-                    <img style={{ width: '100px', height: '100px' }} src={state.form_data[input_name].additionally_tracking.preview_link} alt="" />
+                    <SELECTED_IMAGE___REUSABLE
+                        src={state.form_data[input_name].additionally_tracking.preview_link}
+                        handle_click_on_remove_button={() => handle_delete_selected_image()}
+                    />
 
-                    <Button onClick={() => handle_delete_selected_image()} size="small">
-                        Remove
-                    </Button>
+                </WRAPPER_OF_SELECTED_IMAGES___STYLED>
 
-                </Box>
+
             }
 
         </>

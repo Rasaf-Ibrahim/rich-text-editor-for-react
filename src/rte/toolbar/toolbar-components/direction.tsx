@@ -55,7 +55,7 @@ export default function DIRECTION___COMPONENT(props:type_of_toolbar_option_compo
             //  updating the state as well
             update_wysiwyg_state(draft => {
 
-                draft.formats_of_selected_text.direction = false
+                draft.formats_of_selected_text.direction = 'ltr'
 
                 draft.formats_of_selected_text.align = false
             })

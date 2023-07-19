@@ -110,6 +110,7 @@ const RichTextEditor: React.ComponentType<RichTextEditorPropsType> = (props) => 
             strike: false, // strikethrough
             list: 'none',  // ordered & unordered(bullet) list
             align: false, //text alignment
+            custom_align: 'left', // custom text alignment
             indent: 0,
             direction: 'ltr', //rtl, ltr
             blockquote: false,
@@ -128,7 +129,7 @@ const RichTextEditor: React.ComponentType<RichTextEditorPropsType> = (props) => 
     const [wysiwyg_state, update_wysiwyg_state] = useImmer(wysiwyg_initial_state)
 
 
-    // useLogger('🛑 wysiwyg_state', wysiwyg_state)
+    useLogger('🛑 wysiwyg_state', wysiwyg_state)
 
 
 

@@ -12,15 +12,8 @@ import { useImmer } from "use-immer";
 // type
 import { type_of_toolbar_option_component_props } from '../../types/types-for-the-library';
 
-
 // icons
 import { LinkRounded } from '../mui/icons';
-
-
-// styled components
-import {
-    MODAL_CONTENT___STYLED
-} from "../styled-components/styled-components";
 
 
 // mui components
@@ -31,9 +24,15 @@ import {
     IconButton,
     FormControl,
     TextField,
-    Tooltip,
-    Modal,
+    Tooltip
 } from '../mui/components'
+
+// styled components
+import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
+
+// reusable components
+import MODAL___REUSABLE from '../reusable-components/modal';
+import MODAL_CLOSE_BUTTON___REUSABLE from '../reusable-components/modal-close-button';
 
 
 
@@ -42,7 +41,7 @@ import {
  ✅ Functional Component 
 ____________________________________________*/
 
-export default function LINK___COMPONENT(props:type_of_toolbar_option_component_props) {
+export default function LINK___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
     // 🥪 props
@@ -120,6 +119,9 @@ export default function LINK___COMPONENT(props:type_of_toolbar_option_component_
     //  when a user submits the link, the following function gets triggered
     const handle_submit = () => {
 
+        // Prevent the default form submission behavior
+        event.preventDefault()
+
         quillRef.current.format('link', link_state.link)
 
         update_wysiwyg_state(draft => {
@@ -166,78 +168,141 @@ export default function LINK___COMPONENT(props:type_of_toolbar_option_component_
 
 
 
+            <MODAL___REUSABLE
 
-            <Modal open={link_state.open_modal} onClose={handle_modal_close}>
+                modal_is_open={link_state.open_modal}
 
-                <MODAL_CONTENT___STYLED>
+                user_can_close_the_modal={true}
 
+                handle_close_modal={handle_modal_close}
 
-                    {(() => {
+                modal_content_jsx={
 
-
-                        if (link_state.link_already_exist) {
-
-
-                            return (
-
-                                <Typography variant='body2' sx={{ textAlign: 'center' }}>Link already exists on your selected text. Just click on the text in the editor, you will get options to edit or remove the link.</Typography>
-                            )
-
-                        }
-
-                        else {
+                    <MODAL_CONTENT___CHILD
+                        handle_submit={handle_submit}
+                        link_state={link_state}
+                        handle_input_change={handle_input_change}
+                    />
+                }
 
 
-                            if (link_state.text_is_selected) {
+                modal_navbar_jsx={
 
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
 
-                                return (
+                        <LinkRounded sx={{ fontSize: '1.3rem' }} />
 
-                                    <Box component='form' onSubmit={handle_submit}
-                                        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                        <Typography sx={{
+                            typography: 'body1', textAlign: 'center',
+                            fontWeight: 600
+                        }}>
+                            Link
+                        </Typography>
 
-                                        <TextField
-                                            label="URL Link"
-                                            variant="outlined"
-                                            value={link_state.link}
-                                            onChange={handle_input_change}
-                                            size='small'
-                                        />
-
-                                        <Button type="submit" variant="contained" size='small' >
-                                            Submit
-                                        </Button>
-
-                                    </Box>
-                                )
+                    </Box>
+                }
 
 
 
+                modal_footer_jsx={
 
-                            }
+                    <MODAL_CLOSE_BUTTON___REUSABLE handle_modal_close={handle_modal_close} />
 
-                            else {
+                }
 
-
-                                return (
-
-                                    <Typography variant='body2' sx={{ padding: '1rem', textAlign: 'center' }}>Please select some text before trying to insert a link.</Typography>
-                                )
-
-
-                            }
-
-                        }
-                    })()}
+            />
 
 
 
 
 
-                </MODAL_CONTENT___STYLED>
 
-            </Modal>
 
         </>
     )
 }
+
+
+
+
+
+/*__________________________________________
+
+ ✅ Child Component of 
+ <LINK___COMPONENT/>
+____________________________________________*/
+
+function MODAL_CONTENT___CHILD({ handle_submit, link_state, handle_input_change }) {
+
+
+
+
+    return (
+
+        <MODAL_WRAPPER_OF_CONTENT___STYLED>
+
+
+            {(() => {
+
+
+                if (link_state.link_already_exist) {
+
+
+                    return (
+
+                        <Typography variant='body2' sx={{ textAlign: 'center' }}>Link already exists on your selected text. Just click on the text in the editor, you will get options to edit or remove the link.</Typography>
+                    )
+
+                }
+
+                else {
+
+
+                    if (link_state.text_is_selected) {
+
+
+                        return (
+
+                            <Box component='form' onSubmit={handle_submit}
+                                sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+
+                                <TextField
+                                    label="URL Link"
+                                    variant="filled"
+                                    value={link_state.link}
+                                    onChange={handle_input_change}
+                                    size='small'
+                                />
+
+                                <Button type="submit" variant="contained" size='small' >
+                                    Submit
+                                </Button>
+
+                            </Box>
+                        )
+
+
+
+
+                    }
+
+                    else {
+
+
+                        return (
+
+                            <Typography variant='body2' sx={{ padding: '1rem', textAlign: 'center' }}>Please select some text before trying to insert a link.</Typography>
+                        )
+
+
+                    }
+
+                }
+            })()}
+
+        </MODAL_WRAPPER_OF_CONTENT___STYLED>
+    )
+
+
+}
+

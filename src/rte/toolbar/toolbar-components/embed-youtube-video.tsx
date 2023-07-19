@@ -2,7 +2,6 @@
 
  ✅ import
 ____________________________________________*/
-
 import React from 'react'
 
 // hook
@@ -17,13 +16,6 @@ import { type_of_toolbar_option_component_props } from '../../types/types-for-th
 import { YouTube } from '../mui/icons';
 
 
-
-// styled components
-import {
-    MODAL_CONTENT___STYLED,
-} from "../styled-components/styled-components";
-
-
 // mui components
 import {
     Box,
@@ -32,9 +24,15 @@ import {
     IconButton,
     FormControl,
     TextField,
-    Tooltip,
-    Modal
+    Tooltip
 } from '../mui/components'
+
+// styled components
+import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
+
+// reusable components
+import MODAL___REUSABLE from '../reusable-components/modal';
+import MODAL_CLOSE_BUTTON___REUSABLE from '../reusable-components/modal-close-button';
 
 
 
@@ -45,7 +43,7 @@ import {
 ____________________________________________*/
 
 
-export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_option_component_props){
+export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
 
@@ -171,10 +169,10 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
     /*  when the user closes the modal or when the modal automatically gets closed, the following function gets triggered */
     const handle_modal_close = () => {
 
-
-        // when the modal closes, we don't want to do anything other than closing the modal!
         update_video_state(draft => {
             draft.open_modal = false
+
+            draft.valid_link = true
         })
     }
 
@@ -286,38 +284,98 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
 
 
 
+            <MODAL___REUSABLE
 
-            <Modal open={video_state.open_modal} onClose={handle_modal_close}>
+                modal_is_open={video_state.open_modal}
 
-                <MODAL_CONTENT___STYLED>
+                user_can_close_the_modal={true}
 
-                    <Box component='form' onSubmit={handle_submit}
-                        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                handle_close_modal={handle_modal_close}
 
-                        <TextField
-                            label="URL Link"
-                            variant="outlined"
-                            value={video_state.link}
-                            onChange={handle_input_change}
-                            size='small'
-                        />
+                modal_content_jsx={
 
-                        <Button type="submit" variant="contained" size='small' >
-                            Submit
-                        </Button>
+                    <MODAL_CONTENT___CHILD
+                        handle_submit={handle_submit}
+                        video_state={video_state}
+                        handle_input_change={handle_input_change}
+                    />
+                }
 
-                        {video_state.valid_link === false &&
 
-                            <Typography variant='body2' color='error.main'>Provide a valid video link of youtube.</Typography>
+                modal_navbar_jsx={
 
-                        }
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
+
+                        <YouTube sx={{ fontSize: '1.3rem' }} />
+
+                        <Typography sx={{
+                            typography: 'body1', textAlign: 'center',
+                            fontWeight: 600
+                        }}>
+                            Embed Youtube Video
+                        </Typography>
 
                     </Box>
+                }
 
-                </MODAL_CONTENT___STYLED>
 
-            </Modal>
+
+                modal_footer_jsx={
+
+                    <MODAL_CLOSE_BUTTON___REUSABLE handle_modal_close={handle_modal_close} />
+
+                }
+
+
+            />
+
 
         </>
     )
 }
+
+
+
+
+/*__________________________________________
+
+ ✅ Child Component of 
+ <EMBED_YOUTUBE_VIDEO___COMPONENT/>
+____________________________________________*/
+
+function MODAL_CONTENT___CHILD({ handle_submit, video_state, handle_input_change }) {
+
+
+
+
+    return (
+
+        <MODAL_WRAPPER_OF_CONTENT___STYLED
+            component='form'
+            onSubmit={handle_submit}>
+
+
+            <TextField
+                label="URL Link"
+                variant="filled"
+                value={video_state.link}
+                onChange={handle_input_change}
+                size='small'
+            />
+
+            <Button type="submit" variant="contained" size='small' >
+                Submit
+            </Button>
+
+            {video_state.valid_link === false &&
+
+                <Typography variant='body2' color='error.main'>Provide a valid video link of youtube.</Typography>
+
+            }
+        </MODAL_WRAPPER_OF_CONTENT___STYLED>
+
+    )
+
+
+}
+

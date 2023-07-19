@@ -1,6 +1,6 @@
 {
     "name": "rich-text-editor-for-react",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "A Rich Text Editor for React",
     "author": "Rasaf Ibrahim",
     "license": "MIT",
@@ -65,5 +65,6 @@
         "rich-text-editor",
         "wysiwyg",
         "rte"
-    ]
+    ],
+    "dependencies": {}
 }

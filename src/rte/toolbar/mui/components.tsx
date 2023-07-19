@@ -14,7 +14,6 @@ import Tooltip from  '@mui/material/Tooltip'
 
 import Popover from '@mui/material/Popover'
 
-import Modal from '@mui/material/Modal'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -34,7 +33,6 @@ export {
     TextField,
     Tooltip,
     Popover,
-    Modal,
     Dialog,
     DialogTitle,
     DialogContent,

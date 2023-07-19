@@ -2,7 +2,7 @@
 import React from 'react'
 
 // styled components
-import media_queries from './media-queries';
+import css_media_queries from './media-queries';
 import { styled } from '@mui/material/styles';
 
 // mui components
@@ -11,22 +11,26 @@ import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem';
 
 
+
+
 /* 🥪 */
-const MODAL_CONTENT___STYLED = styled((props: type_of_obj_with_any_values) =>
+const MODAL_WRAPPER_OF_CONTENT___STYLED = styled((props: type_of_obj_with_any_values) =>
 
     <Box  {...props} />
 )
     (({ theme }) => `
 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400;
-    background: ${theme.palette.background.paper};
-    box-shadow: 2rem;
-    padding: 2rem;
+    min-height: 10rem;
+    min-width: 15rem;
+
+    padding-top:2rem;
+    
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1rem;
 `)
+
 
 
 
@@ -84,15 +88,16 @@ const WRAPPER_OF_FORM_CONTENT___STYLED = styled((props: type_of_obj_with_any_val
 )
     (({ theme }) => `
 
-    ${media_queries.name_xs_sm_md_lg('width', '18rem', '20rem', '22rem', '24rem')};
+    ${css_media_queries.name_xs_sm_md_lg('width', '18rem', '20rem', '22rem', '24rem')};
 
     ${/*when the width is increasing 2, we need to increase the padding the padding 1 because padding has right and left. */ ''}
-    ${media_queries.name_xs_sm_md_lg('padding-right', '1rem', '2rem', '3rem', '4rem')};
-    ${media_queries.name_xs_sm_md_lg('padding-left', '1rem', '2rem', '3rem', '4rem')};
+    ${css_media_queries.name_xs_sm_md_lg('padding-right', '1rem', '2rem', '3rem', '4rem')};
+    ${css_media_queries.name_xs_sm_md_lg('padding-left', '1rem', '2rem', '3rem', '4rem')};
     padding-top:1rem;
     padding-bottom:1rem;
 
-    background-color: ${theme.palette.background.paper};
+    ${/* usually, for the form, we don't use default background color but as the form will be placed in a modal, so we are using default background color */''}
+    background-color: ${theme.palette.background.default};
 
 
     ${/* Button's size is getting changed while toggling the email form if we use display:'grid' instead of display:'flex' & flex-direction:'column' */ ''}
@@ -100,6 +105,28 @@ const WRAPPER_OF_FORM_CONTENT___STYLED = styled((props: type_of_obj_with_any_val
     flex-direction: column;
     justify-content: center; 
     gap: 1.2rem; 
+`)
+
+
+
+/* 🥪 */
+const WRAPPER_OF_SELECTED_IMAGES___STYLED = styled(Box)
+    (({ theme }) => `
+
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+
+    border-width: 2px;
+    border-style: dotted;
+    border-color: ${theme.palette.divider};
+    border-radius: 15px;
+    overflow: hidden;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 `)
 
 
@@ -649,7 +676,7 @@ const CSS_FOR_QUILL_EDITOR____STYLED = styled((props: type_of_obj_with_any_value
     ${/* 🍔 quill editor - blockquote 🍔 */ ''}
 
     .ql-editor blockquote {
-        border-left: 4px solid ${theme.palette.mode === 'dark' ? theme.palette.grey[100] : theme.palette.grey[700] };
+        border-left: 4px solid ${theme.palette.mode === 'dark' ? theme.palette.grey[100] : theme.palette.grey[700]};
         margin-bottom: 5px;
         margin-top: 5px;
         padding-left: 16px;
@@ -1003,31 +1030,31 @@ const CSS_FOR_QUILL_EDITOR____STYLED = styled((props: type_of_obj_with_any_value
 
       .ql-editor .ql-image-size-xs{
 
-            ${media_queries.name_xs_sm_md_lg_xl('width', '35%', '25%', '20%', '15%', '10%')}
+            ${css_media_queries.name_xs_sm_md_lg_xl('width', '35%', '25%', '20%', '15%', '10%')}
         }
 
 
       .ql-editor .ql-image-size-sm{
 
-            ${media_queries.name_xs_sm_md_lg_xl('width', '45%', '35%', '30%', '25%', '20%')}
+            ${css_media_queries.name_xs_sm_md_lg_xl('width', '45%', '35%', '30%', '25%', '20%')}
         }
 
 
        .ql-editor .ql-image-size-md{
 
-            ${media_queries.name_xs_sm_md_lg_xl('width', '60%', '45%', '40%', '35%', '30%')}
+            ${css_media_queries.name_xs_sm_md_lg_xl('width', '60%', '45%', '40%', '35%', '30%')}
         }
 
 
         .ql-editor .ql-image-size-lg{
 
-            ${media_queries.name_xs_sm_md_lg_xl('width', '75%', '55%', '50%', '45%', '40%')}
+            ${css_media_queries.name_xs_sm_md_lg_xl('width', '75%', '55%', '50%', '45%', '40%')}
         }
 
 
         .ql-editor .ql-image-size-xl{
 
-            ${media_queries.name_xs_sm_md_lg_xl('width', '90%', '65%', '60%', '55%', '50%')}
+            ${css_media_queries.name_xs_sm_md_lg_xl('width', '90%', '65%', '60%', '55%', '50%')}
         }
 
 
@@ -1038,29 +1065,25 @@ const CSS_FOR_QUILL_EDITOR____STYLED = styled((props: type_of_obj_with_any_value
 
         ${/* 🍔 custom - the following classes are necessary for aligning image  🍔 */ ''}
 
-        .ql-editor .ql-image-align-center {
+        .ql-editor .ql-custom-align-center {
 
             width: 100%;
-            display: flex;
-            justify-content: center;
+            text-align: center;
         }
 
 
-        .ql-editor .ql-image-align-right {
+        .ql-editor .ql-custom-align-right {
 
             width: 100%;
-            display: flex;
-            justify-content: right;
+            text-align: right;
         }
 
 
-        .ql-editor .ql-image-align-left {
+        .ql-editor .ql-custom-align-left {
 
             width: 100%;
-            display: flex;
-            justify-content: left;
+            text-align: left;
         }
-
 
 
 `)
@@ -1174,8 +1197,9 @@ const CSS_FOR_QUILL_GENERATED_HTML___STYLED = styled((props: type_of_obj_with_an
 
 
 
+
 export {
-    MODAL_CONTENT___STYLED,
+    MODAL_WRAPPER_OF_CONTENT___STYLED,
     SELECT___STYLED,
     MENU_ITEM___STYLED,
     WRAPPER_OF_FORM___STYLED,
@@ -1183,4 +1207,6 @@ export {
 
     CSS_FOR_QUILL_EDITOR____STYLED,
     CSS_FOR_QUILL_GENERATED_HTML___STYLED,
+
+    WRAPPER_OF_SELECTED_IMAGES___STYLED
 }
