@@ -169,7 +169,8 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
         /* 🥔 Required Field Validation 🥔 */
         //  only proceed to required field validation if this field is a required field.
 
-        console.log(validation_info)
+       
+
         if (validation_info[input_name].is_required) {
 
 

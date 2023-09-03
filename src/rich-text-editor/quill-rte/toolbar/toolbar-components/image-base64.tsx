@@ -180,9 +180,9 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
         /* 🥔🥔 submit the form's all the inputted data 🥔🥔 */
-        console.log('😃 submitting data', {
-            ...formState.form_data
-        })
+        // console.log('😃 submitting data', {
+        //     ...formState.form_data
+        // })
 
 
         // 🥔🥔 Trigger quill to insert the image 🥔🥔

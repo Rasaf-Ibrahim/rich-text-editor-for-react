@@ -166,7 +166,7 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
     const [rte_state, update_rte_state] = useImmer(rte_initial_state)
 
 
-    useLogger('🛑 rte_state', rte_state)
+    // useLogger('🛑 rte_state', rte_state)
 
 
     /* 🫓 (1/8) for user - indirectly updating "output" state when the user passes an initial value */
@@ -296,8 +296,6 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
     */
 
     useUpdateEffect(() => {
-
-        console.log(rte_state.images.all_removed_url_src_image_id.length)
 
         // first, update the "imageOperationsData" to let the user know how many images are being uploaded
         fetchImageOperationsData(prevState => ({
