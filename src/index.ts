@@ -1,4 +1,4 @@
-import RichTextEditor from "./rte/rich-text-editor"
+import RichTextEditor from "./rich-text-editor/rich-text-editor"
 
 
 

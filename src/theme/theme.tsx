@@ -1,20 +1,33 @@
+/*__________________________________________
+
+ ✅ import
+____________________________________________*/
+
+// react
 import React from "react"
 
+// css
 import './index.css'
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+// mui theme
+import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
+
+// type
+import { typographyType } from "../types/types-for-the-users"
 
 
-// importing all the customized theme properties*
+// css in js
+import { lighten, darken, getLuminance, parseToRgb } from 'polished'
+
+
+// customized theme properties
 import {
     theme_palette_background,
     theme_palette_text,
     theme_palette_primary,
     theme_palette_secondary,
     theme_palette_error,
-    theme_palette_warning,
     theme_palette_info,
-    theme_palette_success,
     theme_palette_grey,
 } from './customized-theme-properties/palette/_palette'
 
@@ -24,75 +37,111 @@ import { theme_breakpoints } from './customized-theme-properties/breakpoints/bre
 
 import { theme_component_button } from './customized-theme-properties/components/button'
 
-// types
-import { PrimaryColorType } from "../rte/types/types-for-the-users";
 
 
+/*__________________________________________
 
-export interface ThemeProps {
-    dark: boolean
-    primaryColor: PrimaryColorType
-    children: any
+ ✅ types
+____________________________________________*/
+
+type type_of_mui_theme = {
+    backgroundColor: string
+    primaryColor: string
+    iconColor?: string
+    typography: typographyType
 }
 
 
 
-export default function MuiTheme(props: ThemeProps) {
+/*__________________________________________
 
-    const { children, dark, primaryColor } = props
+ ✅ Functional Component
+____________________________________________*/
+export default function MUI_THEME___COMPONENT(props: React.PropsWithChildren<type_of_mui_theme>) {
 
 
+    // 🫓 props
+    const {
+        children,
+        backgroundColor,
+        primaryColor,
+        iconColor,
+        typography
+    } = props
 
-    //colors
-    const theme_palette_primary_obj = theme_palette_primary(dark, primaryColor)
+ 
+    // 🫓 theme
+    const theme = useTheme()
 
-    const theme_palette_secondary_obj = theme_palette_secondary(dark)
 
-    const theme_palette_error_obj = theme_palette_error(dark)
+    // 🫓 deciding the theme is dark or not
+    let dark = getLuminance(backgroundColor) < 0.5 ? true : false
 
-    const theme_palette_warning_obj = theme_palette_warning(dark)
 
-    const theme_palette_success_obj = theme_palette_success(dark)
+    // 🫓 background color (receiving form the  user)
+    const theme_palette_background_obj = theme_palette_background(dark, backgroundColor)
 
-    const theme_palette_info_obj = theme_palette_info(dark)
 
-    const theme_palette_grey_obj = theme_palette_grey(dark)
-
-    // text
+    // 🫓 text color
     const theme_palette_text_obj = theme_palette_text(dark)
 
-    //background
-    const theme_palette_background_obj = theme_palette_background(dark)
+
+    //🫓 primary color 
+    const theme_palette_primary_obj = theme_palette_primary({
+        dark: dark,
+        primaryColor:primaryColor
+    })
 
 
+    // 🫓 secondary color (using for coloring any icon)
+    const theme_palette_secondary_obj = theme_palette_secondary({
+        iconColor:iconColor,
+        theme: theme,
+        dark:dark
+    })
+
+
+    // 🫓 error color (using for error message)
+    const theme_palette_error_obj = theme_palette_error(dark)
+
+
+    // 🫓 info color (using for <a/> color in editor)
+    const theme_palette_info_obj = theme_palette_info(dark)
+
+
+    // 🫓 grey color (using in couple of places in the editor)
+    const theme_palette_grey_obj = theme_palette_grey(dark)
+
+
+    // 🫓 breakpoints
     const theme_breakpoints_obj = theme_breakpoints()
 
 
-    const theme_typography_obj = theme_typography()
+    // 🫓 typography
+    const theme_typography_obj = theme_typography(typography)
 
 
-
-    // button
+    // 🫓 button
     const theme_component_button_obj = theme_component_button()
 
 
 
+    // 🫓 creating theme
     const customizedTheme = createTheme({
 
 
-        /*🍪 Spacing 🍪 */
+        // Spacing 
         spacing: factor => `${0.5 * factor}rem`,
 
 
-        /*🍪 Breakpoints 🍪 */
+        // Breakpoints 
         breakpoints: {
 
             ...theme_breakpoints_obj
         },
 
 
-        /*🍪 Palette 🍪 */
-
+        // Palette 
         palette: {
 
             mode: dark ? 'dark' : 'light',
@@ -109,10 +158,6 @@ export default function MuiTheme(props: ThemeProps) {
 
             ...theme_palette_error_obj,
 
-            ...theme_palette_warning_obj,
-
-            ...theme_palette_success_obj,
-
             ...theme_palette_info_obj,
 
             // grey
@@ -125,13 +170,14 @@ export default function MuiTheme(props: ThemeProps) {
         },
 
 
-        /*🍪 Typography 🍪 */
+        // Typography 
         typography: {
 
             ...theme_typography_obj
         },
 
-
+        
+        // components
         components: {
 
             // button
@@ -145,6 +191,7 @@ export default function MuiTheme(props: ThemeProps) {
 
 
 
+    // ✅ TSX
     return (
 
         <>

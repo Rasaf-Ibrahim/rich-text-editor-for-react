@@ -1,6 +1,6 @@
 {
     "name": "rich-text-editor-for-react",
-    "version": "0.2.4",
+    "version": "0.3.8",
     "description": "A Rich Text Editor for React",
     "author": "Rasaf Ibrahim",
     "license": "MIT",
@@ -11,17 +11,21 @@
         "publish": "npm publish"
     },
     "devDependencies": {
+        "@emotion/css": "^11.11.2",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.11.16",
-        "@mui/material": "^5.13.5",
+        "@mui/material": "^5.11.3",
         "@rollup/plugin-commonjs": "^25.0.1",
+        "@rollup/plugin-json": "^6.0.0",
         "@rollup/plugin-node-resolve": "^15.1.0",
         "@rollup/plugin-terser": "^0.4.3",
         "@rollup/plugin-typescript": "^11.1.1",
         "@types/quill": "^2.0.10",
-        "highlight.js": "^11.8.0",
+        "axios": "^1.5.0",
         "immer": "^10.0.2",
+        "nanoid": "^4.0.2",
+        "polished": "^4.2.2",
         "postcss": "^8.4.24",
         "quill": "^1.3.7",
         "react": "^18.2.0",
@@ -44,7 +48,8 @@
     "type": "module",
     "exports": {
         ".": "./dist/index.js",
-        "./hook": "./dist/hook.js"
+        "./hook": "./dist/hook.js",
+        "./display-output": "./dist/display-output.js"
     },
     "typesVersions": {
         "*": {
@@ -53,6 +58,9 @@
             ],
             "hook": [
                 "./dist/types/hook.d.ts"
+            ],
+            "display-output": [
+                "./dist/types/display-output.d.ts"
             ]
         }
     },
@@ -65,6 +73,5 @@
         "rich-text-editor",
         "wysiwyg",
         "rte"
-    ],
-    "dependencies": {}
+    ]
 }

@@ -8,7 +8,6 @@ export function theme_palette_error(darkModeVariable) {
 
         error: {
 
-
             light: darkModeVariable ? pink[50] : pink[600],
             main: darkModeVariable ? pink[100] : pink[700],
             dark: darkModeVariable ? pink[200] : pink[800],

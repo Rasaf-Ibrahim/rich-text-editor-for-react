@@ -41,7 +41,7 @@
 
 
 
-    /* 🔖 managing the following configurations in the tsconfig.json file */
+    /* 🔖 managing the following configurations in the rollup.config.mjs file */
 
     
     /* generate .d.ts files from TypeScript and JavaScript files in your project. */

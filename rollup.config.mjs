@@ -1,4 +1,5 @@
 import resolve from "@rollup/plugin-node-resolve";
+import json from '@rollup/plugin-json';
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from '@rollup/plugin-typescript'
@@ -9,11 +10,14 @@ import terser from "@rollup/plugin-terser";
 
 
 
-
 const plugins_for_bundling = [
 
     peerDepsExternal(),
-    resolve(),
+    resolve({
+        // browser specific code (it will ignore something like fs)
+        browser: true,
+    }),
+    json(),
     commonjs(),
     typescript({
 
@@ -68,6 +72,16 @@ export default [
     },
 
 
+    //  🥪 bundling - src/display-output.ts
+    {
+        input: 'src/display-output.ts',
+        output: {
+            file: 'dist/display-output.js',
+            format: 'esm',
+        },
+        plugins: plugins_for_bundling,
+    },
+
     
     //🥪 after bundling, we are generating type declaration files
     {
@@ -86,6 +100,14 @@ export default [
         external: [/\.(css|less|scss)$/],
     },
 
+
+    // 🥪 after bundling, we are generating type declaration files
+    {
+        input: 'dist/display-output.d.ts',
+        output: { file: "dist/types/display-output.d.ts", format: "esm" },
+        plugins: [dts()],
+        external: [/\.(css|less|scss)$/],
+    },
 ]
 
 

@@ -1,28 +1,19 @@
-const dark_1 = 'hsl(200, 10%, 10%)' 
-const dark_2 = 'hsl(200, 10%, 13%)'  
-
-const light_1 = 'hsl(0, 0%, 99%)'
-const light_2 = 'hsl(0, 10%, 96%)' 
+// css in js
+import {lighten, darken} from 'polished'
 
 
-
-
-
-
-export function theme_palette_background(darkModeVariable) {
-
+// theme_palette_background function
+export function theme_palette_background(darkModeVariable, backgroundColor) {
 
     return {
 
         background: {
 
-            default: darkModeVariable ? dark_1 : light_1,
+            default: backgroundColor,
 
-            // when the paper's elevation is 0, it will have same color as the background
-            paper: darkModeVariable ? dark_2 : light_2,
+            paper: darkModeVariable? lighten(0.03, backgroundColor) : darken(0.03, backgroundColor)
 
         }
-
 
     }
 
