@@ -9,7 +9,7 @@ type fontType = {
     lineHeight?: number | string
     letterSpacing?: string
 }
-  
+
 
 // 🥔 typographyType
 export type typographyType = {
@@ -25,11 +25,11 @@ export type typographyType = {
 
 // 🥔 defaultVisibleToolbarOptionsType
 export type defaultVisibleToolbarOptionsType = {
-    phone?:number
-    tablet?:number
-    laptop?:number
+    phone?: number
+    tablet?: number
+    laptop?: number
 }
-  
+
 
 // 🥔 customizeUiType
 export type customizeUiType = {
@@ -66,8 +66,8 @@ export type ToolbarNonConditionalOptionsType =
     | 'blockquote'
     | 'code_block'
     | 'link'
-    | 'image_edit'
-    | 'embed_youtube_video'
+    | 'format_media'
+    | 'embed_video'
     | 'sub_script'
     | 'super_script'
     | 'word_count';
@@ -157,7 +157,7 @@ type RichTextEditorConditionalPropsType = {
 
 } | {
 
-    toolbarOptions: Array<ToolbarNonConditionalOptionsType | ToolbarImageCloudOptionType>  
+    toolbarOptions: Array<ToolbarNonConditionalOptionsType | ToolbarImageCloudOptionType>
 
     imageValidation?: imageValidationType
 

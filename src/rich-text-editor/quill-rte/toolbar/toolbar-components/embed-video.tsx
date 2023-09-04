@@ -19,6 +19,7 @@ import { YouTube } from '../mui/icons';
 // mui components
 import {
     Box,
+    Paper,
     Typography,
     Button,
     IconButton,
@@ -43,7 +44,7 @@ import MUI_ICON___REUSABLE from '../reusable-components/mui-icon';
 ____________________________________________*/
 
 
-export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_option_component_props) {
+export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
 
@@ -81,8 +82,10 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
 
 
 
-    // regex to check valid youtube video link
-    const youtube_video_link_regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:.*)$/;
+
+    // regex to check valid video link
+    const valid_url_regex = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/
+
 
 
 
@@ -129,7 +132,7 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
         function is_valid_video_link(link) {
             /* as we are just accepting youtube video, we are just using regex which checks youtube's link */
 
-            return youtube_video_link_regex.test(link)
+            return valid_url_regex.test(link)
         }
 
 
@@ -141,7 +144,7 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
         if (!is_valid_video_link(video_state.link.trim())) {
 
             update_video_state(draft => {
-                draft.valid_link = false;
+                draft.valid_link = false
             })
 
             return
@@ -209,19 +212,16 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
         if (quillRef.current) {
 
 
-            /* 🔖 It's just not enough to check that the link is valid or not. We will need to convert the link so that it can be embedded. Because to embed a video, there is special format of the link which we need to follow.*/
+            let value = {
+                url: video_state.link,
+            }
 
-            const original_link = video_state.link
-            const video_id = original_link.match(youtube_video_link_regex)[1];
-            const embed_link = `https://www.youtube.com/embed/${video_id}`
-
-            // embedding the video
-            quillRef.current.clipboard.dangerouslyPasteHTML(
+            quillRef.current.insertEmbed(
                 rte_state.editor_cursor.position,
-
-
-                `<iframe class="ql-video ql-align-center" frameborder="0" allowfullscreen="true" src="${embed_link}"></iframe>`
+                'iframe_custom_blot',
+                value
             )
+
 
 
             /* updating the cursor position */
@@ -231,8 +231,6 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
 
             //  moving the cursor after the embedded video
             quillRef.current.setSelection(video_state.remembering_cursor_position + 1)
-
-
 
 
 
@@ -266,7 +264,7 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
 
     return (
         <>
-            <Tooltip title="Embed Youtube Video" placement="top">
+            <Tooltip title="Embed Video" placement="top">
 
                 <FormControl margin='dense'>
 
@@ -312,7 +310,7 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
                             typography: 'body1', textAlign: 'center',
                             fontWeight: 600
                         }}>
-                            Embed Youtube Video
+                            Embed Video
                         </Typography>
 
                     </Box>
@@ -340,7 +338,7 @@ export default function EMBED_YOUTUBE_VIDEO___COMPONENT(props: type_of_toolbar_o
 /*__________________________________________
 
  ✅ Child Component of 
- <EMBED_YOUTUBE_VIDEO___COMPONENT/>
+ <EMBED_VIDEO___COMPONENT/>
 ____________________________________________*/
 
 function MODAL_CONTENT___CHILD({ handle_submit, video_state, handle_input_change }) {
@@ -367,11 +365,20 @@ function MODAL_CONTENT___CHILD({ handle_submit, video_state, handle_input_change
                 Submit
             </Button>
 
+
             {video_state.valid_link === false &&
-
-                <Typography variant='body2' color='error.main'>Provide a valid video link of youtube.</Typography>
-
+                <Typography variant='body2' color='error.main'>Provide a valid link</Typography>
             }
+
+
+
+            {/* Instructions */}
+            <Box sx={{ marginTop: '1rem' }}>
+                <MODAL_INSTRUCTIONS___CHILD />
+            </Box>
+
+
+
         </MODAL_WRAPPER_OF_CONTENT___STYLED>
 
     )
@@ -379,3 +386,36 @@ function MODAL_CONTENT___CHILD({ handle_submit, video_state, handle_input_change
 
 }
 
+
+
+
+function MODAL_INSTRUCTIONS___CHILD() {
+
+    return (
+
+        <Paper elevation={1} sx={{ padding: '1rem' }}>
+
+            <Typography variant="body1" sx={{ fontWeight: 600, textAlign: 'center', marginBottom: '1rem' }}>
+                Instruction
+            </Typography>
+
+
+            <Typography variant="subtitle2" gutterBottom>
+                Please provide video links in their embeddable format from any platform. For reference, here are a few examples:
+            </Typography>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '0.5rem' }}>
+
+                <Typography variant="subtitle2">
+                    - YouTube: <code>https://www.youtube.com/embed/VIDEO_ID</code>
+                </Typography>
+
+                <Typography variant="subtitle2">
+                    - Rumble: <code>https://rumble.com/embed/VIDEO_ID</code>
+                </Typography>
+
+            </Box>
+
+        </Paper>
+    )
+}

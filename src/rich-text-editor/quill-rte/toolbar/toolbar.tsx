@@ -64,8 +64,8 @@ import SUPER_SCRIPT___COMPONENT from './toolbar-components/super-script'
 
 import IMAGE_CLOUD___COMPONENT from "./toolbar-components/image-cloud"
 import IMAGE_BASE64___COMPONENT from './toolbar-components/image-base64'
-import IMAGE_EDIT___COMPONENT from './toolbar-components/image-edit'
-import EMBED_YOUTUBE_VIDEO___COMPONENT from './toolbar-components/embed-youtube-video'
+import FORMAT_MEDIA___COMPONENT from './toolbar-components/format-media'
+import EMBED_VIDEO___COMPONENT from './toolbar-components/embed-video'
 import LINK___COMPONENT from './toolbar-components/link';
 
 import WORD_COUNT___COMPONENT from './toolbar-components/word-count';
@@ -322,13 +322,13 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
         },
 
         {
-            name: 'image_edit',
-            component: IMAGE_EDIT___COMPONENT
+            name: 'format_media',
+            component: FORMAT_MEDIA___COMPONENT
         },
 
         {
-            name: 'embed_youtube_video',
-            component: EMBED_YOUTUBE_VIDEO___COMPONENT
+            name: 'embed_video',
+            component: EMBED_VIDEO___COMPONENT
         },
 
         {
@@ -351,7 +351,7 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
 
 
 
-        /* 🔖 If you see the toolbar options, you will see that there is 'image_edit' where image can be resized but we don't have any embedded video resizing option because:
+        /* 🔖 If you see the toolbar options, you will see that there is 'format_media' where image can be resized but we don't have any embedded video resizing option because:
         
             Resizing images in a rich text editor is important because images can have pixelation issues if they are stretched or resized improperly. This can lead to a degradation in the quality of the image, which can negatively impact the user's experience.
 

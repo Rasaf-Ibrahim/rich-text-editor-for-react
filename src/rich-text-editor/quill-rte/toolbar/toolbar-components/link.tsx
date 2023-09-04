@@ -252,7 +252,7 @@ function MODAL_CONTENT___CHILD({ handle_submit, link_state, handle_input_change 
 
                     return (
 
-                        <Typography variant='body2' sx={{ textAlign: 'center' }}>Link already exists on your selected text. Just click on the text in the editor, you will get options to edit or remove the link.</Typography>
+                        <Typography variant='body1' sx={{ textAlign: 'center' }}>Link already exists on your selected text. Just click on the text in the editor, you will get options to edit or remove the link.</Typography>
                     )
 
                 }
@@ -293,7 +293,7 @@ function MODAL_CONTENT___CHILD({ handle_submit, link_state, handle_input_change 
 
                         return (
 
-                            <Typography variant='body2' sx={{ padding: '1rem', textAlign: 'center' }}>Please select some text before trying to insert a link.</Typography>
+                            <Typography variant='body1' sx={{ padding: '1rem', textAlign: 'center' }}>Please select some text before trying to insert a link.</Typography>
                         )
 
 

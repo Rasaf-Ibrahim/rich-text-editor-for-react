@@ -3,7 +3,6 @@ import AspectRatioRounded from '@mui/icons-material/AspectRatioRounded'
 import ColorizeRounded from '@mui/icons-material/ColorizeRounded'
 import CloseRounded from '@mui/icons-material/CloseRounded'
 import CodeRounded from "@mui/icons-material/CodeRounded"
-import EditIcon from '@mui/icons-material/Edit'
 import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
 import ExpandLessRounded from '@mui/icons-material/ExpandLessRounded'
 import FormatAlignLeftRounded from "@mui/icons-material/FormatAlignLeftRounded"
@@ -42,7 +41,6 @@ export {
     ColorizeRounded,
     CloseRounded,
     CodeRounded,
-    EditIcon,
     ExpandMoreRounded,
     ExpandLessRounded,
     FormatAlignLeftRounded,

@@ -6,7 +6,7 @@ ____________________________________________*/
 import React from 'react'
 
 // hook
-import { useUpdateEffect } from "react-use";
+import { useUpdateEffect, useLogger } from "react-use";
 import { useImmer } from "use-immer";
 
 
@@ -15,7 +15,7 @@ import { type_of_toolbar_option_component_props } from '../../../../types/types-
 
 
 // icons
-import { AspectRatioRounded, EditIcon } from '../mui/icons';
+import { AspectRatioRounded} from '../mui/icons';
 
 // mui components
 import {
@@ -50,7 +50,7 @@ import MUI_ICON___REUSABLE from '../reusable-components/mui-icon';
  ✅ Functional Component 
 ____________________________________________*/
 
-export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_component_props) {
+export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
     // 🫓 props
@@ -60,15 +60,15 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
     // 🫓 state to handle all the possible changes of this component
     const initial_state = {
 
-        open_edit_image_modal: false,
+        open_format_media_modal: false,
 
-        image_is_selected: false,
+        media_is_selected: false,
 
-        image_current_size: null,
+        media_current_size: null,
 
-        image_current_align: null,
+        media_current_align: null,
 
-        image_has_been_edited: false,
+        media_has_been_formatted: false,
 
     }
 
@@ -81,31 +81,36 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
 
 
-    //  🫓 updating "image_is_selected" property of the state
+    //  🫓 updating "media_is_selected" property of the state
     useUpdateEffect(() => {
 
         const [leaf] = quillRef.current.getLeaf(rte_state.editor_cursor.position)
 
         const element = leaf && leaf.domNode
 
-        // const parentElement = element?.parentElement
+
+        const parentElement = element?.parentElement
+
+        // console.log('element', element)
 
         // console.log('parentElement', parentElement)
 
+        // console.log('element tag', element.tagName)
 
-        if (element && element.tagName === 'IMG') {
+
+        if (element && (element.tagName === 'IMG' || element.tagName === 'IFRAME')) {
 
             update_image_state(draft => {
-                draft.image_is_selected = true
+                draft.media_is_selected = true
             })
 
         }
 
 
-        else if (element && element.tagName !== 'IMG') {
+        else if (element && (element.tagName !== 'IMG' || element.tagName !== 'IFRAME')) {
 
             update_image_state(draft => {
-                draft.image_is_selected = false
+                draft.media_is_selected = false
             })
 
         }
@@ -118,11 +123,11 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
 
 
-    //  🫓 updating "image_current_size" & "image_current_align" properties of the state when modal is open or image is edited
+    //  🫓 updating "media_current_size" & "media_current_align" properties of the state when modal is open or image is edited
     useUpdateEffect(() => {
 
         // 🥔 if the modal is not open, return
-        if (!image_state.open_edit_image_modal) return
+        if (!image_state.open_format_media_modal) return
 
 
         // 🥔 getting the element and parent element
@@ -134,7 +139,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
 
         // 🥔 if the element is not an image, return 
-        if (element && element.tagName !== 'IMG') return
+        if (element && (element.tagName !== 'IMG' && element.tagName !== 'IFRAME')) return
 
 
         // 🥔 image current size
@@ -173,21 +178,21 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
         //  🥔 updating state
         update_image_state(draft => {
-            draft.image_current_size = imageCurrentSize
-            draft.image_current_align = imageCurrentAlign
+            draft.media_current_size = imageCurrentSize
+            draft.media_current_align = imageCurrentAlign
         })
 
 
         // 🥔 initially, 'imageCurrentAlign' is empty string, then set it 'left'
         if (imageCurrentAlign === '') {
             update_image_state(draft => {
-                draft.image_current_align = 'left'
+                draft.media_current_align = 'left'
             })
         }
 
 
 
-    }, [image_state.open_edit_image_modal, image_state.image_has_been_edited])
+    }, [image_state.open_format_media_modal, image_state.media_has_been_formatted])
 
 
 
@@ -200,7 +205,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
 
         update_image_state(draft => {
-            draft.open_edit_image_modal = true
+            draft.open_format_media_modal = true
         })
 
     }
@@ -213,7 +218,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
     const handle_modal_close = () => {
 
         update_image_state(draft => {
-            draft.open_edit_image_modal = false
+            draft.open_format_media_modal = false
         })
 
     }
@@ -225,22 +230,23 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
         <>
 
 
-            <Tooltip title="Edit Image" placement="top">
+            <Tooltip title="Format Media" placement="top">
 
                 <FormControl margin='dense'>
 
                     {/* Badge should be placed as the wrapper of the icon. Alternatively, if we wrap the <FormControl/> with badge, then the badge will be visible far from the icon which we don't want. */}
                     <Badge
-                        invisible={!image_state.image_is_selected}
-                        badgeContent='Edit'
-                        color="primary">
+                        invisible={!image_state.media_is_selected}
+                        badgeContent='Format'
+                        color="primary"
+                        sx={{ '.MuiBadge-badge': { fontSize: '10px' } }}>
 
                         <IconButton onClick={handle_click_on_the_button} >
 
 
                             <MUI_ICON___REUSABLE
                                 ICON_COMPONENT={AspectRatioRounded}
-                                condition_to_use_primary_color={image_state.image_is_selected}
+                                condition_to_use_primary_color={image_state.media_is_selected}
                             />
 
 
@@ -257,7 +263,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 
 
             <MODAL___REUSABLE
-                modal_is_open={image_state.open_edit_image_modal}
+                modal_is_open={image_state.open_format_media_modal}
 
                 user_can_close_the_modal={true}
 
@@ -277,13 +283,13 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
 
                         {/* This icon is not for the toolbar. So, we are not using "MUI_ICON___REUSABLE"   */}
-                        <EditIcon sx={{ fontSize: '1.3rem' }} />
+                        <AspectRatioRounded sx={{ fontSize: '1.3rem' }} />
 
                         <Typography sx={{
                             typography: 'body1', textAlign: 'center',
                             fontWeight: 600
                         }}>
-                            Edit Image
+                            Format Media
                         </Typography>
 
                     </Box>
@@ -310,7 +316,7 @@ export default function IMAGE_EDIT___COMPONENT(props: type_of_toolbar_option_com
 /*__________________________________________
 
  ✅ Child Component of 
- <IMAGE_EDIT___COMPONENT/>
+ <FORMAT_MEDIA___COMPONENT/>
 ____________________________________________*/
 
 function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, rte_state }) {
@@ -322,7 +328,7 @@ function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, rte_
         <MODAL_WRAPPER_OF_CONTENT___STYLED sx={{ paddingTop: '0rem' }}>
 
 
-            {image_state.image_is_selected ?
+            {image_state.media_is_selected ?
 
 
                 <>
@@ -346,11 +352,18 @@ function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, rte_
 
 
                 <Typography
-                    variant='body2'
-                    sx={{ padding: '1.5rem', textAlign: 'center' }}>
+                    variant='body1'
+                    sx={{ padding: '1rem', textAlign: 'center' }}>
 
-                    Please click next to an image before attempting to edit it. When you click beside an image, the edit image button in the toolbar will change its color, indicating that the image is now editable.
+                    Please click next to an image or embedded video before attempting to format it.
+                    
+                    <div style={{marginTop:'1rem'}}>
+                        When you click next to an image or embedded video, the format button in the toolbar will change its color and a badge saying "format" will become visible, indicating that the item is now selected for formatting. 
+                    </div>
+                   
                 </Typography>
+
+
 
 
             }
@@ -413,7 +426,7 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
             element.classList.add("ql-image-size-xs")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
@@ -425,7 +438,7 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
             element.classList.add("ql-image-size-sm")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
@@ -437,7 +450,7 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
             element.classList.add("ql-image-size-md")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
@@ -449,7 +462,7 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
             element.classList.add("ql-image-size-lg")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
@@ -461,31 +474,31 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
             element.classList.add("ql-image-size-xl")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
 
-         // 🥔 resize to '2xl'
-         else if (size === '2xl') {
+        // 🥔 resize to '2xl'
+        else if (size === '2xl') {
             remove_ql_image_size_class()
 
             element.classList.add("ql-image-size-2xl")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
 
-         // 🥔 resize to '3xl'
-         else if (size === '3xl') {
+        // 🥔 resize to '3xl'
+        else if (size === '3xl') {
             remove_ql_image_size_class()
 
             element.classList.add("ql-image-size-3xl")
 
             update_image_state(draft => {
-                draft.image_has_been_edited = !draft.image_has_been_edited
+                draft.media_has_been_formatted = !draft.media_has_been_formatted
             })
         }
 
@@ -512,32 +525,32 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
 
 
 
-                <Button onClick={() => resize('xs')} disabled={image_state.image_current_size === 'xs'}>
+                <Button onClick={() => resize('xs')} disabled={image_state.media_current_size === 'xs'}>
                     xs
                 </Button>
 
-                <Button onClick={() => resize('sm')} disabled={image_state.image_current_size === 'sm'}>
+                <Button onClick={() => resize('sm')} disabled={image_state.media_current_size === 'sm'}>
                     sm
                 </Button>
 
-                <Button onClick={() => resize('md')} disabled={image_state.image_current_size === 'md'}>
+                <Button onClick={() => resize('md')} disabled={image_state.media_current_size === 'md'}>
                     md
                 </Button>
 
-                <Button onClick={() => resize('lg')} disabled={image_state.image_current_size === 'lg'}>
+                <Button onClick={() => resize('lg')} disabled={image_state.media_current_size === 'lg'}>
                     lg
                 </Button>
 
-                <Button onClick={() => resize('xl')} disabled={image_state.image_current_size === 'xl'}>
+                <Button onClick={() => resize('xl')} disabled={image_state.media_current_size === 'xl'}>
                     xl
                 </Button>
 
 
-                <Button onClick={() => resize('2xl')} disabled={image_state.image_current_size === '2xl'}>
+                <Button onClick={() => resize('2xl')} disabled={image_state.media_current_size === '2xl'}>
                     2xl
                 </Button>
 
-                <Button onClick={() => resize('3xl')} disabled={image_state.image_current_size === '3xl'}>
+                <Button onClick={() => resize('3xl')} disabled={image_state.media_current_size === '3xl'}>
                     3xl
                 </Button>
 
@@ -577,7 +590,7 @@ function ALIGN_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_st
         })
 
         update_image_state(draft => {
-            draft.image_has_been_edited = !draft.image_has_been_edited
+            draft.media_has_been_formatted = !draft.media_has_been_formatted
         })
     }
 
@@ -594,15 +607,15 @@ function ALIGN_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_st
             <WRAPPER_OF_THE_OPTIONS_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED>
 
 
-                <Button onClick={() => align_image('left')} disabled={image_state.image_current_align === 'left'}>
+                <Button onClick={() => align_image('left')} disabled={image_state.media_current_align === 'left'}>
                     left
                 </Button>
 
-                <Button onClick={() => align_image('center')} disabled={image_state.image_current_align === 'center'}>
+                <Button onClick={() => align_image('center')} disabled={image_state.media_current_align === 'center'}>
                     center
                 </Button>
 
-                <Button onClick={() => align_image('right')} disabled={image_state.image_current_align === 'right'}>
+                <Button onClick={() => align_image('right')} disabled={image_state.media_current_align === 'right'}>
                     right
                 </Button>
 

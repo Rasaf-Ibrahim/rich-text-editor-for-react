@@ -77,6 +77,18 @@ But I don't think that I will ever go back to use the package again. Because:
 
 */
 
+/*__________________________________________
+
+ ✅ Blot
+____________________________________________*/
+
+
+// iframe-blot (side-effect-only import)
+import './custom-blot/iframe-custom-blot'
+
+// image blot (side-effect-only import)
+import './custom-blot/cloud-image-custom-blot'
+
 
 /*__________________________________________
 

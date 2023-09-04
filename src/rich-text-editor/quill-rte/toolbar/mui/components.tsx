@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 
 import Typography from '@mui/material/Typography'
 
@@ -26,6 +27,7 @@ import Divider from '@mui/material/Divider'
 
 export {
     Box,
+    Paper,
     Typography,
     Button,
     IconButton,
