@@ -339,6 +339,10 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
 
     useEffect(() => {
 
+        // if user doesn't want operations data, return
+        if(!fetchImageOperationsData) return;
+
+
         fetchImageOperationsData(prevState => ({
 
             ...prevState, // Copy the previous state
