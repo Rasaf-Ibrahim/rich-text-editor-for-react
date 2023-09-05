@@ -153,11 +153,30 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
             modules: {
 
                 /* 🔖 
-                    - Actually, I don't need the default toolbar but if make the toolbar false, then tooltip for the inserted link will not work. 
+                    - I don't need the default toolbar but if make the toolbar false, then tooltip for the inserted link will not work. 
                     
                     - So, setting the value of the toolbar to true but in the css, we are using .ql-toolbar{display:none} to hide the toolbar. 
 
-                    If I ever  make the tooltip for inserted link, I should make the toolbar false.
+                
+                     💡 If I ever  make the tooltip for inserted link, I should make the toolbar false. But I don't have any plan to make a tooltip as of Sep 23, 2023. Reason:
+
+                      I was thinking that the toolbar:true isn't doing much but contributing significantly in the bundle size.
+
+                      So, I modified the toolbar's link component. Whenever a user would touch a text with link inserted on the editor, the link button on toolbar would have a "edit" badge (Just like the format media toolbar button).
+
+                      Then when the user will click the link button in the toolbar, the same modal which was used to insert the link, will be used again to edit the link.
+
+                      I did 80% of the work. 
+
+                      But still I didn't like this approach of editing the link. The default tooltip approach for editing link is cooler and google docs does the same.
+
+                      So, I thought about testing the actual impact of toolbar: false vs toolbar: true.
+
+                      In the version 0.4.1 & 0.4.2, I did the test.
+
+                      I didn't see any change in the bundle size. 
+
+                      So, I planned to stick with the default tooltip and this "toolbar:true" approach. 
                 */
                 toolbar: true,
 
