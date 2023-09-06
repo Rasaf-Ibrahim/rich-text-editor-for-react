@@ -1,5 +1,14 @@
 
 {
+    "Demo": {
+        "title": "Demo",
+        "type": "page",
+        "href": "https://rich-text-editor-for-react.rasaf-ibrahim.com",
+        "newWindow": true
+    },
+
+
+
     "index": "Installation",
     "import": "How to Import",
     "render": "Render Rich Text Editor",
