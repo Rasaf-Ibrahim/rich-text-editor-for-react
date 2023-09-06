@@ -25,19 +25,20 @@ import {
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
-- If you are using Next.js with TypeScript, you may encounter this error during the build process.
-- To resolve this error, you can use the `any` type for the "RichTextEditor" component:
+- This error is not exclusive to this package. It can occur in Next.js projects utilizing TypeScript, especially during the build process. 
+- A quick fix to bypass this error is to assign the `any` type to the "RichTextEditor" component as shown below:
 
-```tsx showLineNumbers {1} /any/ copy  
- const RichTextEditor:any = dynamic(
-    () => import('rich-text-editor-for-react'),
-    {
-        ssr: false,
-        loading: () => <p>Loading...</p>,
-    }
-  )
-```
+  ```tsx showLineNumbers {1} /any/ copy  
+   const RichTextEditor: any = dynamic(
+      () => import('rich-text-editor-for-react'),
+      {
+          ssr: false,
+          loading: () => <p>Loading...</p>,
+      }
+    )
+  ```
 
-- But using the `any` type for the "RichTextEditor" component means you won't receive proper typing assistance from your IDE.
-- To get proper type assistance during development, you can use the `any` type just before building for production as this error won't occur in development mode.
+- However, it's important to note that using the `any` type will disable the TypeScript type checking for the "RichTextEditor" component, meaning you won't receive proper typing assistance from your IDE.
+
+- To maintain type safety during development, you might consider using the `any` type only before building for production, as this error generally doesn't occur in development mode.
 

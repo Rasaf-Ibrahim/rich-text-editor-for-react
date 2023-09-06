@@ -36,7 +36,7 @@ ____________________________________________*/
 function HEADING_TOP_SPACER___COMPONENT() {
 
     return (
-        <div style={{ marginBottom: '2.5rem' }}>
+        <div style={{ marginBottom: '4rem' }}>
         </div>
     )
 }

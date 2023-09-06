@@ -28,11 +28,12 @@ import {
             () => import('rich-text-editor-for-react'),
             {
                 ssr: false,
-                loading: () => <p>Loading...</p>,
+                loading: () => <p>Loading...</p>, // Anything can be used here as a loading component
             }
         )
 
-        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
+        import useRichTextEditor from 'rich-text-editor-for-react/hook'
+
    ```
 
    > Also, you must use the `use client` directive.
