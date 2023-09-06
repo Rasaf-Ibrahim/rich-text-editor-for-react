@@ -3,7 +3,7 @@
  ✅ import
 ____________________________________________*/
 import React from 'react'
-import DARK_THEME___HOOK from '../hooks/dark-theme-hook'
+import useDarkTheme from '../hooks/dark-theme-hook'
 
 
 /*__________________________________________
@@ -13,7 +13,7 @@ ____________________________________________*/
 function HORIZONTAL_LINE_SPACER___COMPONENT() {
 
     // theme
-    const { dark_theme } = DARK_THEME___HOOK()
+    const { dark_theme } = useDarkTheme()
 
     return (
         <div style={{

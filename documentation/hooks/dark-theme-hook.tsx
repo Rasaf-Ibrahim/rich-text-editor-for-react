@@ -1,11 +1,17 @@
-// importing
+/*__________________________________________
+
+ ✅ import
+____________________________________________*/
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
 
-// hook
-export default function DARK_THEME___HOOK() {
+/*__________________________________________
+
+ ✅ hook
+____________________________________________*/
+export default function useDarkTheme() {
 
     // useTheme
     const { theme } = useTheme()

@@ -1,119 +1,42 @@
 ---
-title: Rich Text Editor for React
+title: 'Installation'
 ---
 
-{/* import react */}
-import React from 'react'
-
-{/* import component */}
-import Link from 'next/link'
+{/* import */}
 import { Tab, Tabs } from 'nextra-theme-docs'
-import DOCUMENTATION_BUTTON from '../components/documentation-button'
-import FEATURES___COMPONENT from '../components/features'
-import LANDING_PAGE_HEADING___STYLED from '../components/styled/landing-page-heading'
+import {
+    HORIZONTAL_LINE_SPACER___COMPONENT,
+    HEADING_TOP_SPACER___COMPONENT, 
+    HEADING_BOTTOM_SPACER___COMPONENT
+} from '../components/spacer.tsx'
 
 
 
-{/* Headline */}
-{
-    <LANDING_PAGE_HEADING___STYLED 
-       more_style={{marginTop:'1rem', marginBottom:'1rem'}}
-    >
-      RICH TEXT EDITOR FOR REACT
-    </LANDING_PAGE_HEADING___STYLED>
-}
+{/* Page Heading */}
+### Installation
+<HORIZONTAL_LINE_SPACER___COMPONENT/>
+
+Inside your React project directory, run the following:
+
+<Tabs items={['npm', 'yarn']}>
+
+
+  <Tab>
+
+   ```shell copy
+       npm install rich-text-editor-for-react
+   ```
+  </Tab>
 
 
 
-{/* Tabs */}
-<Tabs items={
-    [  
-        'Demo(Next.js)', 
-        'Demo(React+Vite)',
-        'CodeSandbox(Next.js)', 
-        'CodeSandbox(React+Vite)', 
-    ]
-}
+  <Tab>
 
->
+   ```shell copy
+       yarn add rich-text-editor-for-react
+   ```
 
-        <Tab>
-            <iframe
-
-                src="https://nextjs-demo-of-rich-text-editor-for-react.rasaf-ibrahim.com/"
-
-                style={{width:'100%', height:'35rem'}}
-                
-            />
-
-            <p style={{marginTop:'1rem'}}> This demo is actually an embed. Click [here](https://nextjs-demo-of-rich-text-editor-for-react.rasaf-ibrahim.com) for full page Demo.</p>
-
-            <p style={{marginTop:'1rem'}}>Click [here](https://github.com/Rasaf-Ibrahim/rich-text-editor-for-react/tree/main/demo/nextjs) to get the code of this demo.</p>
-
-
-
-        </Tab>
-
-
-        <Tab>
-
-        
-
-
-            <iframe
-
-                src="http://react-vite-demo-of-rich-text-editor-for-react.rasaf-ibrahim.com/"
-
-                style={{width:'100%', height:'35rem'}}
-                
-            />
-
-            <p style={{marginTop:'1rem'}}> This demo is actually an embed. Click [here](http://react-vite-demo-of-rich-text-editor-for-react.rasaf-ibrahim.com/) for full page Demo.</p>
-
-            <p style={{marginTop:'1rem'}}>Click [here](https://github.com/Rasaf-Ibrahim/rich-text-editor-for-react/tree/main/demo/vite%2Breact) to get the code of this demo.</p>
-
-        </Tab>
-
-
-        <Tab>
-
-
-            <iframe
-
-                src="https://codesandbox.io/embed/rich-text-editor-for-react-nextjs-56zgx4?hidenavigation=1&view=preview"
-
-                style={{width:'100%', height:'20rem'}}
-            />
-
-        </Tab>
-
-
-        <Tab>
-
-            <iframe
-                src="https://codesandbox.io/embed/rich-text-editor-for-react-vite-j5mxp2?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-
-
-                style={{width:'100%', height:'20rem'}}
-            />
-
-        </Tab>
+  </Tab>
 
 
 </Tabs>
-
-
-
-
-
-
-
-
-{/* features */}
-<FEATURES___COMPONENT/>
-
-
-
-{/* Linking Documentation */}
-<DOCUMENTATION_BUTTON/>
-
