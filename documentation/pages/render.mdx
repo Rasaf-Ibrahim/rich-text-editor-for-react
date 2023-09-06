@@ -24,7 +24,7 @@ import {
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
-To render the RichTextEditor component with only the required props, use the following code:
+To render the RichTextEditor component with only the required props, follow the code snippet below:
 
 
 ```ts showLineNumbers copy  
@@ -40,16 +40,15 @@ export default function Demo() {
     return (
 
         <RichTextEditor
-
-            fetchOutput={fetchOutput}
-
-            toolbarOptions={['clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link',  'embed_youtube_video', 'image_base64', 'image_edit', 'sub_script', 'super_script']}
+        
+            toolbarOptions={['word_count', 'clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link', 'image_base64', 'embed_video', 'format_media', 'sub_script', 'super_script']}
 
             customizeUI={{
-                dark: true,
-                primaryColor:'red'
+                backgroundColor: '#fcfcfc',
+                primaryColor: '#20464b',
             }}
 
+            fetchOutput={fetchOutput}
         />
 
     )
@@ -62,65 +61,56 @@ export default function Demo() {
 #### `fetchOutput`
 
 
-In line 7, we have used the "useRichTextEditor" hook and destructured  `output` and `fetchOutput`. We are passing the "fetchOutput" as a prop. 
-
-The rich text editor generates HTML and the "output" variable contains the generated HTML.
-
+In line 7, the "useRichTextEditor" hook is invoked, and the `output` and `fetchOutput` are destructured from it. The fetchOutput is subsequently passed as a prop to the RichTextEditor component. This component generates HTML, which is stored in the "output" variable.
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
 #### `toolbarOptions`
 
-The "toolbarOptions" prop controls which toolbar options are visible. You can include or exclude specific options based on your requirements. Here are the available options:
+The `toolbarOptions` prop allows you to customize the visibility of various toolbar options. You can customize the toolbar to meet your requirements by including or excluding specific options. Below is a list of available options that you can specify:
 
 ```ts copy
+'word_count',
 'clear_format',
 'undo',
-'redo', 
-'font', 
-'header', 
-'bold', 
+'redo',
+'font',
+'header',
+'bold',
 'italic',
 'underline',
 'strikethrough',
 'text_color',
 'highlight_color',
-'numbered_list', 
+'numbered_list',
 'bulleted_list',
 'align',
-'decrease_indent', 
+'decrease_indent',
 'increase_indent',
-'direction', 
-'blockquote', 
+'direction',
+'blockquote',
 'code_block',
 'link',
 'image_base64',
-'image_cloudinary',
-'image_edit',
-'embed_youtube_video', 
-'sub_script', 
-'super_script', 
+'image_cloud'
+'embed_video',
+'format_media',
+'sub_script',
+'super_script'
 ```
+
+> **Note**: You must choose either `image_base64` or `image_cloud`. The choice between `image_base64` and `image_cloud` depends on your image handling preferences.
+>
+> - Use `image_base64` if you prefer to handle images as base64 strings.
+>
+> - Opt for `image_cloud` if you intend to upload images to a cloud platform like Cloudinary, which will provide a URL for the uploaded image. Please note that utilizing a cloud platform requires additional setup. You can find detailed setup guidance [here](/upload-image-in-cloud).
+
+
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
 #### `customizeUI`
 
-The "customizedUI" prop is not discussed on this page.  This prop is discussed on the [UI Customization](/ui-customization) page.
+The `customizeUI` prop allows you to customize the user interface of the toolbar and editor. Detailed information about this prop can be found on the [UI Customization](/ui-customization) page.
 
-
-<HEADING_TOP_SPACER___COMPONENT/>
-
-### Errors which You May Encounter
-
-<HEADING_BOTTOM_SPACER___COMPONENT/>
-
-
-
-<Callout type='error' emoji="️🚫">
-`ReactTextEditor` cannot be used as a JSX component
-</Callout>
-
-
-Check out this  [link](/common-errors#reacttexteditor-cannot-be-used-as-a-jsx-component) to solve this error.
