@@ -55,6 +55,20 @@ function HEADING_BOTTOM_SPACER___COMPONENT() {
 }
 
 
+
+/*__________________________________________
+
+ ✅ Functional component
+____________________________________________*/
+function HALF_REM_SPACER___COMPONENT() {
+
+    return (
+        <div style={{ height: '0.5rem' }}>
+        </div>
+    )
+}
+
+
 /*__________________________________________
 
  ✅ export
@@ -62,5 +76,6 @@ ____________________________________________*/
 export {
     PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT,
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HEADING_BOTTOM_SPACER___COMPONENT,
+    HALF_REM_SPACER___COMPONENT
 }

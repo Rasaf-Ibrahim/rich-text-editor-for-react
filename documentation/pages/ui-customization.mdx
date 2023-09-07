@@ -6,7 +6,8 @@ title: 'UI Customization'
 import {
     PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HEADING_BOTTOM_SPACER___COMPONENT,
+    HALF_REM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
 import { Tab, Tabs } from 'nextra-theme-docs'
 
@@ -52,8 +53,17 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
     ```ts showLineNumbers copy  
     'use client'
 
-    import RichTextEditor from 'rich-text-editor-for-react'   
-    import useRichTextEditor  from 'rich-text-editor-for-react/hook'
+    import dynamic from 'next/dynamic'
+
+    const RichTextEditor = dynamic(
+        () => import('rich-text-editor-for-react'),
+        {
+            ssr: false,
+            loading: () => <p>Loading...</p>, // Anything can be used here as a loading component
+        }
+    )
+
+    import useRichTextEditor from 'rich-text-editor-for-react/hook'
 
     import hljs from 'highlight.js';
     import 'highlight.js/styles/atom-one-dark.css'
@@ -225,7 +235,7 @@ By default, these styles have predefined appearances and it's optional to custom
 customizeUI={{
 
     typography: {
-        
+
         // Style for "Normal" text
         p:{
             fontSize: '1rem',
@@ -262,23 +272,100 @@ Each heading key allows you to set properties such as "fontSize", "fontFamily", 
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
-#### Sticky Toolbar on Scroll
+#### Stick the Toolbar at the Top on Scroll
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
+
+For a seamless user experience, it's essential that the toolbar remains easily accessible. If it disappears from view as users scroll, they might find it cumbersome to scroll back up every time they need to use a toolbar option.
+
+To enhance usability, you can make the toolbar "sticky" at the top when users scroll past it. Achieve this by setting the `stickyToolbarOnScroll` property to `true` within the `customizeUI` prop:
+
+```jsx copy
+customizeUI={{
+    stickyToolbarOnScroll: true
+}}
+```
+
+This property is optional, and its default value is `false`, meaning the toolbar won't stick unless explicitly set.
 
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
-#### Highlight Code
+#### Code Highlighting in the Editor
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
+When you include "code" in the `toolbarOptions` prop, the toolbar will show a "Code Block" option, allowing users to input code within a designated block.
+
+However, syntax highlighting for the code isn't enabled by default. To activate code highlighting, you'll need to integrate the `highlight.js` package. The good news is, it's a straightforward process without any complex configurations.
+
+First, install the `highlight.js` package in your React project:
+
+<Tabs items={['npm', 'yarn']}>
+
+  <Tab>
+
+   ```shell copy
+       npm install highlight.js
+   ```
+  </Tab>
+
+  <Tab>
+
+   ```shell copy
+       yarn add highlight.js
+   ```
+
+  </Tab>
+
+</Tabs>
+
+Next, import the package and its desired style into your component, then pass it to the `customizeUI` prop:
+
+ ```ts showLineNumbers copy  
+    // Import highlight.js and a style of your choice
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/atom-one-dark.css'
+
+    export default function Demo() {
+
+        // ...
+
+        return (
+            <RichTextEditor
+                customizeUI={{
+                    highlightJS: hljs,
+
+                    //...
+                }}
+                //...
+            />
+        )
+    }
+```
+
+In the example above, the `atom-one-dark.css` style is used for highlighting. However, `highlight.js` offers various styles, and you can choose any of them. Here are a few alternatives:
+
+```jsx copy
+import 'highlight.js/styles/default.css';
+```
+
+```jsx copy
+import 'highlight.js/styles/github.css'
+```
+
+```jsx copy
+import 'highlight.js/styles/github-dark-dimmed.css'
+```
+
+<HALF_REM_SPACER___COMPONENT/>
+
+> **Note**: In designing the `rich-text-editor-for-react` package, we had the option to bundle it with `highlight.js`. This would have meant that you wouldn't need to install `highlight.js` separately. However, we understood that not every Developer using the `rich-text-editor-for-react` package would need the `Code Block` feature. Therefore, to maintain a streamlined package size, we chose not to include `highlight.js` by default.
 
 
 
-<HEADING_TOP_SPACER___COMPONENT/>
 
 #### Default Visible Toolbar Options
 
