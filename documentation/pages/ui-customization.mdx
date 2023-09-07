@@ -177,7 +177,7 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
 
-```ts copy  
+```jsx copy  
 customizeUI={{
     backgroundColor: '#fcfcfc', // required
     primaryColor: '#20464b' // required
@@ -200,7 +200,7 @@ Here's how these properties affect the UI:
 
 If you are using themes like dark and light modes in your application, you can adjust the editor's colors dynamically. Assuming you have a state like `isDarkMode` which becomes `true` when the application is in dark mode and `false` during light mode:
 
-```jsx
+```jsx copy
 customizeUI={{
     backgroundColor: isDarkMode ? '#000000' : '#fcfcfc',
     primaryColor: isDarkMode ? '#ffffff' : '#20464b',
@@ -217,6 +217,47 @@ customizeUI={{
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
+If you've included "header" in the `toolbarOptions` prop, the toolbar will display a "header" option. This enables users to select text styles like "Normal", "Heading 1", "Heading 2", "Heading 3", and others. 
+
+By default, these styles have predefined appearances and it's optional to customize these styles. But if you want to ensure the editor's typography matches your application's design, you can provide  custom styles for these headers by using the `typography` property inside the `customizeUI` prop:
+
+```jsx copy
+customizeUI={{
+
+    typography: {
+        
+        // Style for "Normal" text
+        p:{
+            fontSize: '1rem',
+            fontFamily: "'Noto Sans', sans-serif",
+            fontWeight: 400,
+            lineHeight: 1.5,
+            letterSpacing: '0.001em',
+        },
+
+        // Style for "Heading 5"
+        h5:{
+            fontSize: '0.9rem',
+            fontFamily: "'Noto Sans', sans-serif",
+            fontWeight: 500,
+            lineHeight: 1.4,
+            letterSpacing: '0.001em',
+        }
+    }
+    
+}}
+```
+
+In this example:
+- The style for "Normal" text is represented by the `p` key.
+- The style for "Heading 5" is represented by the `h5` key.
+
+You're free to customize any heading level. For example:
+- Use `h1` for "Heading 1"
+- Use `h2` for "Heading 2"
+... and so on.
+
+Each heading key allows you to set properties such as "fontSize", "fontFamily", "fontWeight", "lineHeight", and "letterSpacing". You can choose to set all of these or only the ones you need.
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
