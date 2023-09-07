@@ -4,7 +4,7 @@ title: 'Underlying Technologies'
 
 {/* import */}
 import {
-    HORIZONTAL_LINE_SPACER___COMPONENT,
+    PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
     HEADING_BOTTOM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
@@ -12,8 +12,7 @@ import {
 
 {/* Page Heading */}
 ### Underlying Technologies
-
-<HORIZONTAL_LINE_SPACER___COMPONENT/>
+<PAGE_HEADING_BOTTOM/>
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
@@ -32,17 +31,8 @@ We are utilizing the popular JavaScript library Quill under the hood. However, y
 
 `Material Design`
 
+
 For the UI, we are following Material Design.
-
-
-
-
-<HEADING_TOP_SPACER___COMPONENT/>
-
-`Highlight.js`
-
-To highlight the code written in the editor, we are using the popular hightlight.js library. But no need to install Highlight.js, it’s already bundled with this library.
-
 
 
 
@@ -56,8 +46,10 @@ To highlight the code written in the editor, we are using the popular hightlight
 
 `quill-resize-image-module`
 
-This library has a built-in option for resizing inserted images. We are not using [quill-resize-image-module](https://www.npmjs.com/package/quill-image-resize-module) or [quill-resize-image](https://www.npmjs.com/package/quill-image-resize) for resizing image in the editor. At first, we considered using these libraries but these libraries have some problems:
 
- - They use 'px' for resizing images. So, the resized image is not responsive. 
+Our editor comes with a native feature for resizing images. It's worth noting that we don't rely on external libraries like [quill-resize-image-module](https://www.npmjs.com/package/quill-image-resize-module) or [quill-resize-image](https://www.npmjs.com/package/quill-image-resize) for this functionality. While we initially considered integrating these libraries, we identified a couple of limitations:
 
-- Resizing doesn't work on the touch screen because these libraries only work with mouse event
+- They employ 'px' units for image resizing, which results in non-responsive images.
+  
+- Their resizing functionality is not compatible with touch screens, as they are designed to respond solely to mouse events.
+

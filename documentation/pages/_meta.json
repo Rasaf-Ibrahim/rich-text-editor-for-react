@@ -10,15 +10,15 @@
 
 
     "index": "Installation",
-    "import": "How to Import",
-    "render": "Render Rich Text Editor",
-    "display": "Display Generated HTML",
+    "how-to-import": "How to Import",
+    "render-rich-text-editor": "Render Rich Text Editor",
     "ui-customization": "UI Customization",
     "utils": "Utils",
     "editor-status": "Editor Status",
-    "validation-in-form": "Validation in Form",
+    "display-generated-html": "Display Generated HTML",
     "upload-image-in-cloud": "Upload Image in Cloud",
     "common-errors": "Common Errors & Solution",
     "underlying-technologies": "Underlying Technologies"
+        
 }
  

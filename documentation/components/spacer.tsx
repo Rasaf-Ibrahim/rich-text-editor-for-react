@@ -10,7 +10,7 @@ import useDarkTheme from '../hooks/dark-theme-hook'
 
  ✅ Functional component
 ____________________________________________*/
-function HORIZONTAL_LINE_SPACER___COMPONENT() {
+function PAGE_HEADING_BOTTOM() {
 
     // theme
     const { dark_theme } = useDarkTheme()
@@ -36,7 +36,7 @@ ____________________________________________*/
 function HEADING_TOP_SPACER___COMPONENT() {
 
     return (
-        <div style={{ marginBottom: '4rem' }}>
+        <div style={{ marginTop: '3rem' }}>
         </div>
     )
 }
@@ -49,7 +49,7 @@ ____________________________________________*/
 function HEADING_BOTTOM_SPACER___COMPONENT() {
 
     return (
-        <div style={{ marginBottom: '1rem' }}>
+        <div style={{ marginBottom: '2rem' }}>
         </div>
     )
 }
@@ -60,7 +60,7 @@ function HEADING_BOTTOM_SPACER___COMPONENT() {
  ✅ export
 ____________________________________________*/
 export {
-    HORIZONTAL_LINE_SPACER___COMPONENT,
+    PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT,
     HEADING_BOTTOM_SPACER___COMPONENT
 }

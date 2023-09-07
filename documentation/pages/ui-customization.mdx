@@ -4,22 +4,26 @@ title: 'UI Customization'
 
 {/* import */}
 import {
-    HORIZONTAL_LINE_SPACER___COMPONENT,
+    PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
     HEADING_BOTTOM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
-
+import { Tab, Tabs } from 'nextra-theme-docs'
 
 
 {/* Page Heading */}
 ### UI Customization
-<HORIZONTAL_LINE_SPACER___COMPONENT/>
+<PAGE_HEADING_BOTTOM/>
 
 
-The `customizeUI` is a required prop that dictates the appearance of the UI.
 
-This prop accepts an object as its value, which can contain several properties:
+<HEADING_TOP_SPACER___COMPONENT/>
 
+#### `customizeUI` Prop Overview 
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+The `customizeUI` is a required prop. It accepts an object containing various properties that allow you to personalize the appearance of the editor & toolbar. Here are the properties you can define:
 
 
 | Name                      | Type     | Required/Optional |  Default Value Available |
@@ -35,11 +39,230 @@ This prop accepts an object as its value, which can contain several properties:
 
 
 
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Example Usage of `customizeUI` Prop
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+<Tabs items={['Next.js', 'React+Vite']}>
+
+  <Tab>
+               
+    ```ts showLineNumbers copy  
+    'use client'
+
+    import RichTextEditor from 'rich-text-editor-for-react'   
+    import useRichTextEditor  from 'rich-text-editor-for-react/hook'
+
+    import hljs from 'highlight.js';
+    import 'highlight.js/styles/atom-one-dark.css'
+
+
+    export default function Demo() {
+
+        // ...
+
+        return (
+
+            <RichTextEditor
+
+                customizeUI={{
+                    backgroundColor: '#fcfcfc',
+
+                    primaryColor: '#20464b',
+
+                    iconColor: '#121212'
+
+                    stickyToolbarOnScroll: true,
+
+                    highlightJS: hljs,
+
+                    defaultVisibleToolbarOptions:{
+                        phone: 5,
+                        tablet:8,
+                        laptop:15
+                    },
+
+                    typography: {
+                        p:{
+                            fontSize: '1rem',
+                            fontFamily: "'Noto Sans', sans-serif",
+                            fontWeight: 400,
+                            lineHeight: 1.5,
+                            letterSpacing: '0.001em',
+                        },
+
+                        //...
+                    }
+                }}
+
+                //...
+            />
+
+        )
+    }
+    ```
+
+  </Tab>
+
+
+
+  <Tab>
+   
+        ```ts showLineNumbers copy  
+        import RichTextEditor from 'rich-text-editor-for-react'   
+        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
+
+        import hljs from 'highlight.js';
+        import 'highlight.js/styles/atom-one-dark.css'
+
+
+        export default function Demo() {
+
+            // ...
+
+            return (
+
+                <RichTextEditor
+
+                    customizeUI={{
+                        backgroundColor: '#fcfcfc',
+
+                        primaryColor: '#20464b',
+
+                        iconColor: '#121212'
+
+                        stickyToolbarOnScroll: true,
+
+                        highlightJS: hljs,
+
+                        defaultVisibleToolbarOptions:{
+                            phone: 5,
+                            tablet:8,
+                            laptop:15
+                        },
+
+                        typography: {
+                            p:{
+                                fontSize: '1rem',
+                                fontFamily: "'Noto Sans', sans-serif",
+                                fontWeight: 400,
+                                lineHeight: 1.5,
+                                letterSpacing: '0.001em',
+                            },
+
+                            //...
+                        }
+                    }}
+
+                    //...
+                />
+
+            )
+        }
+        ```
+
+  </Tab>
+    
+</Tabs>
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Background, Primary & Icon Color
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+```ts copy  
+customizeUI={{
+    backgroundColor: '#fcfcfc', // required
+    primaryColor: '#20464b' // required
+    iconColor: '#121212' //optional
+}}
+```
+
+Here's how these properties affect the UI:
+
+- `backgroundColor`: Sets the background color for both the toolbar and editor. The text color adjusts automatically based on the chosen background color.
+- `primaryColor`: Defines the color for buttons and specific text elements, enhancing the UI.
+- `iconColor`: Specifies the color of icons in the toolbar.
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Theming 
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+If you are using themes like dark and light modes in your application, you can adjust the editor's colors dynamically. Assuming you have a state like `isDarkMode` which becomes `true` when the application is in dark mode and `false` during light mode:
+
+```jsx
+customizeUI={{
+    backgroundColor: isDarkMode ? '#000000' : '#fcfcfc',
+    primaryColor: isDarkMode ? '#ffffff' : '#20464b',
+    iconColor: isDarkMode ? '#f0f0f0' : '#121212'
+}}
+```
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Typography
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Sticky Toolbar on Scroll
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Highlight Code
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Default Visible Toolbar Options
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 
 
 
 
-&nbsp;
 
-**theming**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

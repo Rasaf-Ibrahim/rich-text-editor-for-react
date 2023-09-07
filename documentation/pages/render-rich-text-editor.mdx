@@ -4,7 +4,7 @@ title: 'Render Rich Text Editor'
 
 {/* import */}
 import {
-    HORIZONTAL_LINE_SPACER___COMPONENT,
+    PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
     HEADING_BOTTOM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
@@ -13,7 +13,7 @@ import {
 
 {/* Page Heading */}
 ### Render Rich Text Editor
-<HORIZONTAL_LINE_SPACER___COMPONENT/>
+<PAGE_HEADING_BOTTOM/>
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
@@ -58,12 +58,16 @@ export default function Demo() {
 
 #### `fetchOutput`
 
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 In line 7, the "useRichTextEditor" hook is invoked, and the `output` and `fetchOutput` are destructured from it. The fetchOutput is subsequently passed as a prop to the RichTextEditor component. This component generates HTML, which is stored in the "output" variable.
+
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
 #### `toolbarOptions`
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 The `toolbarOptions` prop allows you to customize the visibility of various toolbar options. You can customize the toolbar to meet your requirements by including or excluding specific options. Below is a list of available options that you can specify:
 
@@ -109,6 +113,8 @@ The `toolbarOptions` prop allows you to customize the visibility of various tool
 <HEADING_TOP_SPACER___COMPONENT/>
 
 #### `customizeUI`
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 The `customizeUI` prop allows you to customize the user interface of the toolbar and editor. Detailed information about this prop can be found on the [UI Customization](/ui-customization) page.
 
