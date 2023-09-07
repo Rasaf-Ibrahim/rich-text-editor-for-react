@@ -17,7 +17,7 @@ function PAGE_HEADING_BOTTOM() {
 
     return (
         <div style={{
-            marginTop: '0.6rem',
+            height: '0.6rem',
             borderBottomWidth: '1.5px',
             borderBottomColor: 'inherit',
             borderBottomStyle: 'solid',
