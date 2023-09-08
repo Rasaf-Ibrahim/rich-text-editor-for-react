@@ -325,8 +325,9 @@ First, install the `highlight.js` package in your React project:
 
 Next, import the package and its desired style into your component, then pass it to the `customizeUI` prop:
 
- ```ts showLineNumbers copy  
-    // Import highlight.js and a style of your choice
+ ```ts showLineNumbers {3-4, 13} /hljs/ copy  
+    //...
+
     import hljs from 'highlight.js';
     import 'highlight.js/styles/atom-one-dark.css'
 
@@ -366,14 +367,37 @@ import 'highlight.js/styles/github-dark-dimmed.css'
 > **Note**: In designing the `rich-text-editor-for-react` package, we had the option to bundle it with `highlight.js`. This would have meant that you wouldn't need to install `highlight.js` separately. However, we understood that not every Developer using the `rich-text-editor-for-react` package would need the `Code Block` feature. Therefore, to maintain a streamlined package size, we chose not to include `highlight.js` by default.
 
 
+<HEADING_TOP_SPACER___COMPONENT/>
 
-
-#### Default Visible Toolbar Options
+#### Set the Number of Default Visible Toolbar Options
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
 
+If you've explored our [demo](https://rich-text-editor-for-react.rasaf-ibrahim.com), you might've noticed that not all toolbar options are visible right away. Instead, there's a `more` button. Clicking this reveals all the available toolbar options.
 
+Why do we use this approach? The [demo](https://rich-text-editor-for-react.rasaf-ibrahim.com) has over 25 toolbar options. Displaying all these options, especially on smaller screens like mobiles, would consume a significant amount of space. Additionally, the on-screen keyboard on mobile devices occupies space.So, the `more/less` button helps keep things tidy and user-friendly.
+
+By default, you'll see:
+- 5 toolbar options on mobile screens
+- 7 on tablet screens
+- 7 on laptop screens
+
+
+
+To customize these default settings, you can utilize the `defaultVisibleToolbarOptions` property within the `customizeUI` prop. This allows you to specify the number of toolbar options you wish to display for each device type:
+
+```tsx copy
+ customizeUI={{
+                     
+    defaultVisibleToolbarOptions:{
+        phone: 5,
+        tablet: 8,
+        laptop: 15
+    }
+
+}}
+```
 
 
 

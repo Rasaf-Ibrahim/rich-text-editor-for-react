@@ -36,7 +36,7 @@ ____________________________________________*/
 function HEADING_TOP_SPACER___COMPONENT() {
 
     return (
-        <div style={{ marginTop: '3rem' }}>
+        <div style={{ height: '3rem' }}>
         </div>
     )
 }
@@ -49,7 +49,7 @@ ____________________________________________*/
 function HEADING_BOTTOM_SPACER___COMPONENT() {
 
     return (
-        <div style={{ marginBottom: '2rem' }}>
+        <div style={{ height: '2rem' }}>
         </div>
     )
 }

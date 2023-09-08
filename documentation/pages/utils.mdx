@@ -5,8 +5,7 @@ title: 'Utils'
 {/* import */}
 import {
     PAGE_HEADING_BOTTOM,
-    HEADING_TOP_SPACER___COMPONENT, 
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HALF_REM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
 
 
@@ -14,3 +13,47 @@ import {
 {/* Page Heading */}
 ### Utils
 <PAGE_HEADING_BOTTOM/>
+
+In the [render rich text editor](/render-rich-text-editor) page, we have discussed how to extract and use `output` and `fetchOutput` from the `useRichTextEditor` hook. In addition to these, you can also destructure `utils` and `fetchUtils`.
+
+Here's how to do it:
+
+```tsx  showLineNumbers {3, 9} copy
+export default function Demo() {
+
+  const { utils, fetchUtils } = useRichTextEditor();
+
+  return (
+
+    <RichTextEditor
+
+      fetchUtils={fetchUtils}
+
+      // ...
+    />
+
+    // ...
+  )
+
+}
+```
+
+
+<HALF_REM_SPACER___COMPONENT/>
+> **Passing `fetchUtils` to `RichTextEditor`**
+
+The "RichTextEditor" component accepts a `fetchUtils` prop. To this prop, pass the `fetchUtils` you've destructured from "useRichTextEditor" hook.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+<HALF_REM_SPACER___COMPONENT/>
+> **Working with `utils`**
+
+The `utils` object provides several utility functions for enhanced control over the Rich Text Editor:
+
+- **resetEditor**: This function clears the editor's content. It's useful in your submit handler to reset the editor after a successful submission. To use it, call `utils.resetEditor()`.
+
+- **focusOnEditor**: This function allows you to set focus to the editor programmatically. To use it, call `utils.focusOnEditor()`.
+
+- **removeFocusFromEditor**: To remove focus from the editor, use `utils.removeFocusFromEditor()`.
+
