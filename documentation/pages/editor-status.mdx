@@ -5,11 +5,58 @@ title: 'Editor Status'
 {/* import */}
 import {
     PAGE_HEADING_BOTTOM,
-    HEADING_TOP_SPACER___COMPONENT, 
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HALF_REM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
 
 
 {/* Page Heading */}
 ### Editor Status
 <PAGE_HEADING_BOTTOM/>
+
+At times, you'll need to track the editor's current state. For instance, you might need to check if the editor is currently focused, or perhaps you want to enforce a word or character limit. To achieve these tasks, you'll need to access the editor's state.
+
+To get the editor's state, destructure `editorStatus` and `fetchEditorStatus` from the `useRichTextEditor` hook.
+
+Here's how to do it:
+
+```tsx  showLineNumbers {3, 9} copy
+export default function Demo() {
+
+  const { editorStatus, fetchEditorStatus } = useRichTextEditor();
+
+  return (
+
+    <RichTextEditor
+
+      fetchEditorStatus={fetchEditorStatus}
+
+      // ...
+    />
+
+    // ...
+  )
+
+}
+```
+
+<HALF_REM_SPACER___COMPONENT />
+
+> **Passing `fetchEditorStatus` to RichTextEditor Component**
+
+The "RichTextEditor" component accepts a `fetchEditorStatus` prop. Simply pass the `fetchEditorStatus` function you've destructured from the "useRichTextEditor" hook to this prop.
+
+<HALF_REM_SPACER___COMPONENT />
+<HALF_REM_SPACER___COMPONENT />
+
+> **Utilizing `editorStatus`**
+
+With the `editorStatus` object, you can access a set of properties for tracking the current state of the editor:
+
+
+- **hasFocus**: Use this property to determine if the editor is focused. For example, you can use `editorStatus.hasFocus` to conditionally trigger specific actions.
+
+- **totalWords**: With this property, you get the total word count in the editor. So, you can use `editorStatus.totalWords` to enforce a word limit by showing an error message, or simply display the current word count to the user.
+
+- **totalCharacters**: This property gives you the total character count. The use case is similar to `totalWords`. You can use `editorStatus.totalCharacters` to either enforce a character limit and show an error message if exceeded, or display the current character count to the user.
+
+- **totalCharactersExcludingSpacing**: This property counts characters without including spaces. The use case is similar to `totalWords`. You can use `editorStatus.totalCharacters` to set a character limit without spaces, or just show the user the character count, excluding spaces.
