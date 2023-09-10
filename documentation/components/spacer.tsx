@@ -49,7 +49,7 @@ ____________________________________________*/
 function HEADING_BOTTOM_SPACER___COMPONENT() {
 
     return (
-        <div style={{ height: '2rem' }}>
+        <div style={{ height: '1rem' }}>
         </div>
     )
 }

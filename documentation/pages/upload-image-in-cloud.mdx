@@ -6,10 +6,55 @@ title: 'Upload Image in Cloudinary'
 import {
     PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HEADING_BOTTOM_SPACER___COMPONENT,
+    HALF_REM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
+import { Callout } from 'nextra/components'
+ 
 
 
 {/* Page Heading */}
-### Upload Image in Cloudinary
+### Upload Image in Cloud
 <PAGE_HEADING_BOTTOM/>
+
+
+If you have read about [toolbarOptions](/render-rich-text-editor#toolbaroptions), you may already know you have two choices for handling images. The first is embedding images as base64 strings directly in the editor. The second is uploading images to cloud storage and using the image URL in the editor.
+
+If you've passed for the `image_base64` in the `toolbarOptions` prop, you're all set—no further configuration is needed. However, if you've passed `image_cloud` because you prefer to store images in the cloud and use URLs in the editor, then this guide is for you.
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### How the Image Upload to Cloud Happens: A Quick Overview
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+- As you have choosen `image_cloud`, so now everytime user inserts an image on the editor, it will get inserted as a `blob` image.
+
+- Now, let's assume there's a "Submit" button that the user clicks after they've finished writing. At this point, all blob images in the output will be uploaded to your cloud storage. After a successful upload, each blob URL will be replaced with its corresponding cloud URL.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+> *Why Have We Decided to Upload Images All at Once Instead of One by One?*
+>
+> - When users are writing, they often insert multiple images just to try them out. If we upload images one by one as they're added, we risk uploading images that the user might eventually remove. Even if we track these removed images and delete them from cloud storage, this approach still consumes extra time and bandwidth unnecessarily.
+> - Moreover, If the user upload couple of images individually and closes the browser or uninstalls the browser, we lose the ability to track the images that has already been uploaded.
+> - Conversely, by waiting for a "Submit" action and only uploading the images that the user has finalized, we can optimize both time and bandwidth usage.
+
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Prerequisite
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+You'll need a backend server to manage cloud uploads. You can use any programming language or framework of your choice for the backend server.
+
+Below, we'll walk through setting up both the frontend and backend.
+
+
