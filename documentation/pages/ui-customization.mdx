@@ -46,136 +46,61 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
-<Tabs items={['Next.js', 'React+Vite']}>
-
-  <Tab>
-               
-    ```ts showLineNumbers {27-55} copy  
-    'use client'
-
-    import dynamic from 'next/dynamic'
-
-    const RichTextEditor = dynamic(
-        () => import('rich-text-editor-for-react'),
-        {
-            ssr: false,
-            loading: () => <p>Loading...</p>, // Anything can be used here as a loading component
-        }
-    )
-
-    import useRichTextEditor from 'rich-text-editor-for-react/hook'
-
-    import hljs from 'highlight.js';
-    import 'highlight.js/styles/atom-one-dark.css'
+    
+```ts showLineNumbers {5-6, 17-45} copy  
+// import RichTextEditor component & useRichTextEditor hook/
+// ...
 
 
-    export default function Demo() {
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'
 
-        // ...
 
-        return (
+export default function Demo() {
 
-            <RichTextEditor
+    // ...
 
-                customizeUI={{
-                    backgroundColor: '#fcfcfc',
+    return (
 
-                    primaryColor: '#20464b',
+        <RichTextEditor
 
-                    iconColor: '#121212'
+            customizeUI={{
+                backgroundColor: '#fcfcfc',
 
-                    stickyToolbarOnScroll: true,
+                primaryColor: '#20464b',
 
-                    highlightJS: hljs,
+                iconColor: '#121212'
 
-                    defaultVisibleToolbarOptions:{
-                        phone: 5,
-                        tablet:8,
-                        laptop:15
+                stickyToolbarOnScroll: true,
+
+                highlightJS: hljs,
+
+                defaultVisibleToolbarOptions:{
+                    phone: 5,
+                    tablet:8,
+                    laptop:15
+                },
+
+                typography: {
+                    p:{
+                        fontSize: '1rem',
+                        fontFamily: "'Noto Sans', sans-serif",
+                        fontWeight: 400,
+                        lineHeight: 1.5,
+                        letterSpacing: '0.001em',
                     },
 
-                    typography: {
-                        p:{
-                            fontSize: '1rem',
-                            fontFamily: "'Noto Sans', sans-serif",
-                            fontWeight: 400,
-                            lineHeight: 1.5,
-                            letterSpacing: '0.001em',
-                        },
-
-                        //...
-                    }
-                }}
-
-                //...
-            />
-
-        )
-    }
-    ```
-
-  </Tab>
-
-
-
-  <Tab>
-   
-        ```ts showLineNumbers {16-44} copy  
-        import RichTextEditor from 'rich-text-editor-for-react'   
-        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
-
-        import hljs from 'highlight.js';
-        import 'highlight.js/styles/atom-one-dark.css'
-
-
-        export default function Demo() {
-
-            // ...
-
-            return (
-
-                <RichTextEditor
-
-                    customizeUI={{
-                        backgroundColor: '#fcfcfc',
-
-                        primaryColor: '#20464b',
-
-                        iconColor: '#121212'
-
-                        stickyToolbarOnScroll: true,
-
-                        highlightJS: hljs,
-
-                        defaultVisibleToolbarOptions:{
-                            phone: 5,
-                            tablet:8,
-                            laptop:15
-                        },
-
-                        typography: {
-                            p:{
-                                fontSize: '1rem',
-                                fontFamily: "'Noto Sans', sans-serif",
-                                fontWeight: 400,
-                                lineHeight: 1.5,
-                                letterSpacing: '0.001em',
-                            },
-
-                            //...
-                        }
-                    }}
-
                     //...
-                />
+                }
+            }}
 
-            )
-        }
-        ```
+            //...
+        />
 
-  </Tab>
-    
-</Tabs>
+    )
+}
+```
+
 
 
 In the example usage above, you've seen how the customizeUI prop can be leveraged to tailor the RichTextEditor's UI to your specific needs. In the following sections of this page, we'll dissect every single property available within customizeUI, so you can gain a full understanding of how to make the editor truly your own.
@@ -325,8 +250,9 @@ First, install the `highlight.js` package in your React project:
 
 Next, import the package and its desired style into your component, then pass it to the `customizeUI` prop:
 
- ```ts showLineNumbers {3-4, 13} /hljs/ copy  
-    //...
+ ```ts showLineNumbers {4-5, 14} /hljs/ copy  
+    // import RichTextEditor component & useRichTextEditor hook/
+    // ...
 
     import hljs from 'highlight.js';
     import 'highlight.js/styles/atom-one-dark.css'

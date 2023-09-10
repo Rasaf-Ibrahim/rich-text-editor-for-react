@@ -58,3 +58,134 @@ You'll need a backend server to manage cloud uploads. You can use any programmin
 Below, we'll walk through setting up both the frontend and backend.
 
 
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Setting Up the Frontend
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+Initially, we'll go through the code, followed by an in-depth explanation
+
+```tsx showLineNumbers /isImageOperationsEnabled/ /enableImageOperations/ /imageOperationsData/  /fetchImageOperationsData/ /cloudImageApiEndpoint/ copy
+import { useEffect, useRef } from 'react'
+ 
+// import RichTextEditor component & useRichTextEditor hook/
+// ...
+ 
+export default function Demo() {
+ 
+    // Destructuring properties from useRichTextEditor
+    const {
+        output,
+        fetchOutput, 
+        isImageOperationsEnabled,  
+        enableImageOperations,  
+        imageOperationsData,  
+        fetchImageOperationsData  
+    } = useRichTextEditor()
+ 
+    // handleSubmit function
+    const handleSubmit = () => {
+        enableImageOperations() 
+    }
+ 
+    //Using useRef for conditional useEffect execution
+    const notInitialRender = useRef(false)
+ 
+    // useEffect hook
+    useEffect(() => {
+ 
+        if (notInitialRender.current) {
+            // Custom code placeholder
+            // Put your code here. The code will only run when the dependency changes, not on the initial render of the component
+        } 
+
+        else {
+            notInitialRender.current = true  
+        }
+ 
+    }, [imageOperationsData.outputUpdatedWithImageLink])  
+ 
+    
+    // JSX
+    return (
+ 
+        <div> 
+ 
+            <RichTextEditor
+            
+                toolbarOptions={[
+                    'image_cloud',
+                    //...
+                ]}
+ 
+                customizeUI={{
+                    // ...
+                }}
+ 
+                fetchOutput={fetchOutput}
+ 
+                imageValidation={{
+                    maximumFileSize: 1024,
+                    acceptableFileFormats: ['png', 'jpg', 'jpeg']
+                }}
+ 
+                cloudImageApiEndpoint="https://your-server-domain.com/api/v1/rte/manage-image"  
+ 
+                isImageOperationsEnabled={isImageOperationsEnabled}  
+ 
+                fetchImageOperationsData={fetchImageOperationsData}  
+            />
+ 
+            {/* Submit button */}
+            <button onClick={handleSubmit}>
+                Submit
+            </button>
+ 
+        </div>
+    )
+}
+
+```
+
+**Code Explanation:**
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Lines 12-15**: Here, we're destructuring several properties from the `useRichTextEditor` hook. These include `isImageOperationsEnabled`, `enableImageOperations`, `imageOperationsData`, and `fetchImageOperationsData`.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Line 46**: Here, in our 'RichTextEditor' component, we are passing 3 new props that are specific to cloud image upload:
+   - Prop `cloudImageApiEndpoint`: We are passing the backend server's API endpoint which manages image operations.
+   - Prop `isImageOperationsEnabled`: We are passing "isImageOperationsEnabled" which we have destructured from useRichTextEditor hook
+   - Prop `fetchImageOperationsData`: We are passing the "fetchImageOperationsData" which we have destructured from useRichTextEditor hook 
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Line 72**: Notice the "Submit" button. When clicked, it triggers the `handleSubmit` function defined on line 19.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **handleSubmit Function**: This function calls `enableImageOperations`, which sends a request to the backend to initiate image-related operations.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Line 27**: We employ `useEffect` with a dependency of `imageOperationsData.outputUpdatedWithImageLink`. This `imageOperationsData.outputUpdatedWithImageLink` changes only when the image operations are complete, and blob images in the output are replaced with their cloud URLs.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Conditional useEffect Execution**: We use `useRef` to ensure that the `useEffect` logic is skipped during the component's initial render. This is why you see `notInitialRender.current` being checked and updated within the `useEffect`.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- **Inside useEffect**: You'll notice a comment indicating where to place your custom code. This is where you'd typically insert API calls to save the user's rich text editor content after image operations are complete.
+
+
+
+
+
+
+
+
