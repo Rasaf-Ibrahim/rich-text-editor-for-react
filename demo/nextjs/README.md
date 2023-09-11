@@ -1,1 +1,0 @@
-## Rich Text Editor for React (NextJS)
