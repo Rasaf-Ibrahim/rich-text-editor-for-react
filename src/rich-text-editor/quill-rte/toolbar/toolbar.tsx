@@ -94,6 +94,8 @@ type type_of_toolbar_props = {
     imageValidation: imageValidationType
 
     defaultVisibleToolbarOptions: defaultVisibleToolbarOptionsType
+
+    dividerInToolbar: boolean
 }
 
 
@@ -114,7 +116,8 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
         rte_state,
         update_rte_state,
         imageValidation,
-        defaultVisibleToolbarOptions
+        defaultVisibleToolbarOptions,
+        dividerInToolbar = true
     } = props
 
 
@@ -395,16 +398,16 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
     let defaultItemCount
 
     if (phone_and_up) {
-        // if on phone, show at most 5 items (at most 2 lines)
+        // if on phone, show at most 5 items 
         defaultItemCount = defaultVisibleToolbarOptions?.phone || 5
     }
     else if (tablet_and_up) {
-        // if on tablet, show at most 7 items (at most 2 lines)
+        // if on tablet, show at most 7 items
         defaultItemCount = defaultVisibleToolbarOptions?.tablet || 7
     }
     else {
-        // if on laptop or larger, show at most 7 items (at most 1 line)
-        defaultItemCount = defaultVisibleToolbarOptions?.laptop || 7
+        // if on laptop or larger, show at most 12 items 
+        defaultItemCount = defaultVisibleToolbarOptions?.laptop || 12
     }
 
     // set state to control whether to show all toolbar items or not
@@ -455,8 +458,30 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
                         imageValidation={imageValidation}
                     />
 
-                    {/* This renders a Divider component for visual separation between the toolbar options */}
-                    <Divider orientation="vertical" variant="middle" flexItem />
+                    {/*
+                        "dividerInToolbar" prop's default value is "true". So, if the user doesn't explicitly sets it to false, we will render  render a Divider component for visual separation between the toolbar options  
+                     */}
+
+                    {dividerInToolbar ?
+
+                        <Divider 
+                            orientation="vertical"
+                            variant="middle" 
+                            flexItem 
+                            sx={{
+                                marginRight:'2px',
+                                marginLeft:'2px'
+                            }}
+                        />
+
+                        :
+
+                        <Box sx={{
+                            marginRight:'2px',
+                            marginLeft:'2px'
+                        }}/>
+                    }
+
 
                 </React.Fragment>
 

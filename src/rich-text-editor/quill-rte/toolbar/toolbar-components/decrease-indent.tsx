@@ -78,7 +78,7 @@ export default function DECREASE_INDENT___COMPONENT(props: type_of_toolbar_optio
 
             <FormControl margin="dense">
 
-                <IconButton onClick={handleIndent}>
+                <IconButton onClick={handleIndent} size='small'>
 
                     {/* 🔖 Why are we not changing color of the indent icon?
 

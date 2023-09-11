@@ -68,7 +68,7 @@ export default function SUB_SCRIPT___COMPONENT(props: type_of_toolbar_option_com
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleSubScript}>
+                <IconButton onClick={handleSubScript} size='small'>
 
                     <MUI_ICON___REUSABLE
 

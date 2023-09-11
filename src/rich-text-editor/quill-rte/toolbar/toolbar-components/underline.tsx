@@ -60,7 +60,7 @@ export default function UNDERLINE___COMPONENT(props: type_of_toolbar_option_comp
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleUnderline}>
+                <IconButton onClick={handleUnderline} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatUnderlinedRounded}

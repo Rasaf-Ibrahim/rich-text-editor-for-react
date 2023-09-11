@@ -76,15 +76,25 @@ export default function TEXT_COLOR___COMPONENT(props: type_of_toolbar_option_com
     return (
         <>
             <Tooltip title="Text Color" placement="top">
-                <FormControl margin="dense">
-                    <IconButton onClick={handleOpenPopover}>
 
+                <FormControl margin="dense">
+
+                    <IconButton 
+                        size='small'
+                        onClick={handleOpenPopover}
+                        sx={{
+                            ...(rte_state.formats_of_selected_text.color && { 
+                                
+                                backgroundColor: rte_state.formats_of_selected_text.color 
+                            })  
+                        }}
+                      >
+
+   
                         {/*
                         
                             We will not use <MUI_ICON___REUSABLE/> for the following icon because the color change for this icon is slightly different. 
 
-                            The color of the icon depends on the chosen color
-                        
                         */}
                         <FormatColorTextRounded
                             sx={(theme) => ({
@@ -95,11 +105,7 @@ export default function TEXT_COLOR___COMPONENT(props: type_of_toolbar_option_com
                                 ...(rte_state.formats_of_selected_text.color ?
 
                                     {
-                                        padding: '1px',
-
                                         color: readableColor(rte_state.formats_of_selected_text.color),
-
-                                        backgroundColor: rte_state.formats_of_selected_text.color
                                     }
 
                                     :
@@ -114,7 +120,9 @@ export default function TEXT_COLOR___COMPONENT(props: type_of_toolbar_option_com
                             })}
                         />
                     </IconButton>
+
                 </FormControl>
+
             </Tooltip>
 
 

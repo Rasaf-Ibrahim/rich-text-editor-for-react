@@ -72,7 +72,7 @@ export default function UNORDERED_LIST___COMPONENT(props: type_of_toolbar_option
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleUnorderedList}>
+                <IconButton onClick={handleUnorderedList} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatListBulletedRounded}

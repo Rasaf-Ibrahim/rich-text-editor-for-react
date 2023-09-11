@@ -64,7 +64,7 @@ export default function BLOCKQUOTE___COMPONENT(props: type_of_toolbar_option_com
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleBlockQuote}>
+                <IconButton size='small' onClick={handleBlockQuote}>
 
                     <MUI_ICON___REUSABLE
 

@@ -59,7 +59,7 @@ export default function BOLD___COMPONENT(props: type_of_toolbar_option_component
     return (
         <Tooltip title="Bold" placement="top">
             <FormControl margin='dense'>
-                <IconButton onClick={handleBold}>
+                <IconButton onClick={handleBold} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatBoldRounded}

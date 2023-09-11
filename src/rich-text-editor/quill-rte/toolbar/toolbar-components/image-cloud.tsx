@@ -264,7 +264,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
                 <FormControl margin='dense'>
 
-                    <IconButton onClick={handle_click_on_the_image_button}>
+                    <IconButton onClick={handle_click_on_the_image_button} size='small'>
 
                         <MUI_ICON___REUSABLE
                             ICON_COMPONENT={ImageRounded}

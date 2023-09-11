@@ -68,7 +68,7 @@ export default function CODE_BLOCK___COMPONENT(props: type_of_toolbar_option_com
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleCodeBlock}>
+                <IconButton onClick={handleCodeBlock} size='small'>
 
                     <MUI_ICON___REUSABLE
 

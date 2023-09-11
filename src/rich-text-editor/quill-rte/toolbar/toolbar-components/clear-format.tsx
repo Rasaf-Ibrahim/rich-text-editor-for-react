@@ -107,7 +107,7 @@ export default function CLEAR_FORMAT___COMPONENT(props: type_of_toolbar_option_c
             <FormControl margin='dense'>
 
 
-                <IconButton onClick={handle_clear_format}>
+                <IconButton onClick={handle_clear_format} size='small'>
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatClearRounded}
                     />

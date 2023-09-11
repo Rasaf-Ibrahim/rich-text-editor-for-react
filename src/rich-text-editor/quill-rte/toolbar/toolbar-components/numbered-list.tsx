@@ -87,7 +87,7 @@ export default function ORDERED_LIST___COMPONENT(props: type_of_toolbar_option_c
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleOrderedList}>
+                <IconButton onClick={handleOrderedList} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatListNumberedRounded}

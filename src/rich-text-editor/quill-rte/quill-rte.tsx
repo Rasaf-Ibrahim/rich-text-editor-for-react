@@ -752,6 +752,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
                     update_rte_state={update_rte_state}
                     imageValidation={imageValidation}
                     defaultVisibleToolbarOptions={customizeUI.defaultVisibleToolbarOptions}
+                    dividerInToolbar={customizeUI.dividerInToolbar}
                 />
 
             </Box>

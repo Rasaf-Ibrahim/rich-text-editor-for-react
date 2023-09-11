@@ -268,7 +268,7 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
 
                 <FormControl margin='dense'>
 
-                    <IconButton onClick={handle_click_on_the_button} >
+                    <IconButton onClick={handle_click_on_the_button} size='small'>
 
                         <MUI_ICON___REUSABLE
                             ICON_COMPONENT={YouTube}

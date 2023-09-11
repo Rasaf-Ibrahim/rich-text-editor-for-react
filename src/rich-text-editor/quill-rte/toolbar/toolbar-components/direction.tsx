@@ -87,7 +87,7 @@ export default function DIRECTION___COMPONENT(props: type_of_toolbar_option_comp
     return (
         <Tooltip title="Direction" placement="top">
             <FormControl margin='dense'>
-                <IconButton onClick={handleDirection}>
+                <IconButton onClick={handleDirection} size='small'>
 
                     {rte_state.formats_of_selected_text.direction === 'rtl' ?
 

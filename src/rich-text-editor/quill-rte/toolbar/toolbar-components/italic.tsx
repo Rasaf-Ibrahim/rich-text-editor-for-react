@@ -60,7 +60,7 @@ export default function ITALIC___COMPONENT(props: type_of_toolbar_option_compone
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleItalic}>
+                <IconButton onClick={handleItalic} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={FormatItalicRounded}

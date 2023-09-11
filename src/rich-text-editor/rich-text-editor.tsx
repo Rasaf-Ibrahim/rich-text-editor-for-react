@@ -70,10 +70,6 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
 
 
 
-
-
-
-
     // 🫓 quill's reference 
     const quillRef = useRef(null)
 
@@ -305,13 +301,12 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
             totalUploading: rte_state.images.all_inserted_blob_src_image_info.length,
 
             totalDeleting: rte_state.images.all_removed_url_src_image_id.length
-
         }))
 
 
 
-        // if there is no image to upload, update the "imageOperationsData" to let the user know that they can safely  submit the data
-        if (rte_state.images.all_inserted_blob_src_image_info.length === 0) {
+        // if there is no image to upload or delete, update the "imageOperationsData" to let the user know that they can safely  submit the data
+        if (rte_state.images.all_inserted_blob_src_image_info.length === 0 && rte_state.images.all_removed_url_src_image_id.length === 0 ) {
 
             fetchImageOperationsData(prevState => ({
 
@@ -323,7 +318,7 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
         }
 
 
-        // if there is image to upload, upload them
+        // if there is image to upload or delete, run the "upload_and_delete_image" function
         else {
             upload_and_delete_image()
         }
@@ -335,8 +330,6 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
 
 
     /* 🫓 (7/8) for user -  updating the "imageOperationsData" state based on the response of the image upload and delete functionality  */
-
-
     useEffect(() => {
 
         // if user doesn't want operations data, return
@@ -357,7 +350,11 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
 
 
 
+  
+        
+    
 
+    
     /* 🫓 (8/8) for user - 
     
         - from the above step, if we get a successful response back, we will update the 'quillRef.current.root.innerHTML'
@@ -365,53 +362,84 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
 
         - after that, updating a specific property of the "imageOperationsData" state to let the user know blob image has been updated with the actual link and they can safely save the output of the rich text editor in database.   
         
-
     */
+
 
     useUpdateEffect(() => {
 
-
-        // 🥔 update_image_src_and_data_id function
-        function update_image_src_and_data_id(html, responseArray) {
+        // 🥔 function to update the image src and id
+        function updateImageSrcAndId(html: string, imageInfoArray: Array<{ public_id: string, src: string }>): string {
 
             // Use DOMParser to create a new Document from the HTML string
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-
+            const parser = new DOMParser()
+            const doc = parser.parseFromString(html, 'text/html')
+        
             // Query all img tags in the document
             const imgTags = doc.getElementsByTagName('img');
-
-            // Loop through each img tag
-            for (let i = 0; i < imgTags.length; i++) {
-                const img = imgTags[i];
-
+        
+            // Convert HTMLCollection to array and loop through each img tag using for...of loop
+            for (const img of Array.from(imgTags)) {
+        
                 // Get the current image's data-id
-                const currentImageId = img.getAttribute('data-image-id');
-
-                // Find the matching item in the response array
-                const matchingItem = responseArray.find(item => item.public_id.split('/')[1] === currentImageId);
-
+                const currentImageId = img.getAttribute('data-image-id')
+        
+                // Find the matching item in the image response array
+                const matchingItem = imageInfoArray.find(item => item.public_id.split('/')[1] === currentImageId)
+        
                 // If a matching item was found, update the img tag's src and data-id attributes
                 if (matchingItem) {
                     img.setAttribute('src', matchingItem.src);
-                    img.setAttribute('data-image-id', matchingItem.public_id);
+                    img.setAttribute('data-image-id', matchingItem.public_id)
                 }
             }
-
-
+        
             // Return the updated HTML string
             return doc.documentElement.innerHTML
         }
 
 
+        // 🥔 function to extract images' id
+        function extractImageIds(html: string): string[] {
+
+            // Use DOMParser to create a new Document from the HTML string
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+        
+            // Query all img tags in the document
+            const imgTags = doc.getElementsByTagName('img');
+        
+            // Initialize an array to hold the data-image-id values
+            const dataImageIds: string[] = [];
+        
+            // Convert HTMLCollection to array and loop through each img tag using for...of loop
+            for (const img of Array.from(imgTags)) {
+        
+                // Get the current image's src attribute
+                const srcAttribute = img.getAttribute('src');
+        
+                // Get the current image's data-image-id attribute
+                const dataImageId = img.getAttribute('data-image-id');
+        
+                // If src attribute starts with http or https and data-image-id is not null, add it to the array
+                if (srcAttribute && (srcAttribute.startsWith('http') || srcAttribute.startsWith('https')) && dataImageId) {
+                    dataImageIds.push(dataImageId);
+                }
+            }
+        
+            // Return the array of data-image-id values
+            return dataImageIds;
+        }
+        
+
+
         // 🥔 updating image src and data id of the editor's html
-        quillRef.current.root.innerHTML = update_image_src_and_data_id(rte_state.quill_generated_html, data?.result)
+        quillRef.current.root.innerHTML = updateImageSrcAndId(rte_state.quill_generated_html, data?.result)
 
 
 
-        /* 🥔 after we update the "quillRef.current.root.innerHTML", we need to update the "imageOperationsData.outputUpdatedWithImageLink" state.
+        /* 🥔 after we update the "quillRef.current.root.innerHTML", we need to update the "imageOperationsData.outputUpdatedWithImageLink" & "imageOperationsData.idsOfTheImages" state.
 
-            But before updating this state, we will wait 2 seconds.  Because:
+            But before updating these states, we will wait 2 seconds.  Because:
 
             when we update the "quillRef.current.root.innerHTML", the editor's html gets updated, editor-change event occurs, the "rte_state.quill_generated_html" state gets updated, and so the user's "output" state also gets updated 
 
@@ -423,6 +451,8 @@ export default function RichTextEditor(props:RichTextEditorPropsType) {
             fetchImageOperationsData(prevState => ({
 
                 ...prevState, // Copy the previous state
+
+                idsOfTheImages: extractImageIds(quillRef.current.root.innerHTML),
 
                 outputUpdatedWithImageLink: nanoid(8)
             }))

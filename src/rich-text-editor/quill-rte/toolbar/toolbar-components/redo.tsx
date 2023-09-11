@@ -48,7 +48,7 @@ export default function REDO___COMPONENT(props: type_of_toolbar_option_component
 
         <Tooltip title="Redo" placement="top">
             <FormControl margin='dense'>
-                <IconButton onClick={handle_redo}>
+                <IconButton onClick={handle_redo} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={RedoRounded}

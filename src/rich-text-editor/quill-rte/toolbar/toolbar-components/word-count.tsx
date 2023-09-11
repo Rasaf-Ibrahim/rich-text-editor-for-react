@@ -91,7 +91,7 @@ export default function WORD_COUNT___COMPONENT(props: type_of_toolbar_option_com
 
                 <FormControl margin='dense'>
 
-                    <IconButton onClick={handle_click_on_the_button} >
+                    <IconButton onClick={handle_click_on_the_button} size='small'>
 
                         <MUI_ICON___REUSABLE
                             ICON_COMPONENT={ArticleRounded}

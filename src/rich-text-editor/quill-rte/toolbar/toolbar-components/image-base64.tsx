@@ -249,7 +249,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
         <>
             <Tooltip title="Insert Image" placement="top">
                 <FormControl margin='dense'>
-                    <IconButton onClick={handle_click_on_the_image_button}>
+                    <IconButton onClick={handle_click_on_the_image_button} size='small'>
                         <MUI_ICON___REUSABLE
                             ICON_COMPONENT={ImageRounded}
                         />

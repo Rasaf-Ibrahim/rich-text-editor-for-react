@@ -45,7 +45,8 @@ export default function useRichTextEditor() {
         isProcessing: false,
         hasSucceed: false,
         hasFailed: false,
-        outputUpdatedWithImageLink: ''
+        outputUpdatedWithImageLink: '',
+        idsOfTheImages: []
     })
 
 

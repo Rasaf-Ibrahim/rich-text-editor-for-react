@@ -39,6 +39,7 @@ export type customizeUiType = {
     iconColor?: string
     stickyToolbarOnScroll?: boolean
     defaultVisibleToolbarOptions?: defaultVisibleToolbarOptionsType
+    dividerInToolbar?: boolean,
     highlightJS?: any
     typography?: typographyType
 }
@@ -123,7 +124,8 @@ export type imageOperationsDataType = {
     hasFailed: boolean,
     totalUploading: number,
     totalDeleting: number,
-    outputUpdatedWithImageLink: string //unique
+    outputUpdatedWithImageLink: string, //unique
+    idsOfTheImages: string[]
 }
 
 

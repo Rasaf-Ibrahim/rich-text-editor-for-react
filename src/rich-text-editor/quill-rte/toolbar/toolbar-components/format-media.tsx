@@ -241,7 +241,7 @@ export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_c
                         color="primary"
                         sx={{ '.MuiBadge-badge': { fontSize: '10px' } }}>
 
-                        <IconButton onClick={handle_click_on_the_button} >
+                        <IconButton onClick={handle_click_on_the_button} size='small'>
 
 
                             <MUI_ICON___REUSABLE

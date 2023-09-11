@@ -67,7 +67,7 @@ export default function SUPER_SCRIPT___COMPONENT(props: type_of_toolbar_option_c
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleSuperScript}>
+                <IconButton onClick={handleSuperScript} size='small'>
 
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={SuperscriptRounded}

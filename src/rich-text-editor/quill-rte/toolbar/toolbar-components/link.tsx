@@ -154,7 +154,7 @@ export default function LINK___COMPONENT(props: type_of_toolbar_option_component
 
                 <FormControl margin='dense'>
 
-                    <IconButton onClick={handle_click_on_the_link_button} >
+                    <IconButton onClick={handle_click_on_the_link_button} size='small'>
 
                         <MUI_ICON___REUSABLE
                             ICON_COMPONENT={LinkRounded}

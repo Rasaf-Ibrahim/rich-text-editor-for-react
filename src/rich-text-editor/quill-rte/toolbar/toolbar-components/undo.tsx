@@ -49,7 +49,7 @@ export default function UNDO___COMPONENT(props: type_of_toolbar_option_component
 
         <Tooltip title="Undo" placement="top">
             <FormControl margin='dense'>
-                <IconButton onClick={handle_undo}>
+                <IconButton onClick={handle_undo} size='small'>
                     <MUI_ICON___REUSABLE
                         ICON_COMPONENT={UndoRounded}
                     />

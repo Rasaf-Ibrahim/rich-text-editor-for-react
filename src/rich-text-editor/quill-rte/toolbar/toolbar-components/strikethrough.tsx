@@ -62,7 +62,7 @@ export default function STRIKE_THROUGH___COMPONENT(props: type_of_toolbar_option
 
             <FormControl margin='dense'>
 
-                <IconButton onClick={handleStrikeThrough}>
+                <IconButton onClick={handleStrikeThrough} size='small'>
 
                     <MUI_ICON___REUSABLE
 

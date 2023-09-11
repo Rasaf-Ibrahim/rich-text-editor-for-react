@@ -76,10 +76,21 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
         <>
 
             <Tooltip title="Highlight Color" placement="top">
-                <FormControl margin="dense">
-                    <IconButton onClick={handleOpenPopover}>
 
-                        {/* We will not use <MUI_ICON___REUSABLE/> for the following icon because the color chnage for this icon is slightly different.  */}
+                <FormControl margin="dense">
+
+                    <IconButton 
+                    size='small'
+                      onClick={handleOpenPopover}
+                      sx={{
+                        ...(rte_state.formats_of_selected_text.background && { 
+                            
+                            backgroundColor: rte_state.formats_of_selected_text.background 
+                        })  
+                      }}
+                    >
+
+                        {/* We will not use <MUI_ICON___REUSABLE/> for the following icon because the color change for this icon is slightly different.  */}
 
                         <ColorizeRounded
                             sx={(theme) => ({
@@ -88,11 +99,7 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
                                 ...(rte_state.formats_of_selected_text.background ?
 
                                     {
-                                        padding: '1px',
-
-                                        color: readableColor(rte_state.formats_of_selected_text.background),
-
-                                        backgroundColor: rte_state.formats_of_selected_text.background
+                                        color: readableColor(rte_state.formats_of_selected_text.background)
                                     }
 
                                     :
@@ -103,8 +110,11 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
                                 ),
                             })}
                         />
+
                     </IconButton>
+
                 </FormControl>
+                
             </Tooltip>
 
 
@@ -130,6 +140,6 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
 
 
         </>
-    );
+    )
 }
 
