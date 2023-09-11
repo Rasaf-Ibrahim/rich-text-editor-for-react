@@ -8,7 +8,7 @@ import {
     HEADING_TOP_SPACER___COMPONENT, 
     HEADING_BOTTOM_SPACER___COMPONENT,
     HALF_REM_SPACER___COMPONENT
-} from '../components/spacer.tsx'
+} from '../../components/spacer.tsx'
 import { Callout } from 'nextra/components'
  
 
@@ -187,5 +187,190 @@ export default function Demo() {
 
 
 
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Setting Up the Backend
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+In this guide, we'll walk you through setting up an Express server and using Cloudinary for cloud storage. Keep in mind, you're not restricted to using Express or Cloudinary. You can choose any backend framework and cloud storage service that suits your needs.
+
+The key requirement is to ensure that the API endpoint responsible for handling the rich text editor's images should return an array that includes both the `secure_url` and `public_id` for each uploaded image:
+
+
+> Here is the full code for the backend server with `Express`, for uploading image, we are using `express-fileupload` package.
+```js copy
+
+// import built-in node modules 
+import fs from 'fs'
+
+// import packages
+import express from 'express'
+import dotenv from 'dotenv'
+import fileUpload from 'express-fileupload'
+import { v2 as cloudinary } from 'cloudinary'
+
+
+// express app
+const app = express()
+
+// dotenv
+dotenv.config()
+
+// port
+const PORT = process.env.PORT || 3000
+
+// cloudinary configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+
+// middleware to parse the request body
+app.use(express.json())
+
+// middleware to upload files
+app.use(
+    fileUpload({ useTempFiles: true })
+)
+
+
+// upload and delete images
+app.post('/api/v1/rte/manage-image', async (req, res) => {
+
+
+    try {
+
+        // 🫓 configuration object
+        const configuration = {
+            imagesToUploadFieldName: 'imagesToUpload',
+            imagesToDeleteFieldName: 'imagesToDelete',
+            cloudinaryFolderName: config_obj.env.cloudinary_folder_name
+        }
+
+
+        // 🫓 getting the temporarily uploaded images 
+        let temporarilyUploadedImages = []
+
+        if (req.files?.hasOwnProperty(configuration.imagesToUploadFieldName)) {
+
+            temporarilyUploadedImages = req.files[configuration.imagesToUploadFieldName]
+
+
+            // if "temporarilyUploadedImages" is already not an array, make it an array
+            if (!Array.isArray(temporarilyUploadedImages)) {
+                temporarilyUploadedImages = [temporarilyUploadedImages]
+            } 
+
+        }
+
+
+        // 🫓 getting the ids of the images which we need to delete 
+        let idsOfImagesToDelete = []
+
+
+        if(req.body.hasOwnProperty(configuration.imagesToDeleteFieldName)) {
+            
+            idsOfImagesToDelete = req.body[configuration.imagesToDeleteFieldName]
+
+
+            // if "idsOfImagesToDelete" is already not an array, make it an array
+            if (!Array.isArray(idsOfImagesToDelete)) {
+
+                idsOfImagesToDelete = [idsOfImagesToDelete]
+            } 
+        }
+
+
+        // 🫓 now, we will update the images
+
+        // after uploading the images, we we will store their public_id and link in the following array. 
+        let result = []
+
+        // the following loop will upload the images to the cloudinary and push their info in the "result array"   
+        if (temporarilyUploadedImages.length > 0) {
+
+            for (let i = 0; i < temporarilyUploadedImages.length; i++) {
+                /* To upload an image, cloudinary needs a temporary path of the image from the server. So, let's first get that */
+                const image_temp_path = temporarilyUploadedImages[i].tempFilePath
+
+                /*  uploading the image on cloudinary*/
+                try {
+                    const uploaded_image_on_cloudinary = await cloudinary.uploader.upload(
+                        // temporary image's path
+                        image_temp_path,
+
+                        {
+                            /* specifying the folder in which the image would get uploaded   */
+                            folder: configuration.cloudinaryFolderName,
+
+                            /* setting the name of the image */
+                            public_id: temporarilyUploadedImages[i].name,
+
+                            /* we don't want cloudinary to change the name automatically it order to try to make it unique*/
+                            unique_filename: false,
+                        }
+                    )
+
+                    /* Deleting the temporary image from the server after it has been uploaded to cloudinary*/
+                    fs.unlinkSync(image_temp_path)
+
+                    /* pushing the image info to the result array */
+                    result.push({
+                        src: uploaded_image_on_cloudinary.secure_url,
+                        public_id: uploaded_image_on_cloudinary.public_id
+                    })
+                } 
+                
+                catch (error) {
+                    return res.status(500).json({ error: 'An error occurred while uploading images.' })
+                }
+            }
+        }
+
+
+        // 🫓 now, we will delete the images
+        if (idsOfImagesToDelete.length > 0) {
+
+            // iterating over the 'public_id_of_images'
+            for (const public_id of idsOfImagesToDelete) {
+
+                try {
+                    await cloudinary.uploader.destroy(public_id)
+                } 
+                
+                catch (error) {
+                    return res.status(500).json({ error: 'An error occurred while deleting images.' })
+                }
+            }
+        }
+
+
+        return res.json({
+            status: 'success',
+            message: "All the images are successfully uploaded on the cloudinary",
+            result: result
+        })
+    }
+    
+
+    catch (error) {
+        return res.status(500).json({ error: 'An error occurred while processing your request.' })
+    }
+})
+
+
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+```
 
 

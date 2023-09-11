@@ -7,18 +7,14 @@
         "newWindow": true
     },
 
-
+    "intro": "Introduction",
 
     "index": "Installation",
-    "how-to-import": "How to Import",
-    "render-rich-text-editor": "Render Rich Text Editor",
-    "ui-customization": "UI Customization",
-    "utils": "Utils",
-    "editor-status": "Editor Status",
-    "upload-image-in-cloud": "Upload Image in Cloud",
-    "display-generated-html": "Display Generated HTML",
-    "common-errors": "Common Errors & Solution",
-    "underlying-technologies": "Underlying Technologies"
-        
+
+    "guide": "Guide",
+
+    "api-reference": "API Reference",
+
+    "common-errors": "Common Errors & Solution"  
 }
  

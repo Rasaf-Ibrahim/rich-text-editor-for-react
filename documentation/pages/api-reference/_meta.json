@@ -1,0 +1,5 @@
+{
+    "rich-text-editor-component": "RichTextEditor",
+    "display-the-output-component": "DisplayTheOutput",
+    "use-rich-text-editor-hook": "useRichTextEditor"
+}
