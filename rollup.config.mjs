@@ -46,6 +46,9 @@ const plugins_for_bundling = [
 ]
 
 
+const do_not_bundle_these_dependencies = ['quill', 'react-color', "axios" ]
+
+
 
 export default [
 
@@ -58,6 +61,8 @@ export default [
             format: 'esm'
         },
         plugins: plugins_for_bundling,
+
+        external: [...do_not_bundle_these_dependencies]
     },
 
 
@@ -69,6 +74,8 @@ export default [
             format: 'esm',
         },
         plugins: plugins_for_bundling,
+
+        external: [...do_not_bundle_these_dependencies]
     },
 
 
@@ -80,6 +87,8 @@ export default [
             format: 'esm',
         },
         plugins: plugins_for_bundling,
+
+        external: [...do_not_bundle_these_dependencies]
     },
 
     
