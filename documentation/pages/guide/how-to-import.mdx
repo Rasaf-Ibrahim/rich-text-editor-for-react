@@ -27,7 +27,6 @@ import {
         'use client'
 
         import dynamic from 'next/dynamic'
-
         const RichTextEditor = dynamic(
             () => import('rich-text-editor-for-react'),
             {
@@ -35,9 +34,7 @@ import {
                 loading: () => <p>Loading...</p>, // Anything can be used here as a loading component
             }
         )
-
         import useRichTextEditor from 'rich-text-editor-for-react/hook'
-
    ```
   </Tab>
 
@@ -47,7 +44,6 @@ import {
 
     ```ts showLineNumbers copy
         import RichTextEditor from 'rich-text-editor-for-react'
-        
         import useRichTextEditor  from 'rich-text-editor-for-react/hook'
     ```
 

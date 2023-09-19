@@ -47,14 +47,12 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
     
-```ts showLineNumbers {5-6, 17-45} copy  
+```ts showLineNumbers {4-5, 15-36} copy  
 // import RichTextEditor component & useRichTextEditor hook/
 // ...
 
-
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css'
-
 
 export default function Demo() {
 
@@ -66,21 +64,15 @@ export default function Demo() {
 
             customizeUI={{
                 backgroundColor: '#fcfcfc',
-
                 primaryColor: '#20464b',
-
                 iconColor: '#121212'
-
                 stickyToolbarOnScroll: true,
-
                 highlightJS: hljs,
-
                 defaultVisibleToolbarOptions:{
                     phone: 5,
                     tablet:8,
                     laptop:15
                 },
-
                 typography: {
                     p:{
                         fontSize: '1rem',
@@ -89,11 +81,9 @@ export default function Demo() {
                         lineHeight: 1.5,
                         letterSpacing: '0.001em',
                     },
-
                     //...
                 }
             }}
-
             //...
         />
 
@@ -159,9 +149,7 @@ By default, these styles have predefined appearances and it's optional to custom
 
 ```jsx copy
 customizeUI={{
-
     typography: {
-
         // Style for "Normal" text
         p:{
             fontSize: '1rem',
@@ -170,7 +158,6 @@ customizeUI={{
             lineHeight: 1.5,
             letterSpacing: '0.001em',
         },
-
         // Style for "Heading 5"
         h5:{
             fontSize: '0.9rem',
@@ -179,8 +166,7 @@ customizeUI={{
             lineHeight: 1.4,
             letterSpacing: '0.001em',
         }
-    }
-    
+    } 
 }}
 ```
 
@@ -314,14 +300,12 @@ By default, you'll see:
 To customize these default settings, you can utilize the `defaultVisibleToolbarOptions` property within the `customizeUI` prop. This allows you to specify the number of toolbar options you wish to display for each device type:
 
 ```tsx copy
- customizeUI={{
-                     
+ customizeUI={{             
     defaultVisibleToolbarOptions:{
         phone: 5,
         tablet: 8,
         laptop: 15
     }
-
 }}
 ```
 

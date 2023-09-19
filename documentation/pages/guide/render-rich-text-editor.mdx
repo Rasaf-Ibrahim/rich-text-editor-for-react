@@ -26,20 +26,16 @@ To render the RichTextEditor component with only the required props, follow the 
 
 
 ```ts showLineNumbers copy  
-// import RichTextEditor component & useRichTextEditor hook/
-// ...
-
+// import RichTextEditor component & useRichTextEditor hook
 
 export default function Demo() {
 
-
   const {output, fetchOutput} = useRichTextEditor()
-
 
     return (
 
         <RichTextEditor
-        
+
             toolbarOptions={['word_count', 'clear_format', 'undo', 'redo', 'font', 'header', 'bold', 'italic', 'underline', 'strikethrough', 'text_color', 'highlight_color', 'numbered_list', 'bulleted_list', 'align', 'decrease_indent', 'increase_indent', 'direction', 'blockquote', 'code_block', 'link', 'image_base64', 'embed_video', 'format_media', 'sub_script', 'super_script']}
 
             customizeUI={{
@@ -61,7 +57,7 @@ export default function Demo() {
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
-In line 7, the "useRichTextEditor" hook is invoked, and the `output` and `fetchOutput` are destructured from it. The fetchOutput is subsequently passed as a prop to the RichTextEditor component. This component generates HTML, which is stored in the "output" variable.
+In line 5, the "useRichTextEditor" hook is invoked, and the `output` and `fetchOutput` are destructured from it. The fetchOutput is subsequently passed as a prop to the RichTextEditor component. This component generates HTML, which is stored in the "output" variable.
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
