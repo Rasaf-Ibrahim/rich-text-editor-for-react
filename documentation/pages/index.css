@@ -76,6 +76,7 @@ h6 {
 }
 
 
+
 p, .body1 {
     /* console.log(clampBuilder(300, 1800, 16, 18)) */
     font-size: clamp(1rem, 0.975rem + 0.13vw, 1.125rem);
@@ -83,6 +84,27 @@ p, .body1 {
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.001em;
+}
+
+
+/* body2 & callout component of nextra */
+.body2, .nextra-callout > div > p {
+    /* console.log(clampBuilder(300, 1800, 14, 15)) */
+    font-size: clamp(0.875rem, 0.863rem + 0.07vw, 0.938rem);
+    font-family:'Noto Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.52;
+    letter-spacing: 0.002.5em
+}
+
+
+/* code block of nextra*/
+code > span { 
+    /* console.log(clampBuilder(300, 1800, 14, 15)) */
+    font-size: clamp(0.875rem, 0.863rem + 0.07vw, 0.938rem);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    line-height: 2;
 }
 
 
@@ -95,8 +117,6 @@ p, .body1 {
     letter-spacing: 0.002.5em
 
 }
-
-
 
 
 .logo_text {
