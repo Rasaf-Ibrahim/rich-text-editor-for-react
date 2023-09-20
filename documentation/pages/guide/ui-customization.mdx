@@ -33,7 +33,6 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
 | primaryColor              | string   | required          | No             |
 | iconColor           | string   | optional          | Yes             |
 | stickyToolbarOnScroll     | boolean  | optional          | Yes (false)         |
-| highlightJS               | -        | optional          | No         |
 | defaultVisibleToolbarOptions | object | optional          | Yes             |
 | typography | object | optional          | Yes         |
 
@@ -47,12 +46,9 @@ The `customizeUI` is a required prop. It accepts an object containing various pr
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
     
-```ts showLineNumbers {4-5, 15-36} copy  
+```ts showLineNumbers {12-32} copy  
 // import RichTextEditor component & useRichTextEditor hook/
 // ...
-
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css'
 
 export default function Demo() {
 
@@ -67,7 +63,6 @@ export default function Demo() {
                 primaryColor: '#20464b',
                 iconColor: '#121212'
                 stickyToolbarOnScroll: true,
-                highlightJS: hljs,
                 defaultVisibleToolbarOptions:{
                     phone: 5,
                     tablet:8,
@@ -202,81 +197,6 @@ customizeUI={{
 This property is optional, and its default value is `false`, meaning the toolbar won't stick unless explicitly set.
 
 
-
-<HEADING_TOP_SPACER___COMPONENT/>
-
-#### Code Highlighting in the Editor
-
-<HEADING_BOTTOM_SPACER___COMPONENT/>
-
-When you include "code" in the `toolbarOptions` prop, the toolbar will show a "Code Block" option, allowing users to input code within a designated block.
-
-However, syntax highlighting for the code isn't enabled by default. To activate code highlighting, you'll need to integrate the `highlight.js` package. The good news is, it's a straightforward process without any complex configurations.
-
-First, install the `highlight.js` package in your React project:
-
-<Tabs items={['npm', 'yarn']}>
-
-  <Tab>
-
-   ```shell copy
-       npm install highlight.js
-   ```
-  </Tab>
-
-  <Tab>
-
-   ```shell copy
-       yarn add highlight.js
-   ```
-
-  </Tab>
-
-</Tabs>
-
-Next, import the package and its desired style into your component, then pass it to the `customizeUI` prop:
-
- ```ts showLineNumbers {4-5, 14} /hljs/ copy  
-    // import RichTextEditor component & useRichTextEditor hook/
-    // ...
-
-    import hljs from 'highlight.js';
-    import 'highlight.js/styles/atom-one-dark.css'
-
-    export default function Demo() {
-
-        // ...
-
-        return (
-            <RichTextEditor
-                customizeUI={{
-                    highlightJS: hljs,
-
-                    //...
-                }}
-                //...
-            />
-        )
-    }
-```
-
-In the example above, the `atom-one-dark.css` style is used for highlighting. However, `highlight.js` offers various styles, and you can choose any of them. Here are a few alternatives:
-
-```jsx copy
-import 'highlight.js/styles/default.css';
-```
-
-```jsx copy
-import 'highlight.js/styles/github.css'
-```
-
-```jsx copy
-import 'highlight.js/styles/github-dark-dimmed.css'
-```
-
-<HALF_REM_SPACER___COMPONENT/>
-
-> **Note**: In designing the `rich-text-editor-for-react` package, we had the option to bundle it with `highlight.js`. This would have meant that you wouldn't need to install `highlight.js` separately. However, we understood that not every Developer using the `rich-text-editor-for-react` package would need the `Code Block` feature. Therefore, to maintain a streamlined package size, we chose not to include `highlight.js` by default.
 
 
 <HEADING_TOP_SPACER___COMPONENT/>
