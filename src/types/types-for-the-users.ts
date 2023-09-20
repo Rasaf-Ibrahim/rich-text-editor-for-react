@@ -1,4 +1,4 @@
-// 🫓 parts of RichTextEditorPropsType
+// 🍪 parts of RichTextEditorPropsType
 
 
 // 🥔 fontType
@@ -39,8 +39,7 @@ export type customizeUiType = {
     iconColor?: string
     stickyToolbarOnScroll?: boolean
     defaultVisibleToolbarOptions?: defaultVisibleToolbarOptionsType
-    dividerInToolbar?: boolean,
-    highlightJS?: any
+    dividerInToolbar?: boolean
     typography?: typographyType
 }
 
@@ -124,6 +123,7 @@ export type imageOperationsDataType = {
     hasFailed: boolean,
     totalUploading: number,
     totalDeleting: number,
+    updatingTheOutputWithImageLink: boolean
     outputUpdatedWithImageLink: string, //unique
     idsOfTheImages: string[]
 }
@@ -131,7 +131,7 @@ export type imageOperationsDataType = {
 
 
 
-// 🫓 RichTextEditorPropsType
+// 🍪 RichTextEditorPropsType
 
 type RichTextEditorNonConditionalPropsType = {
 
@@ -174,12 +174,10 @@ type RichTextEditorConditionalPropsType = {
 export type RichTextEditorPropsType = RichTextEditorNonConditionalPropsType & RichTextEditorConditionalPropsType
 
 
-
-// 🫓 DisplayTheOutputType
+// 🍪 DisplayTheOutputType
 export type DisplayTheOutputType = {
     backgroundColor: string,
     primaryColor: string,
     html: string,
-    highlightJS?: any
     typography?: typographyType
 } 

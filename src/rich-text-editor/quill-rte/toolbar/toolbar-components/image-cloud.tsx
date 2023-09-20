@@ -66,11 +66,11 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state, imageValidation } = props
 
 
-    // 🫓 image_state
+    // 🍪 image_state
     const initial_state = {
         open_image_insert_modal: false,
 
@@ -84,7 +84,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
     const [image_state, update_image_state] = useImmer(initial_state)
 
 
-    // 🫓 handle_click_on_the_image_button
+    // 🍪 handle_click_on_the_image_button
     const handle_click_on_the_image_button = () => {
 
         update_image_state(draft => {
@@ -98,7 +98,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    /* 🫓 on change of the 'image_state.open_image_insert_modal' state,
+    /* 🍪 on change of the 'image_state.open_image_insert_modal' state,
 
         - updating 'image_state.remembering_cursor_position' state
         
@@ -117,7 +117,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    // 🫓 form state management (1/3 Steps) - form_configuration 
+    // 🍪 form state management (1/3 Steps) - form_configuration 
     const form_configuration: type_of_form_configuration = {
 
         selected_image: {
@@ -158,7 +158,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    // 🫓 form state management (2/2 Steps) - useFormManagement 
+    // 🍪 form state management (2/2 Steps) - useFormManagement 
     const {
         formState,
         updateFormState,
@@ -171,7 +171,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    // 🫓 form state management (3/3 Steps) - handleSubmit 
+    // 🍪 form state management (3/3 Steps) - handleSubmit 
     const handleSubmit = (event) => {
 
         // 🥔 stop refreshing the page on reload
@@ -192,7 +192,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
     }
 
 
-    // 🫓 handle_close_modal
+    // 🍪 handle_close_modal
     const handle_close_modal = () => {
 
         update_image_state(draft => {
@@ -204,7 +204,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    /* 🫓  on change of the 'image_state.trigger_quill_to_insert_the_image' state,
+    /* 🍪  on change of the 'image_state.trigger_quill_to_insert_the_image' state,
 
 
       1. inserting image on the editor,

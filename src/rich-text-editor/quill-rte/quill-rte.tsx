@@ -20,7 +20,9 @@ import Quill from 'quill';
 import { type_of_rte_state, type_of_update_rte_state, type_of_display_these_toolbar_options } from '../../types/types-for-the-library'
 import { customizeUiType, imageValidationType } from '../../types/types-for-the-users'
 
-
+// highlightJS library
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'
 
 // nono id
 import { nanoid } from 'nanoid';
@@ -40,7 +42,7 @@ import TOOLBAR___COMPONENT from './toolbar/toolbar';
  ✅ Quill initial Setup
 ____________________________________________*/
 
-// 🫓 assigning the Quill object to the window object to make it globally 
+// 🍪 assigning the Quill object to the window object to make it globally 
 window.Quill = Quill
 
 declare global {
@@ -50,13 +52,13 @@ declare global {
 }
 
 
-// 🫓 importing and registering font 
+// 🍪 importing and registering font 
 let fonts = Quill.import("attributors/style/font");
 fonts.whitelist = ["sans-serif", "serif", "monospace"];
 Quill.register(fonts, true);
 
 
-// 🫓 importing and registering font size but I have no intension to use font size now. Heading is enough!  
+// 🍪 importing and registering font size but I have no intension to use font size now. Heading is enough!  
 const fontSizeArr = ['10px', '11px', '12px', '14px', '18px', '24px'];
 let Size = Quill.import('attributors/style/size');
 Size.whitelist = fontSizeArr;
@@ -120,7 +122,7 @@ type type_of_rte_props = {
 ____________________________________________*/
 export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
-    // 🫓 props
+    // 🍪 props
     const {
         quillRef,
         rte_initial_state,
@@ -139,13 +141,13 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         When the component is rendered, the quillEditorRef  hook will hold a reference to the DOM node of the <Box> component, allowing the Quill editor to be initialized and rendered inside it. This approach is necessary because quill requires a DOM node to be passed as the container for the editor.
     */
 
-    // 🫓 quill editor's reference
+    // 🍪 quill editor's reference
     const quillEditorRef = useRef(null);
 
 
 
 
-    /* 🫓 When the component first mounts, setting up the Quill editor and performing various tasks, such as setting up different modules & theme */
+    /* 🍪 When the component first mounts, setting up the Quill editor and performing various tasks, such as setting up different modules & theme */
     useMount(() => {
 
         quillRef.current = new Quill(quillEditorRef.current, {
@@ -183,19 +185,8 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
                 syntax: {
                     highlight: (code) => {
-                        // if user passed highlightJS, use that
-                        if (customizeUI.highlightJS) {
-
-                            return customizeUI.highlightJS.highlightAuto(code).value
-                        }
-
-                        // otherwise no need to use anything
-                        else {
-                            return code
-                        }
+                        return hljs.highlightAuto(code).value 
                     }
-
-
                 },
 
 
@@ -235,7 +226,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'rte_state.editor_cursor' state
+    //🍪 updating 'rte_state.editor_cursor' state
     useMount(() => {
 
 
@@ -296,7 +287,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'draft.editor_events_state.text_change' state on mount
+    //🍪 updating 'draft.editor_events_state.text_change' state on mount
     useMount(() => {
 
         const track_text_change = () => {
@@ -316,7 +307,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'draft.editor_events_state.selection_change' state on mount
+    //🍪 updating 'draft.editor_events_state.selection_change' state on mount
     useMount(() => {
 
         const track_selection_change = () => {
@@ -335,7 +326,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
     })
 
 
-    //🫓 updating 'draft.editor_events_state.any_change' state on mount
+    //🍪 updating 'draft.editor_events_state.any_change' state on mount
     useMount(() => {
 
         const track_any_change = () => {
@@ -355,7 +346,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'rte_state.editor_status' state
+    //🍪 updating 'rte_state.editor_status' state
     useUpdateEffect(() => {
 
         function count_total_words(htmlString) {
@@ -425,7 +416,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'rte_state.quill_generated_html' state
+    //🍪 updating 'rte_state.quill_generated_html' state
     useUpdateEffect(() => {
 
         update_rte_state(draft => {
@@ -438,7 +429,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    /* 🫓 updating image related properties of 'rte_state.editor_events_state' */
+    /* 🍪 updating image related properties of 'rte_state.editor_events_state' */
     const previous_html: any = useRef()
 
     useUpdateEffect(() => {
@@ -587,7 +578,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'rte_state.images.all_inserted_blob_src_image_info' state
+    //🍪 updating 'rte_state.images.all_inserted_blob_src_image_info' state
     useUpdateEffect(() => {
 
 
@@ -641,7 +632,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🫓 updating 'rte_state.images.all_removed_url_src_image_id' state
+    //🍪 updating 'rte_state.images.all_removed_url_src_image_id' state
     useUpdateEffect(() => {
 
         // 🥔 find_missing_image_ids util
@@ -652,13 +643,13 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
             const { old_html, new_html } = payload
 
 
-            //🫓 Use DOMParser to convert the strings into DOMs
+            //🍪 Use DOMParser to convert the strings into DOMs
             const parser = new DOMParser()
             const old_dom = parser.parseFromString(old_html, 'text/html')
             const new_dom = parser.parseFromString(new_html, 'text/html')
 
 
-            //🫓 Get the data-image-id values from the old DOM's <img /> tags that do not have a 'blob:' src
+            //🍪 Get the data-image-id values from the old DOM's <img /> tags that do not have a 'blob:' src
             const old_image_ids = new Set(
                 Array.from(
                     old_dom.querySelectorAll('img:not([src^="blob:"])[data-image-id]')
@@ -736,7 +727,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         <Box>
 
 
-            {/* 🫓 Toolbar 🫓 
+            {/* 🍪 Toolbar 🍪 
 
                 making the toolbar sticky at top when we scroll down     
             */}
@@ -759,7 +750,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-            {/* 🫓 Editor 🫓 */}
+            {/* 🍪 Editor 🍪 */}
             <CSS_FOR_QUILL___STYLED
                 using_it_for='editor'
             >

@@ -33,11 +33,11 @@ ____________________________________________*/
 export default function BLOCKQUOTE___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleBlockQuote
+    // 🍪 handleBlockQuote
     const handleBlockQuote = () => {
 
         const isBlockQuote = quillRef.current.getFormat().blockquote

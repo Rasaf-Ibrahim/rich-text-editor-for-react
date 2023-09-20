@@ -6,11 +6,11 @@ import { editorStatusType, imageOperationsDataType, imageOperationsEnabledType, 
 export default function useRichTextEditor() {
 
 
-    // 🫓 output state
+    // 🍪 output state
     const [output, fetchOutput] = useState<outputType>('');
 
 
-    // 🫓 utils state
+    // 🍪 utils state
     const [utils, fetchUtils] = useState<utilsType>({
         resetEditor: (): void => { },
         focusOnEditor: (): void => { },
@@ -18,7 +18,7 @@ export default function useRichTextEditor() {
     })
 
 
-    // 🫓 editorStatus state
+    // 🍪 editorStatus state
     const [editorStatus, fetchEditorStatus] = useState<editorStatusType>({
         totalWords: 0,
         totalCharacters: 0,
@@ -27,24 +27,25 @@ export default function useRichTextEditor() {
     })
 
 
-    // 🫓 isImageOperationsEnabled state
+    // 🍪 isImageOperationsEnabled state
     const [isImageOperationsEnabled, setIsImageOperationsEnabled] = useState<imageOperationsEnabledType>(false)
 
 
 
-    // 🫓 enableImageOperations function
+    // 🍪 enableImageOperations function
     const enableImageOperations = (): void => {
         setIsImageOperationsEnabled(!isImageOperationsEnabled)
     }
 
 
-    // 🫓 imageOperationsData state
+    // 🍪 imageOperationsData state
     const [imageOperationsData, fetchImageOperationsData] = useState<imageOperationsDataType>({
         totalDeleting: 0,
         totalUploading: 0,
         isProcessing: false,
         hasSucceed: false,
         hasFailed: false,
+        updatingTheOutputWithImageLink: false,
         outputUpdatedWithImageLink: '',
         idsOfTheImages: []
     })
@@ -56,7 +57,7 @@ export default function useRichTextEditor() {
 
 
 
-    // 🫓 return
+    // 🍪 return
     return {
         output,
         fetchOutput,
@@ -78,3 +79,4 @@ export default function useRichTextEditor() {
 
 
 }
+

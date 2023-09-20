@@ -35,11 +35,11 @@ export default function STRIKE_THROUGH___COMPONENT(props: type_of_toolbar_option
 
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleStrikeThrough
+    // 🍪 handleStrikeThrough
     const handleStrikeThrough = () => {
 
         const isStrikeThrough = quillRef.current.getFormat().strike;

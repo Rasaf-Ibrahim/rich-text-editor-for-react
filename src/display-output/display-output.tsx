@@ -6,13 +6,16 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+// highlightJS library
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'
+
 // types
 import { DisplayTheOutputType } from "../types/types-for-the-users";
 
 // components
 import CSS_FOR_QUILL___STYLED from "../rich-text-editor/quill-rte/css-for-quill/css-for-quill";
 import MUI_THEME___COMPONENT from '../theme/theme'
-
 
 
 /*__________________________________________
@@ -22,16 +25,19 @@ ____________________________________________*/
 
 export default function DisplayTheOutput(props: DisplayTheOutputType) {
 
+    // 🍪 Props
     const {
         backgroundColor,
         primaryColor,
         html,
-        highlightJS,
         typography
     } = props
 
 
 
+
+
+    // ✅ TSX
     return (
 
         <MUI_THEME___COMPONENT
@@ -43,7 +49,7 @@ export default function DisplayTheOutput(props: DisplayTheOutputType) {
 
             <CSS_FOR_QUILL___STYLED
                 using_it_for="quill_generated_html"
-                highlightJS={highlightJS}
+                highlightJS={hljs}
             >
 
                 {html}

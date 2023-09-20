@@ -34,11 +34,11 @@ export default function UNDERLINE___COMPONENT(props: type_of_toolbar_option_comp
 
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleUnderline
+    // 🍪 handleUnderline
     const handleUnderline = () => {
         const isUnderline = quillRef.current.getFormat().underline;
 

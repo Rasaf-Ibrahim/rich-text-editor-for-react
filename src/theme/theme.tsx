@@ -60,7 +60,7 @@ ____________________________________________*/
 export default function MUI_THEME___COMPONENT(props: React.PropsWithChildren<type_of_mui_theme>) {
 
 
-    // 🫓 props
+    // 🍪 props
     const {
         children,
         backgroundColor,
@@ -69,64 +69,64 @@ export default function MUI_THEME___COMPONENT(props: React.PropsWithChildren<typ
         typography
     } = props
 
- 
-    // 🫓 theme
+
+    // 🍪 theme
     const theme = useTheme()
 
 
-    // 🫓 deciding the theme is dark or not
+    // 🍪 deciding the theme is dark or not
     let dark = getLuminance(backgroundColor) < 0.5 ? true : false
 
 
-    // 🫓 background color (receiving form the  user)
+    // 🍪 background color (receiving form the  user)
     const theme_palette_background_obj = theme_palette_background(dark, backgroundColor)
 
 
-    // 🫓 text color
+    // 🍪 text color
     const theme_palette_text_obj = theme_palette_text(dark)
 
 
-    //🫓 primary color 
+    //🍪 primary color 
     const theme_palette_primary_obj = theme_palette_primary({
         dark: dark,
-        primaryColor:primaryColor
+        primaryColor: primaryColor
     })
 
 
-    // 🫓 secondary color (using for coloring any icon)
+    // 🍪 secondary color (using for coloring any icon)
     const theme_palette_secondary_obj = theme_palette_secondary({
-        iconColor:iconColor,
+        iconColor: iconColor,
         theme: theme,
-        dark:dark
+        dark: dark
     })
 
 
-    // 🫓 error color (using for error message)
+    // 🍪 error color (using for error message)
     const theme_palette_error_obj = theme_palette_error(dark)
 
 
-    // 🫓 info color (using for <a/> color in editor)
+    // 🍪 info color (using for <a/> color in editor)
     const theme_palette_info_obj = theme_palette_info(dark)
 
 
-    // 🫓 grey color (using in couple of places in the editor)
+    // 🍪 grey color (using in couple of places in the editor)
     const theme_palette_grey_obj = theme_palette_grey(dark)
 
 
-    // 🫓 breakpoints
+    // 🍪 breakpoints
     const theme_breakpoints_obj = theme_breakpoints()
 
 
-    // 🫓 typography
+    // 🍪 typography
     const theme_typography_obj = theme_typography(typography)
 
 
-    // 🫓 button
+    // 🍪 button
     const theme_component_button_obj = theme_component_button()
 
 
 
-    // 🫓 creating theme
+    // 🍪 creating theme
     const customizedTheme = createTheme({
 
 
@@ -176,7 +176,7 @@ export default function MUI_THEME___COMPONENT(props: React.PropsWithChildren<typ
             ...theme_typography_obj
         },
 
-        
+
         // components
         components: {
 

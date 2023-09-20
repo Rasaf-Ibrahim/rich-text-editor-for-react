@@ -49,7 +49,7 @@ ____________________________________________*/
 export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
-    // 🫓 props 🫓 
+    // 🍪 props 🍪 
     const {
         label,
         input_name,
@@ -62,7 +62,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
 
-    // 🫓 state to trigger validation  🫓 
+    // 🍪 state to trigger validation  🍪 
     const [state_trigger_validation, set_state_trigger_validation_check] = useState(false)
 
 
@@ -86,18 +86,18 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
    */
 
 
-    // 🫓input_field_ref 🫓
+    // 🍪input_field_ref 🍪
     const input_field_ref = useRef<type_of_anything>();
 
 
-    // 🫓 When you click on the button, logically you also click on the input field 🫓
+    // 🍪 When you click on the button, logically you also click on the input field 🍪
     const handle_logically_click_the_input_on_button_click = () => {
 
         return input_field_ref.current.click()
     }
 
 
-    // 🫓 function to execute when input change either on selecting or dropping images
+    // 🍪 function to execute when input change either on selecting or dropping images
     const execute_this_when_input_changes = (file) => {
 
 
@@ -117,7 +117,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
 
-    // 🫓 handle input change on selecting an image 🫓
+    // 🍪 handle input change on selecting an image 🍪
     const handle_input_change_on_selecting_image = (event) => {
 
         execute_this_when_input_changes(event.target.files[0])
@@ -125,7 +125,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
     }
 
 
-    // 🫓 handle input change on drag & dropping an image 🫓
+    // 🍪 handle input change on drag & dropping an image 🍪
     const handle_input_change_on_dropping_image = (event) => {
 
         event.preventDefault();
@@ -134,7 +134,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
     }
 
 
-    // 🫓 handle drag over 🫓
+    // 🍪 handle drag over 🍪
     const handle_drag_over = (event) => {
         event.preventDefault();
     }
@@ -142,7 +142,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
 
-    // 🫓 handle delete selected image  🫓
+    // 🍪 handle delete selected image  🍪
     const handle_delete_selected_image = () => {
 
         /* 🥔🥔 deleting the image 🥔🥔 */
@@ -162,14 +162,14 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
 
-    // 🫓 validation function 🫓
+    // 🍪 validation function 🍪
     const validation_func = async () => {
 
 
         /* 🥔 Required Field Validation 🥔 */
         //  only proceed to required field validation if this field is a required field.
 
-       
+
 
         if (validation_info[input_name].is_required) {
 
@@ -265,7 +265,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
     }
 
 
-    // 🫓 executing validation function 🫓
+    // 🍪 executing validation function 🍪
     useUpdateEffect(() => {
 
         validation_func()

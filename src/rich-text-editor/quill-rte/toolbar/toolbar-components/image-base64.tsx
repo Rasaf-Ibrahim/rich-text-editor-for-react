@@ -57,7 +57,7 @@ ____________________________________________*/
 export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state, imageValidation } = props
 
 
@@ -114,7 +114,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    // 🫓 form state management (1/3 Steps) - form_configuration 🫓
+    // 🍪 form state management (1/3 Steps) - form_configuration 🍪
     const form_configuration: type_of_form_configuration = {
 
         selected_image: {
@@ -155,7 +155,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
     }
 
 
-    // 🫓 form state management (2/2 Steps) - useFormManagement 🫓
+    // 🍪 form state management (2/2 Steps) - useFormManagement 🍪
     const {
         formState,
         updateFormState,
@@ -168,7 +168,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    // 🫓 form state management (7/7 Steps) - handleSubmit 🫓
+    // 🍪 form state management (7/7 Steps) - handleSubmit 🍪
     const handleSubmit = (event) => {
 
         // 🥔🥔 stop refreshing the page on reload 🥔🥔

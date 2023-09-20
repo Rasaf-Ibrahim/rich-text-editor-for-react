@@ -45,10 +45,10 @@ ____________________________________________*/
 export default function WORD_COUNT___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { rte_state } = props
 
-    // 🫓 state to handle all the possible changes of this component
+    // 🍪 state to handle all the possible changes of this component
     const initial_state = {
         open_word_count_modal: false,
     }
@@ -58,7 +58,7 @@ export default function WORD_COUNT___COMPONENT(props: type_of_toolbar_option_com
 
 
 
-    // 🫓 handle click on the word count toolbar button
+    // 🍪 handle click on the word count toolbar button
     const handle_click_on_the_button = () => {
 
 
@@ -70,7 +70,7 @@ export default function WORD_COUNT___COMPONENT(props: type_of_toolbar_option_com
 
 
 
-    // 🫓 handle modal close
+    // 🍪 handle modal close
     const handle_modal_close = () => {
 
         update_word_count_modal_state(draft => {

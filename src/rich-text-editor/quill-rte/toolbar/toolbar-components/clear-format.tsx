@@ -44,7 +44,7 @@ ____________________________________________*/
 export default function CLEAR_FORMAT___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_initial_state, rte_state, update_rte_state } = props
 
 

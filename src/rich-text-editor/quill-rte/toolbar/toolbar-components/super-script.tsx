@@ -34,11 +34,11 @@ ____________________________________________*/
 
 export default function SUPER_SCRIPT___COMPONENT(props: type_of_toolbar_option_component_props) {
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleSuperScript
+    // 🍪 handleSuperScript
     const handleSuperScript = () => {
 
         const isSuperScript = quillRef.current.getFormat().script === 'super'

@@ -14,7 +14,7 @@ export type type_of_form_configuration = {
 
     [key: string]:
 
-    /* 🫓 component type - input or password 🫓 */
+    /* 🍪 component type - input or password 🍪 */
     {
 
         component_type: 'input' | 'password'
@@ -41,7 +41,7 @@ export type type_of_form_configuration = {
     } |
 
 
-    /* 🫓 component type - checkbox or radio 🫓 */
+    /* 🍪 component type - checkbox or radio 🍪 */
     {
 
         component_type: 'checkbox'
@@ -57,7 +57,7 @@ export type type_of_form_configuration = {
     } |
 
 
-    /* 🫓 component type - checkbox group 🫓 */
+    /* 🍪 component type - checkbox group 🍪 */
     {
 
         component_type: 'checkbox_group'
@@ -73,7 +73,7 @@ export type type_of_form_configuration = {
     } |
 
 
-    /* 🫓 component type - radio 🫓 */
+    /* 🍪 component type - radio 🍪 */
     {
 
         component_type: 'radio'
@@ -89,7 +89,7 @@ export type type_of_form_configuration = {
 
     } |
 
-    /* 🫓 component type - image 🫓 */
+    /* 🍪 component type - image 🍪 */
 
     {
         component_type: 'image'
@@ -119,7 +119,7 @@ export type type_of_form_configuration = {
 
     } |
 
-    /* 🫓 component type - images 🫓 */
+    /* 🍪 component type - images 🍪 */
 
     {
         component_type: 'images'
@@ -148,7 +148,7 @@ export type type_of_form_configuration = {
 
     } |
 
-    /* 🫓 component type - rte 🫓 */
+    /* 🍪 component type - rte 🍪 */
 
     {
         component_type: 'rte'
@@ -192,19 +192,19 @@ ____________________________________________*/
 export default function useFormManagement(form_configuration: type_of_form_configuration) {
 
 
-    // 🫓 generate_initial_state_and_validation_info 🫓
+    // 🍪 generate_initial_state_and_validation_info 🍪
     const [initial_state, validation_info] = generate_initial_state_and_validation_info(form_configuration)
 
 
-    // 🫓 useImmer 🫓
+    // 🍪 useImmer 🍪
     const [formState, updateFormState] = useImmer(initial_state);
 
 
-    // 🫓 form_actions 🫓
+    // 🍪 form_actions 🍪
     const actions = form_actions(initial_state, updateFormState);
 
 
-    // 🫓 validation_before_form_submission_func 🫓
+    // 🍪 validation_before_form_submission_func 🍪
     const { validation_before_form_submission_func } = parent_func_of_validation_before_form_submission_func({
         state: formState,
         actions: actions,
@@ -213,7 +213,7 @@ export default function useFormManagement(form_configuration: type_of_form_confi
 
 
 
-    // 🫓 return  🫓
+    // 🍪 return  🍪
     return {
         formState,
         updateFormState,
@@ -228,10 +228,10 @@ export default function useFormManagement(form_configuration: type_of_form_confi
 
 
 
-// 🫓 generate_initial_state_and_validation_info 🫓
+// 🍪 generate_initial_state_and_validation_info 🍪
 function generate_initial_state_and_validation_info(form_configuration: type_of_form_configuration) {
 
-    /* 🫓 Defining 1st object which we will return 🫓  */
+    /* 🍪 Defining 1st object which we will return 🍪  */
     let initial_state = {
 
         // We must define the following nested objects here because, after looping through the form_configuration object, we will populate these objects. We must not create the following properties inside the loop. If we do, the following objects will be re-created for every iteration and will lose the previous iteration data.
@@ -242,14 +242,14 @@ function generate_initial_state_and_validation_info(form_configuration: type_of_
     }
 
 
-    /* 🫓 Defining 2nd object which we will return 🫓  */
+    /* 🍪 Defining 2nd object which we will return 🍪  */
     let validation_info = {} as type_of_obj_with_any_values
 
 
 
 
 
-    /* 🫓 Looping the 'form_configuration' object parameter 🫓  */
+    /* 🍪 Looping the 'form_configuration' object parameter 🍪  */
     for (
         const [property_name, property_value] of Object.entries(form_configuration)
     ) {
@@ -364,7 +364,7 @@ function generate_initial_state_and_validation_info(form_configuration: type_of_
 }
 
 
-// 🫓 form_actions 🫓
+// 🍪 form_actions 🍪
 function form_actions(initialState, updateState) {
 
 
@@ -439,7 +439,7 @@ function form_actions(initialState, updateState) {
 
 
 
-// 🫓 parent_func_of_validation_before_form_submission_func 🫓
+// 🍪 parent_func_of_validation_before_form_submission_func 🍪
 function parent_func_of_validation_before_form_submission_func(payload) {
 
     // parameters, destructuring

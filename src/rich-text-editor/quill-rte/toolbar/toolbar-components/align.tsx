@@ -51,15 +51,15 @@ import Select from '@mui/material/Select/Select';
 ____________________________________________*/
 export default function ALIGN___COMPONENT(props: type_of_toolbar_option_component_props) {
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
-    // 🫓 theme
+    // 🍪 theme
     const theme = useTheme()
 
 
 
-    // 🫓 handleAlign
+    // 🍪 handleAlign
     const handleAlign = (event) => {
 
 

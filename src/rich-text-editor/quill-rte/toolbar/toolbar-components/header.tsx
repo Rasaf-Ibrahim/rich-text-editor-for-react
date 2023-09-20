@@ -34,12 +34,12 @@ ____________________________________________*/
 export default function HEADER___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
 
-    // 🫓 handleHeader
+    // 🍪 handleHeader
     const handleHeader = (event) => {
 
         const selectedValue = event.target.value;

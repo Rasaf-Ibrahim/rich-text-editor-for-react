@@ -33,7 +33,7 @@ ____________________________________________*/
 
 export default function UNDO___COMPONENT(props: type_of_toolbar_option_component_props) {
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef } = props
 
 

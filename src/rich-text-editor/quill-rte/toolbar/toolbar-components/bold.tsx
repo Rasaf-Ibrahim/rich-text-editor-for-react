@@ -34,11 +34,11 @@ ____________________________________________*/
 export default function BOLD___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleBold
+    // 🍪 handleBold
     const handleBold = () => {
 
         const isBold = quillRef.current.getFormat().bold;

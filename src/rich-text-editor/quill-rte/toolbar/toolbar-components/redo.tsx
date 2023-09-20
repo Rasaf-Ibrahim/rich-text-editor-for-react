@@ -32,7 +32,7 @@ ____________________________________________*/
 export default function REDO___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef } = props
 
 

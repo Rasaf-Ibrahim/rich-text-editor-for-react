@@ -36,11 +36,11 @@ ____________________________________________*/
 export default function INCREASE_INDENT___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleIndent
+    // 🍪 handleIndent
     const handleIndent = () => {
 
         let indent = quillRef.current.getFormat().indent;

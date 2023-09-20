@@ -45,11 +45,11 @@ type type_for_css_for_quill = {
 ____________________________________________*/
 export default function CSS_FOR_QUILL___STYLED(props: React.PropsWithChildren<type_for_css_for_quill>) {
 
-    // 🫓 theme
+    // 🍪 theme
     const theme: Theme = useTheme()
 
 
-    // 🫓 props
+    // 🍪 props
     const {
         using_it_for,
         highlightJS,
@@ -58,7 +58,7 @@ export default function CSS_FOR_QUILL___STYLED(props: React.PropsWithChildren<ty
 
 
 
-    /* 🫓
+    /* 🍪
 
        using_it_for === 'quill_generated_html' means we want to display quill generated html
         

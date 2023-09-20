@@ -42,7 +42,7 @@ ____________________________________________*/
 
 export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_option_component_props) {
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
@@ -79,15 +79,15 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
 
                 <FormControl margin="dense">
 
-                    <IconButton 
-                    size='small'
-                      onClick={handleOpenPopover}
-                      sx={{
-                        ...(rte_state.formats_of_selected_text.background && { 
-                            
-                            backgroundColor: rte_state.formats_of_selected_text.background 
-                        })  
-                      }}
+                    <IconButton
+                        size='small'
+                        onClick={handleOpenPopover}
+                        sx={{
+                            ...(rte_state.formats_of_selected_text.background && {
+
+                                backgroundColor: rte_state.formats_of_selected_text.background
+                            })
+                        }}
                     >
 
                         {/* We will not use <MUI_ICON___REUSABLE/> for the following icon because the color change for this icon is slightly different.  */}
@@ -114,7 +114,7 @@ export default function HIGHLIGHT_COLOR___COMPONENT(props: type_of_toolbar_optio
                     </IconButton>
 
                 </FormControl>
-                
+
             </Tooltip>
 
 

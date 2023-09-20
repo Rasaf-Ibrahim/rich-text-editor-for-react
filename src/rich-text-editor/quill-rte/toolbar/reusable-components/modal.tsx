@@ -63,7 +63,7 @@ ____________________________________________*/
 export default function MODAL___REUSABLE(props: type_of_modal_props) {
 
 
-    //  🫓 props 
+    //  🍪 props 
     const {
         modal_is_open,
         user_can_close_the_modal,
@@ -74,7 +74,7 @@ export default function MODAL___REUSABLE(props: type_of_modal_props) {
     } = props
 
 
-    //  🫓 do nothing func
+    //  🍪 do nothing func
 
     function doNothing() { }
 

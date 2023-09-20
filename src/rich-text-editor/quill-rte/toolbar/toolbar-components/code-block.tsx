@@ -35,11 +35,11 @@ ____________________________________________*/
 export default function CODE_BLOCK___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 handleCodeBlock
+    // 🍪 handleCodeBlock
     const handleCodeBlock = () => {
 
         const isCodeBlock = quillRef.current.getFormat()['code-block']

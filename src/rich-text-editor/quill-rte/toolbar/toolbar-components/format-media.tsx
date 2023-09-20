@@ -15,7 +15,7 @@ import { type_of_toolbar_option_component_props } from '../../../../types/types-
 
 
 // icons
-import { AspectRatioRounded} from '../mui/icons';
+import { AspectRatioRounded } from '../mui/icons';
 
 // mui components
 import {
@@ -53,11 +53,11 @@ ____________________________________________*/
 export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
-    // 🫓 state to handle all the possible changes of this component
+    // 🍪 state to handle all the possible changes of this component
     const initial_state = {
 
         open_format_media_modal: false,
@@ -81,7 +81,7 @@ export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    //  🫓 updating "media_is_selected" property of the state
+    //  🍪 updating "media_is_selected" property of the state
     useUpdateEffect(() => {
 
         const [leaf] = quillRef.current.getLeaf(rte_state.editor_cursor.position)
@@ -123,7 +123,7 @@ export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    //  🫓 updating "media_current_size" & "media_current_align" properties of the state when modal is open or image is edited
+    //  🍪 updating "media_current_size" & "media_current_align" properties of the state when modal is open or image is edited
     useUpdateEffect(() => {
 
         // 🥔 if the modal is not open, return
@@ -200,7 +200,7 @@ export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    // 🫓 handle click on the edit image toolbar button
+    // 🍪 handle click on the edit image toolbar button
     const handle_click_on_the_button = () => {
 
 
@@ -214,7 +214,7 @@ export default function FORMAT_MEDIA___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-    // 🫓 handle modal close
+    // 🍪 handle modal close
     const handle_modal_close = () => {
 
         update_image_state(draft => {
@@ -356,11 +356,11 @@ function MODAL_CONTENT___CHILD({ image_state, update_image_state, quillRef, rte_
                     sx={{ padding: '1rem', textAlign: 'center' }}>
 
                     Please click next to an image or embedded video before attempting to format it.
-                    
-                    <div style={{marginTop:'1rem'}}>
-                        When you click next to an image or embedded video, the format button in the toolbar will change its color and a badge saying "format" will become visible, indicating that the item is now selected for formatting. 
+
+                    <div style={{ marginTop: '1rem' }}>
+                        When you click next to an image or embedded video, the format button in the toolbar will change its color and a badge saying "format" will become visible, indicating that the item is now selected for formatting.
                     </div>
-                   
+
                 </Typography>
 
 
@@ -391,7 +391,7 @@ function RESIZE_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_s
 
 
 
-    // 🫓 resize function
+    // 🍪 resize function
     type type_of_size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
     function resize(size: type_of_size) {
@@ -578,7 +578,7 @@ ____________________________________________*/
 function ALIGN_IMAGE___CHILD({ image_state, update_image_state, quillRef, rte_state }) {
 
 
-    // 🫓 align_image function
+    // 🍪 align_image function
 
 
     function align_image(align: type_of_align) {
@@ -640,7 +640,7 @@ ____________________________________________*/
 
 
 
-// 🫓
+// 🍪
 function WRAPPER_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED({ children }) {
 
 
@@ -661,7 +661,7 @@ function WRAPPER_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED({ children }) {
 
 
 
-// 🫓
+// 🍪
 function TITLE_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED({ children }) {
 
 
@@ -683,7 +683,7 @@ function TITLE_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED({ children }) {
 
 
 
-// 🫓
+// 🍪
 function WRAPPER_OF_THE_OPTIONS_OF_A_FEATURE_OF_EDIT_IMAGE___STYLED({ children }) {
 
 

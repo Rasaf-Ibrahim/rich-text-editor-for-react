@@ -14,7 +14,7 @@ const min_width = {
 
 const css_media_queries = {
 
-    // 🫓
+    // 🍪
     name_xs_sm: function (property_name, xs_value, sm_value) {
 
         return `
@@ -31,7 +31,7 @@ const css_media_queries = {
 
 
 
-    // 🫓
+    // 🍪
     name_xs_sm_md: function (property_name, xs_value, sm_value, md_value) {
 
         return `
@@ -52,7 +52,7 @@ const css_media_queries = {
 
 
 
-    // 🫓
+    // 🍪
     name_xs_sm_md_lg: function (property_name, xs_value, sm_value, md_value, lg_value) {
 
         return `
@@ -77,7 +77,7 @@ const css_media_queries = {
 
 
 
-    // 🫓
+    // 🍪
     name_xs_sm_md_lg_xl: function (property_name, xs_value, sm_value, md_value, lg_value, xl_value) {
 
         return `

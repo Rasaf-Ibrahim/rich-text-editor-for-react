@@ -48,7 +48,7 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 

@@ -36,7 +36,7 @@ ____________________________________________*/
 export default function ORDERED_LIST___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 

@@ -36,12 +36,12 @@ ____________________________________________*/
 export default function UNORDERED_LIST___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
 
-    // 🫓 handleUnorderedList
+    // 🍪 handleUnorderedList
     const handleUnorderedList = () => {
 
         const isBulleted = quillRef.current.getFormat().list === 'bullet'

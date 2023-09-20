@@ -18,7 +18,7 @@ import { type_of_rte_state } from '../../../../types/types-for-the-library';
 
 
 
-/* 🫓 */
+/* 🍪 */
 const MODAL_WRAPPER_OF_CONTENT___STYLED = styled((props: type_of_obj_with_any_values) =>
 
     <Box  {...props} />
@@ -237,7 +237,7 @@ const MENU_ITEM___STYLED = styled((props: type_of_obj_with_any_values) =>
 
 
 
-/* 🫓 */
+/* 🍪 */
 const WRAPPER_OF_FORM___STYLED = styled((props: type_of_obj_with_any_values) =>
 
     <Box  {...props} />
@@ -251,7 +251,7 @@ align-items: center;
 
 
 
-/* 🫓 */
+/* 🍪 */
 const WRAPPER_OF_FORM_CONTENT___STYLED = styled((props: type_of_obj_with_any_values) =>
 
     <Box  {...props} component='form' />
@@ -279,7 +279,7 @@ const WRAPPER_OF_FORM_CONTENT___STYLED = styled((props: type_of_obj_with_any_val
 
 
 
-/* 🫓 */
+/* 🍪 */
 const WRAPPER_OF_SELECTED_IMAGES___STYLED = styled(Box)
     (({ theme }) => `
 

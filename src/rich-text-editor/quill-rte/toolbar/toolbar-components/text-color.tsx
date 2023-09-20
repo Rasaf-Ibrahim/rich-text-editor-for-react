@@ -47,7 +47,7 @@ ____________________________________________*/
 export default function TEXT_COLOR___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-    // 🫓 props
+    // 🍪 props
     const { quillRef, rte_state, update_rte_state } = props
 
 
@@ -79,18 +79,18 @@ export default function TEXT_COLOR___COMPONENT(props: type_of_toolbar_option_com
 
                 <FormControl margin="dense">
 
-                    <IconButton 
+                    <IconButton
                         size='small'
                         onClick={handleOpenPopover}
                         sx={{
-                            ...(rte_state.formats_of_selected_text.color && { 
-                                
-                                backgroundColor: rte_state.formats_of_selected_text.color 
-                            })  
-                        }}
-                      >
+                            ...(rte_state.formats_of_selected_text.color && {
 
-   
+                                backgroundColor: rte_state.formats_of_selected_text.color
+                            })
+                        }}
+                    >
+
+
                         {/*
                         
                             We will not use <MUI_ICON___REUSABLE/> for the following icon because the color change for this icon is slightly different. 
