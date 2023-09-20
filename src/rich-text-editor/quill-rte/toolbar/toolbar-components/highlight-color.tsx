@@ -8,12 +8,6 @@ import React from 'react'
 // hook
 import { useImmer } from "use-immer";
 
-// css in js
-import { readableColor } from 'polished'
-
-
-// color-picker library
-import { TwitterPicker } from 'react-color';
 
 // colors_for_color_picker array
 import { colors_for_color_picker } from '../utils/colors-for-color-picker';
@@ -33,6 +27,21 @@ import {
     Tooltip,
     Popover
 } from '../mui/components'
+
+
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    react_color,
+    polished
+} = dependencies
+
+const { TwitterPicker } = react_color
+
+const { readableColor } = polished
+
+
 
 
 /*__________________________________________

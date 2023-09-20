@@ -8,11 +8,6 @@ import React from 'react'
 // hook
 import { useImmer } from "use-immer";
 
-// css in js
-import { readableColor } from 'polished'
-
-// color-picker library
-import { TwitterPicker } from 'react-color';
 
 // colors_for_color_picker array
 import { colors_for_color_picker } from '../utils/colors-for-color-picker';
@@ -35,8 +30,18 @@ import {
 } from '../mui/components'
 
 
-// reusable components
-import MUI_ICON___REUSABLE from '../reusable-components/mui-icon';
+
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    react_color,
+    polished
+} = dependencies
+
+const { TwitterPicker } = react_color
+
+const { readableColor } = polished
 
 
 

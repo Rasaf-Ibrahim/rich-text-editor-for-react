@@ -1,5 +1,13 @@
-// css in js
-import { lighten, darken, parseToRgb } from 'polished'
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    polished
+} = dependencies
+
+const { lighten, darken, parseToRgb } = polished
+
+
 
 type type_of_payload = {
     dark: boolean,

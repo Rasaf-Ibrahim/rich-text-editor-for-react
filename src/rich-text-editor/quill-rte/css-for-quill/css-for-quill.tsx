@@ -17,10 +17,21 @@ import { useTheme } from '@mui/material/styles';
 
 // css in js
 import { css } from "@emotion/css";
-import { lighten, darken } from 'polished'
+
 
 // css related util
 import css_media_queries from "../toolbar/styled-components/media-queries";
+
+
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    polished
+} = dependencies
+
+const { lighten, darken } = polished
+
 
 
 /*__________________________________________

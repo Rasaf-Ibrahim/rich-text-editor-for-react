@@ -16,10 +16,6 @@ import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 import { typographyType } from "../types/types-for-the-users"
 
 
-// css in js
-import { lighten, darken, getLuminance, parseToRgb } from 'polished'
-
-
 // customized theme properties
 import {
     theme_palette_background,
@@ -36,6 +32,16 @@ import { theme_typography } from './customized-theme-properties/typography/typog
 import { theme_breakpoints } from './customized-theme-properties/breakpoints/breakpoints'
 
 import { theme_component_button } from './customized-theme-properties/components/button'
+
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    polished
+} = dependencies
+
+const { getLuminance } = polished
+
 
 
 

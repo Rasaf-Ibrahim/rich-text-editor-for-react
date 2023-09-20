@@ -46,7 +46,7 @@ const plugins_for_bundling = [
 ]
 
 
-const do_not_bundle_these_dependencies = ['quill', 'react-color', 'highlight.js']
+const do_not_bundle_these_dependencies = ['rich-text-editor-for-react-dependencies']
 
 
 

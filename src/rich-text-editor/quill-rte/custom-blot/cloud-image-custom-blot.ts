@@ -1,5 +1,13 @@
-// Import Quill
-import Quill from 'quill';
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    quill
+} = dependencies
+
+const { Quill } = quill
+
+
 
 
 // importing the Embed class from Quill, which is a base class for blots that represents block-level embedded content

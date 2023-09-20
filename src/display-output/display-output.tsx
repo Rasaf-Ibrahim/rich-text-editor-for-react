@@ -6,10 +6,6 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// highlightJS library
-import hljs from 'highlight.js';
-import 'highlight.js/styles/atom-one-dark.css'
-
 // types
 import { DisplayTheOutputType } from "../types/types-for-the-users";
 
@@ -17,6 +13,10 @@ import { DisplayTheOutputType } from "../types/types-for-the-users";
 import CSS_FOR_QUILL___STYLED from "../rich-text-editor/quill-rte/css-for-quill/css-for-quill";
 import MUI_THEME___COMPONENT from '../theme/theme'
 
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+const {highlight_js} = dependencies
+const {hljs} = highlight_js
 
 /*__________________________________________
 

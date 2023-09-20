@@ -4,9 +4,6 @@
 ____________________________________________*/
 import React from 'react'
 
-// quill
-import Quill from 'quill';
-
 // hook
 import { useImmer } from "use-immer"
 import { useUpdateEffect } from "react-use"

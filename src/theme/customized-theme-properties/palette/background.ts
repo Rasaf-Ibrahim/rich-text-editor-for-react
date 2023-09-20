@@ -1,5 +1,13 @@
-// css in js
-import {lighten, darken} from 'polished'
+// rich-text-editor-for-react-dependencies 
+import dependencies from 'rich-text-editor-for-react-dependencies'
+
+const {
+    polished
+} = dependencies
+
+const { lighten, darken } = polished
+
+
 
 
 // theme_palette_background function
