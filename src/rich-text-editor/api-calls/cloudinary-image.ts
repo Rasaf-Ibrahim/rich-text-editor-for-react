@@ -6,7 +6,7 @@ ____________________________________________*/
 import { useState } from 'react';
 
 // axios
-import axios from 'axios';
+import { axios } from '../../dependencies/axios/axios'
 
 
 /*__________________________________________

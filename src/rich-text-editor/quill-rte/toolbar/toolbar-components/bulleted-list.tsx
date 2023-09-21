@@ -11,7 +11,7 @@ import { type_of_toolbar_option_component_props } from '../../../../types/types-
 
 
 // icons
-import { FormatListBulletedRounded } from '../mui/icons';
+import { FormatListBulletedRounded } from '../../../../dependencies/mui/icons';
 
 
 // mui components
@@ -19,7 +19,7 @@ import {
     IconButton,
     FormControl,
     Tooltip,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 // reusable components

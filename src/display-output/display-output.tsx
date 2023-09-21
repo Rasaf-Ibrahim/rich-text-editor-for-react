@@ -7,16 +7,16 @@ ____________________________________________*/
 import React from 'react'
 
 // types
-import { DisplayTheOutputType } from "../types/types-for-the-users";
+import { DisplayTheOutputType } from "../types/types-for-the-users"
+
+// highlight.js
+import {hljs} from '../dependencies/highlight-js/highlight-js'
 
 // components
-import CSS_FOR_QUILL___STYLED from "../rich-text-editor/quill-rte/css-for-quill/css-for-quill";
+import CSS_FOR_QUILL___STYLED from "../rich-text-editor/quill-rte/css-for-quill/css-for-quill"
 import MUI_THEME___COMPONENT from '../theme/theme'
 
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-const {highlight_js} = dependencies
-const {hljs} = highlight_js
+
 
 /*__________________________________________
 

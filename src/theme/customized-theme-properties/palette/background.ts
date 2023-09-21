@@ -1,13 +1,5 @@
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-
-const {
-    polished
-} = dependencies
-
-const { lighten, darken } = polished
-
-
+// polished
+import { lighten, darken  } from '../../../dependencies/polished/polished'
 
 
 // theme_palette_background function

@@ -6,7 +6,7 @@ ____________________________________________*/
 import React from 'react'
 
 // mui components
-import { Button } from "../mui/components"
+import { Button } from "../../../../dependencies/mui/components"
 
 
 /*__________________________________________

@@ -1,3 +1,4 @@
+// @mui/icons-material
 import ArticleRounded from '@mui/icons-material/ArticleRounded';
 import AspectRatioRounded from '@mui/icons-material/AspectRatioRounded'
 import ColorizeRounded from '@mui/icons-material/ColorizeRounded'
@@ -5,6 +6,7 @@ import CloseRounded from '@mui/icons-material/CloseRounded'
 import CodeRounded from "@mui/icons-material/CodeRounded"
 import ExpandMoreRounded from '@mui/icons-material/ExpandMoreRounded'
 import ExpandLessRounded from '@mui/icons-material/ExpandLessRounded'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import FormatAlignLeftRounded from "@mui/icons-material/FormatAlignLeftRounded"
 import FormatAlignRightRounded from "@mui/icons-material/FormatAlignRightRounded"
 import FormatAlignCenterRounded from "@mui/icons-material/FormatAlignCenterRounded"
@@ -26,6 +28,7 @@ import FormatUnderlinedRounded from "@mui/icons-material/FormatUnderlinedRounded
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import ImageRounded from "@mui/icons-material/ImageRounded"
 import LinkRounded from "@mui/icons-material/LinkRounded"
+import PhotoIcon from '@mui/icons-material/Photo'
 import RedoRounded from "@mui/icons-material/RedoRounded"
 import ShortTextRounded from '@mui/icons-material/ShortTextRounded'
 import SubscriptRounded from "@mui/icons-material/SubscriptRounded"
@@ -43,6 +46,7 @@ export {
     CodeRounded,
     ExpandMoreRounded,
     ExpandLessRounded,
+    ErrorOutlineIcon,
     FormatAlignLeftRounded,
     FormatAlignRightRounded,
     FormatAlignCenterRounded,
@@ -64,6 +68,7 @@ export {
     HorizontalRuleIcon,
     ImageRounded,
     LinkRounded,
+    PhotoIcon,
     RedoRounded,
     ShortTextRounded,
     SubscriptRounded,

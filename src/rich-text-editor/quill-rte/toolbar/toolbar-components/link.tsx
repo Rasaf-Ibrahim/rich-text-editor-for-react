@@ -3,17 +3,20 @@
  ✅ import
 ____________________________________________*/
 
+// react
 import React from 'react'
-
-// hook
-import { useImmer } from "use-immer";
 
 
 // type
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
+
+
+// hook
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+
 
 // icons
-import { LinkRounded } from '../mui/icons';
+import { LinkRounded } from '../../../../dependencies/mui/icons';
 
 
 // mui components
@@ -25,10 +28,12 @@ import {
     FormControl,
     TextField,
     Tooltip
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
+
 
 // styled components
 import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
+
 
 // reusable components
 import MODAL___REUSABLE from '../reusable-components/modal';

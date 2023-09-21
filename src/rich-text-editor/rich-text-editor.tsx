@@ -7,28 +7,31 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// hook
-import { useEffect, useRef } from 'react'
-import { useImmer } from 'use-immer';
-import { useLogger, useMount, useUpdateEffect } from 'react-use'
-
-// api hook
-import useCloudImage from './api-calls/cloudinary-image'
-
-// nanoid
-import { nanoid } from 'nanoid';
-
 
 // types
 import { type_of_rte_state } from '../types/types-for-the-library';
 import { RichTextEditorPropsType } from '../types/types-for-the-users'
 
 
-//theme
+// hook
+import { useEffect, useRef } from 'react'
+import { useImmer } from '../dependencies/use-immer/use-immer'
+import { useLogger, useMount, useUpdateEffect } from '../dependencies/react-use/react-use'
+
+
+// api hook
+import useCloudImage from './api-calls/cloudinary-image'
+
+
+// nanoid
+import { nanoid } from '../dependencies/nanoid/nanoid'
+
+
+// theme component
 import MUI_THEME___COMPONENT from "../theme/theme"
 
 // mui components
-import { Box } from './quill-rte/toolbar/mui/components'
+import { Box } from '../dependencies/mui/components'
 
 // child component
 import QUILL_RTE___COMPONENT from './quill-rte/quill-rte'

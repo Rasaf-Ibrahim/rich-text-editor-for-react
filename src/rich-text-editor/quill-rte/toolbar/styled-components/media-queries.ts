@@ -1,5 +1,3 @@
-
-
 const min_width = {
 
     xs: '0px',
@@ -9,8 +7,6 @@ const min_width = {
     xl: '1600px'
 
 }
-
-
 
 const css_media_queries = {
 

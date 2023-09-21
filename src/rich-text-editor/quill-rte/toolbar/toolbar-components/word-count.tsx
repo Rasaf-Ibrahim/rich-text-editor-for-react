@@ -6,11 +6,14 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// hook
-import { useImmer } from "use-immer";
 
 // types
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
+
+
+// hook
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+
 
 // icons
 import {
@@ -18,7 +21,7 @@ import {
     ShortTextRounded,
     FormatSizeRounded,
     TextFieldsRounded
-} from '../mui/icons'
+} from '../../../../dependencies/mui/icons'
 
 
 // mui components
@@ -28,7 +31,8 @@ import {
     IconButton,
     FormControl,
     Tooltip,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
+
 
 // reusable components
 import MODAL___REUSABLE from '../reusable-components/modal';

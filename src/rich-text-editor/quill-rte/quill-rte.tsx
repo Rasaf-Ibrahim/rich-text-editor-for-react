@@ -6,40 +6,39 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// hook
-import { useRef } from 'react';
-import { useLogger, useMount, useUpdateEffect } from 'react-use';
-
-
-/* We don't need to  import 'quill/dist/quill.snow.css' because we have created Styled Component (<CSS_FOR_QUILL____STYLED/>) to replace it.  */
 
 // types
 import { type_of_rte_state, type_of_update_rte_state, type_of_display_these_toolbar_options } from '../../types/types-for-the-library'
 import { customizeUiType, imageValidationType } from '../../types/types-for-the-users'
 
 
-// nono id
-import { nanoid } from 'nanoid';
+// hook
+import { useRef } from 'react';
+import { useLogger, useMount, useUpdateEffect } from '../../dependencies/react-use/react-use'
 
-// css in js
-import CSS_FOR_QUILL___STYLED from './css-for-quill/css-for-quill';
+
+// quill
+import { Quill } from '../../dependencies/quill/quill'
+
+/* We don't need to  import 'quill/dist/quill.snow.css' because we have created Styled Component (<CSS_FOR_QUILL____STYLED/>) to replace it.  */
+
+
+// highlight.js
+import { hljs } from '../../dependencies/highlight-js/highlight-js'
+
+
+// nanoid
+import { nanoid } from '../../dependencies/nanoid/nanoid'
+
+
+// styled components
+import CSS_FOR_QUILL___STYLED from './css-for-quill/css-for-quill'
 
 
 // components
-import { Box } from './toolbar/mui/components';
-import TOOLBAR___COMPONENT from './toolbar/toolbar';
+import { Box } from '../../dependencies/mui/components'
+import TOOLBAR___COMPONENT from './toolbar/toolbar'
 
-
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-
-const {
-    quill,
-    highlight_js,
-} = dependencies
-
-const { Quill } = quill
-const { hljs } = highlight_js
 
 
 /*__________________________________________
@@ -190,7 +189,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
                 syntax: {
                     highlight: (code) => {
-                        return hljs.highlightAuto(code).value 
+                        return hljs.highlightAuto(code).value
                     }
                 },
 

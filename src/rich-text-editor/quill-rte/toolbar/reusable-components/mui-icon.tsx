@@ -7,11 +7,12 @@ ____________________________________________*/
 import React from "react"
 
 // types
-import { Theme } from '@mui/material'
+import {Theme} from '../../../../dependencies/mui/types'
 import { type_of_mui_icon_component } from "../../../../types/commonly-used-types"
 
-// theme
-import { useTheme } from '@mui/material/styles'
+// hook
+import { useTheme } from "../../../../dependencies/mui/hooks"
+
 
 
 

@@ -9,10 +9,10 @@ ____________________________________________*/
 import React from 'react'
 
 // hook
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '../../../../dependencies/mui/hooks'
 
 // components
-import { Box, CircularProgress } from '../mui/components';
+import { Box, CircularProgress } from '../../../../dependencies/mui/components';
 
 
 

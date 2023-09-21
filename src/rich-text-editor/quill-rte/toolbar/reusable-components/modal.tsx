@@ -15,7 +15,7 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 

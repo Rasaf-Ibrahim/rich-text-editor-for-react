@@ -1,12 +1,5 @@
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-
-const {
-    polished
-} = dependencies
-
-const { lighten, darken, parseToRgb } = polished
-
+// polished
+import { lighten, darken, parseToRgb  } from '../../../dependencies/polished/polished'
 
 
 type type_of_payload = {

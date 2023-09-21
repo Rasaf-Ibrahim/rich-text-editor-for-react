@@ -1,8 +1,8 @@
-import { indigo } from '@mui/material/colors';
+import { indigo } from '../../../dependencies/mui/colors';
 
 
 export function theme_palette_info(darkModeVariable) {
-    
+
 
     return {
 

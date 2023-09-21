@@ -7,18 +7,18 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// hook
-import { useUpdateEffect } from "react-use";
-import { useImmer } from "use-immer";
-
 
 // types
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
+
+// hook
+import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
 
 
 // icons
-import { FormatClearRounded } from "../mui/icons";
+import { FormatClearRounded } from "../../../../dependencies/mui/icons"
 
 
 // mui components
@@ -26,11 +26,11 @@ import {
     IconButton,
     FormControl,
     Tooltip
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 // reusable components
-import MUI_ICON___REUSABLE from '../reusable-components/mui-icon';
+import MUI_ICON___REUSABLE from '../reusable-components/mui-icon'
 
 
 

@@ -5,32 +5,24 @@ ____________________________________________*/
 // react
 import React from "react"
 
+// type
+import {Theme} from '../../../dependencies/mui/types'
+
 // hook
 import { useRef, useEffect } from "react"
+import { useTheme } from "../../../dependencies/mui/hooks"
 
-// type
-import { Theme } from "@mui/material";
+// css emotion 
+import { css } from '../../../dependencies/emotion-css/emotion-css'
 
-// useTheme hook
-import { useTheme } from '@mui/material/styles';
-
-
-// css in js
-import { css } from "@emotion/css";
-
+// polished
+import { lighten, darken } from '../../../dependencies/polished/polished'
 
 // css related util
 import css_media_queries from "../toolbar/styled-components/media-queries";
 
 
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
 
-const {
-    polished
-} = dependencies
-
-const { lighten, darken } = polished
 
 
 

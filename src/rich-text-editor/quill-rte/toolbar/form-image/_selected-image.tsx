@@ -7,7 +7,8 @@ ____________________________________________*/
 import React from 'react'
 
 // mui components
-import { Button, Box } from '@mui/material'
+import { Box, Button } from '../../../../dependencies/mui/components'
+
 
 
 /*__________________________________________

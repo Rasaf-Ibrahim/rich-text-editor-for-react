@@ -1,7 +1,5 @@
 
-import { SvgIconProps } from '@mui/material/SvgIcon';
-
-
+import {SvgIconProps} from '../dependencies/mui/types'
 
 export type type_of_react_functional_component = React.FC
 

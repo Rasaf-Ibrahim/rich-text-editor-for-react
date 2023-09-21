@@ -1,21 +1,27 @@
+/*__________________________________________
+
+ ✅ import
+____________________________________________*/
+
 // react
 import React from 'react'
 
-// theme hook
-import { useTheme } from '@mui/material/styles'
+// hook
+import { useTheme } from '../../../../dependencies/mui/hooks';
 
-// css in js
+// utils
 import css_media_queries from './media-queries';
-import { styled } from '@mui/material/styles';
-
+import { styled } from '../../../../dependencies/mui/utils';
 
 // mui components
-import Box from '@mui/material/Box'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem';
-import { type_of_rte_state } from '../../../../types/types-for-the-library';
+import { Box, Select, MenuItem } from '../../../../dependencies/mui/components'
 
 
+
+/*__________________________________________
+
+ ✅ styled components
+____________________________________________*/
 
 
 /* 🍪 */

@@ -2,18 +2,21 @@
 
  ✅ import
 ____________________________________________*/
+// react
 import React from 'react'
 
-// hook
-import { useUpdateEffect } from "react-use";
-import { useImmer } from "use-immer";
 
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
 
 
+// hook
+import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+
+
 // icons
-import { YouTube } from '../mui/icons';
+import { YouTube } from '../../../../dependencies/mui/icons';
 
 
 // mui components
@@ -26,10 +29,12 @@ import {
     FormControl,
     TextField,
     Tooltip
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
+
 
 // styled components
 import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
+
 
 // reusable components
 import MODAL___REUSABLE from '../reusable-components/modal';

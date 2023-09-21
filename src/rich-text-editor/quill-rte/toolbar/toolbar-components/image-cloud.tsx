@@ -2,26 +2,28 @@
 
  ✅ import
 ____________________________________________*/
+// react
 import React from 'react'
-
-// hook
-import { useImmer } from "use-immer"
-import { useUpdateEffect } from "react-use"
-
-// nonoid
-import { nanoid } from 'nanoid';
 
 
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
 
+// hook
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
+
+
+// nonoid
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
+
+
 // form management
 import useFormManagement, { type_of_form_configuration } from "../form-management/use-form-management"
 
-
 // icon
-import { ImageRounded } from '../mui/icons';
+import { ImageRounded } from '../../../../dependencies/mui/icons';
 
 // styled components
 import {
@@ -39,7 +41,7 @@ import {
     Tooltip,
     Box,
     Typography,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 // reusable components

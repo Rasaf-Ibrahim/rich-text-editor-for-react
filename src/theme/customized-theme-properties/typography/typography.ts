@@ -1,4 +1,4 @@
-import { typographyType } from "../../../types/types-for-the-users";
+import { typographyType } from "../../../types/types-for-the-users"
 
 
 export function theme_typography(typography:typographyType) {

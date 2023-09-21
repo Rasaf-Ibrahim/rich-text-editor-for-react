@@ -1,6 +1,3 @@
-
-
-
 export function theme_palette_text(darkModeVariable) {
 
     const light_primary = `hsla(0, 0%, 100%, 1)`

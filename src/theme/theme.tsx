@@ -6,14 +6,20 @@ ____________________________________________*/
 // react
 import React from "react"
 
+// type
+import { typographyType } from "../types/types-for-the-users"
+
+
 // css
 import './index.css'
 
-// mui theme
-import { ThemeProvider, createTheme, useTheme } from '@mui/material/styles'
 
-// type
-import { typographyType } from "../types/types-for-the-users"
+// polished
+import { getLuminance } from '../dependencies/polished/polished'
+
+
+// mui 
+import { useTheme, createTheme, ThemeProvider } from '@mui/material/styles'
 
 
 // customized theme properties
@@ -27,20 +33,12 @@ import {
     theme_palette_grey,
 } from './customized-theme-properties/palette/_palette'
 
+
 import { theme_typography } from './customized-theme-properties/typography/typography'
 
 import { theme_breakpoints } from './customized-theme-properties/breakpoints/breakpoints'
 
 import { theme_component_button } from './customized-theme-properties/components/button'
-
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-
-const {
-    polished
-} = dependencies
-
-const { getLuminance } = polished
 
 
 

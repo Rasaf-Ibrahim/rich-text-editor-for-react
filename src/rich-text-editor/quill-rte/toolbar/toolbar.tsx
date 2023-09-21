@@ -3,40 +3,43 @@
  ✅ import
 ____________________________________________*/
 
+// react
 import React from 'react'
 
-// hook
-import { useUpdateEffect } from "react-use";
-import { useImmer } from "use-immer";
-import { useMediaQuery } from '@mui/material'
-import { useTheme } from '@mui/material/styles';
 
 // types
-import { type_of_rte_state, type_of_update_rte_state, type_of_display_these_toolbar_options } from '../../../types/types-for-the-library';
-import { defaultVisibleToolbarOptionsType, imageValidationType } from '../../../types/types-for-the-users';
+import { type_of_rte_state, type_of_update_rte_state, type_of_display_these_toolbar_options } from '../../../types/types-for-the-library'
+import { defaultVisibleToolbarOptionsType, imageValidationType } from '../../../types/types-for-the-users'
+
+
+// hook
+import { useUpdateEffect } from '../../../dependencies/react-use/react-use'
+import { useImmer } from "../../../dependencies/use-immer/use-immer"
+import { useTheme, useMediaQuery } from '../../../dependencies/mui/hooks'
 
 
 // icons
-import { ExpandMoreRounded, ExpandLessRounded } from './mui/icons';
+import { ExpandMoreRounded, ExpandLessRounded } from '../../../dependencies/mui/icons'
+
 
 // mui components
 import {
     Box,
     Button,
     Divider
-} from './mui/components'
+} from '../../../dependencies/mui/components'
 
 
 // toolbar components
-import CLEAR_FORMAT___COMPONENT from './toolbar-components/clear-format';
-import UNDO___COMPONENT from './toolbar-components/undo';
-import REDO___COMPONENT from './toolbar-components/redo';
+import CLEAR_FORMAT___COMPONENT from './toolbar-components/clear-format'
+import UNDO___COMPONENT from './toolbar-components/undo'
+import REDO___COMPONENT from './toolbar-components/redo'
 
-import FONT___COMPONENT from './toolbar-components/font';
-import HEADER___COMPONENT from './toolbar-components/header';
+import FONT___COMPONENT from './toolbar-components/font'
+import HEADER___COMPONENT from './toolbar-components/header'
 
-import BOLD___COMPONENT from './toolbar-components/bold';
-import ITALIC___COMPONENT from './toolbar-components/italic';
+import BOLD___COMPONENT from './toolbar-components/bold'
+import ITALIC___COMPONENT from './toolbar-components/italic'
 import UNDERLINE___COMPONENT from './toolbar-components/underline'
 import STRIKE_THROUGH___COMPONENT from './toolbar-components/strikethrough'
 
@@ -68,7 +71,7 @@ import FORMAT_MEDIA___COMPONENT from './toolbar-components/format-media'
 import EMBED_VIDEO___COMPONENT from './toolbar-components/embed-video'
 import LINK___COMPONENT from './toolbar-components/link';
 
-import WORD_COUNT___COMPONENT from './toolbar-components/word-count';
+import WORD_COUNT___COMPONENT from './toolbar-components/word-count'
 
 
 
@@ -464,22 +467,22 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
 
                     {dividerInToolbar ?
 
-                        <Divider 
+                        <Divider
                             orientation="vertical"
-                            variant="middle" 
-                            flexItem 
+                            variant="middle"
+                            flexItem
                             sx={{
-                                marginRight:'2px',
-                                marginLeft:'2px'
+                                marginRight: '2px',
+                                marginLeft: '2px'
                             }}
                         />
 
                         :
 
                         <Box sx={{
-                            marginRight:'2px',
-                            marginLeft:'2px'
-                        }}/>
+                            marginRight: '2px',
+                            marginLeft: '2px'
+                        }} />
                     }
 
 

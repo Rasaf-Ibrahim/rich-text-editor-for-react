@@ -8,6 +8,7 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
 
@@ -22,7 +23,7 @@ import {
 // mui components
 import {
     Tooltip,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 

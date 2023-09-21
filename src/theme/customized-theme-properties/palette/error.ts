@@ -1,9 +1,9 @@
-import { pink } from '@mui/material/colors';
+import { pink } from '../../../dependencies/mui/colors'
 
 
 export function theme_palette_error(darkModeVariable) {
 
-     
+
     return {
 
         error: {

@@ -2,15 +2,17 @@
 
  ✅ import
 ____________________________________________*/
+
 // react
 import React from 'react'
 
+
 // types
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
 
 // icons
-import { FormatStrikethroughRounded } from '../mui/icons';
+import { FormatStrikethroughRounded } from '../../../../dependencies/mui/icons';
 
 
 // mui components
@@ -18,7 +20,7 @@ import {
     IconButton,
     FormControl,
     Tooltip
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 // reusable components

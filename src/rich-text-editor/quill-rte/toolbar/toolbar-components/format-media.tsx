@@ -3,19 +3,26 @@
  ✅ import
 ____________________________________________*/
 
+// react
 import React from 'react'
-
-// hook
-import { useUpdateEffect, useLogger } from "react-use";
-import { useImmer } from "use-immer";
 
 
 // type
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
+
+
+// hook
+import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
 
 
 // icons
-import { AspectRatioRounded } from '../mui/icons';
+import { AspectRatioRounded } from '../../../../dependencies/mui/icons'
+
+
+// util
+import { align_children, type_of_align } from '../utils/align-children'
+
 
 // mui components
 import {
@@ -26,13 +33,11 @@ import {
     FormControl,
     Tooltip,
     Badge
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
+
 
 // styled components
 import { MODAL_WRAPPER_OF_CONTENT___STYLED } from '../styled-components/styled-components'
-
-// util
-import { align_children, type_of_align } from '../utils/align-children';
 
 
 // reusable components

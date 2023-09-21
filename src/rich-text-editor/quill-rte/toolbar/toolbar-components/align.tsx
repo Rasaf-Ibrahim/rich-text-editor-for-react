@@ -6,12 +6,11 @@ ____________________________________________*/
 // react
 import React from 'react'
 
-// theme hook
-import { useTheme } from '@mui/material/styles'
-
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
 
+// theme hook
+import { useTheme } from '../../../../dependencies/mui/hooks'
 
 // utils
 import { remove_image_align_classes } from '../utils/remove-image-align-classes'
@@ -22,8 +21,7 @@ import {
     FormatAlignRightRounded,
     FormatAlignCenterRounded,
     FormatAlignJustifyRounded
-} from '../mui/icons'
-
+} from '../../../../dependencies/mui/icons'
 
 // css in js
 import {
@@ -31,17 +29,12 @@ import {
     MENU_ITEM___STYLED
 } from '../styled-components/styled-components';
 
-
 // mui components
-import {
-    Tooltip,
-} from '../mui/components'
-
+import { Tooltip } from '../../../../dependencies/mui/components'
 
 // reusable components
 import MUI_ICON___REUSABLE from '../reusable-components/mui-icon';
 
-import Select from '@mui/material/Select/Select';
 
 
 

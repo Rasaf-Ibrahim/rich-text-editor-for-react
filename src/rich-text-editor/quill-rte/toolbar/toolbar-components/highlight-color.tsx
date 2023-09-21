@@ -2,22 +2,33 @@
 
  ✅ import
 ____________________________________________*/
+
 // react
 import React from 'react'
 
+
+// types
+import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
+
+
 // hook
-import { useImmer } from "use-immer";
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+
+
+// polished
+import { readableColor } from '../../../../dependencies/polished/polished'
+
+
+// react-color
+import { TwitterPicker } from '../../../../dependencies/react-color/react-color'
 
 
 // colors_for_color_picker array
 import { colors_for_color_picker } from '../utils/colors-for-color-picker';
 
-// types
-import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
-
 
 // icons
-import { ColorizeRounded } from '../mui/icons'
+import { ColorizeRounded } from '../../../../dependencies/mui/icons'
 
 
 // mui components
@@ -26,20 +37,8 @@ import {
     FormControl,
     Tooltip,
     Popover
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
-
-// rich-text-editor-for-react-dependencies 
-import dependencies from 'rich-text-editor-for-react-dependencies'
-
-const {
-    react_color,
-    polished
-} = dependencies
-
-const { TwitterPicker } = react_color
-
-const { readableColor } = polished
 
 
 

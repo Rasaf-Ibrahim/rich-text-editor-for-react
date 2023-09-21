@@ -7,22 +7,22 @@ import React from 'react'
 
 // hook
 import { useState, useRef } from "react";
-import { useUpdateEffect } from 'react-use';
+import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
 
 // utils
 import { form_empty_field_func } from "../form-management/form-empty-field-func";
 
 // icon
-import PhotoIcon from '@mui/icons-material/Photo';
+import { PhotoIcon } from '../../../../dependencies/mui/icons'
 
-// selected components
+// styled components
 import { WRAPPER_OF_SELECTED_IMAGES___STYLED } from "../styled-components/styled-components"
 
 // components
-import { Box, Button, InputLabel, Typography } from '@mui/material'
+import { Box, Button, InputLabel, Typography } from '../../../../dependencies/mui/components'
+
 import SELECTED_IMAGE___REUSABLE from "./_selected-image"
-import ERROR_MESSAGE___REUSABLE from "./_error-message";
-import { imageValidationType } from '../../../../types/types-for-the-users';
+import ERROR_MESSAGE___REUSABLE from "./_error-message"
 
 
 

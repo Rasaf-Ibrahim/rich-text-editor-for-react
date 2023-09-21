@@ -6,19 +6,21 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
 
 
 // icons
-import { UndoRounded } from '../mui/icons';
+import { UndoRounded } from '../../../../dependencies/mui/icons';
+
 
 // mui components
 import {
     IconButton,
     FormControl,
     Tooltip,
-} from '../mui/components'
+} from '../../../../dependencies/mui/components'
 
 
 // reusable components

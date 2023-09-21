@@ -7,14 +7,14 @@ ____________________________________________*/
 import React from 'react'
 
 // styled components
-import { styled } from '@mui/material/styles'
+import { styled } from '../../../../dependencies/mui/utils'
 
 // icons
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-
+import { ErrorOutlineIcon } from '../../../../dependencies/mui/icons'
 
 // components
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from '../../../../dependencies/mui/components'
+
 
 
 /*__________________________________________
@@ -34,9 +34,9 @@ type types_of_error_message_props = {
  ✅ Functional Component 
 ____________________________________________*/
 
-export default function ERROR_MESSAGE___REUSABLE (props: types_of_error_message_props) {
+export default function ERROR_MESSAGE___REUSABLE(props: types_of_error_message_props) {
 
-    
+
     // props
     const {
         has_a_required_field_error,
@@ -50,9 +50,9 @@ export default function ERROR_MESSAGE___REUSABLE (props: types_of_error_message_
         const sentences = message.split('.');
         if (sentences.length > 1) {
             return (
-                <div style={{display:'flex', flexDirection:'column', gap:'0.7rem'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
                     {sentences.map((sentence, index) =>
-                        sentence.trim() !== '' && 
+                        sentence.trim() !== '' &&
                         <div key={index}>{sentence}.</div>
                     )}
                 </div>
@@ -66,13 +66,13 @@ export default function ERROR_MESSAGE___REUSABLE (props: types_of_error_message_
     // JSX
     return (
         <>
-            { has_a_required_field_error &&
+            {has_a_required_field_error &&
                 <ERROR_MESSAGE___STYLED>
 
                     You must not skip this field.
 
                     <ERROR_ICON___STYLED>
-                        <ErrorOutlineIcon sx={{fontSize:'1rem'}}/>
+                        <ErrorOutlineIcon sx={{ fontSize: '1rem' }} />
                         Error
                     </ERROR_ICON___STYLED>
 
@@ -86,7 +86,7 @@ export default function ERROR_MESSAGE___REUSABLE (props: types_of_error_message_
                     {formatErrorMessage(validation_error_message)}
 
                     <ERROR_ICON___STYLED>
-                        <ErrorOutlineIcon sx={{fontSize:'1rem'}}/>
+                        <ErrorOutlineIcon sx={{ fontSize: '1rem' }} />
                         Error
                     </ERROR_ICON___STYLED>
 
@@ -119,7 +119,7 @@ const fadeIn = `
 
 const ERROR_MESSAGE___STYLED = styled((props: type_of_obj_with_any_values) =>
 
-<Typography {...props}  variant='body2'/>
+    <Typography {...props} variant='body2' />
 
 )(({ theme }) => `
     position: relative;

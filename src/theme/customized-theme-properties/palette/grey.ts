@@ -1,9 +1,9 @@
-import {grey } from '@mui/material/colors';
+import { grey } from '../../../dependencies/mui/colors';
 
 
 export function theme_palette_grey(darkModeVariable) {
 
-     
+
     return {
 
         grey: {
@@ -21,7 +21,7 @@ export function theme_palette_grey(darkModeVariable) {
             900: grey[900],
 
 
-        
+
 
         }
 
