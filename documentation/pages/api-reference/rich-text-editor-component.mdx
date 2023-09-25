@@ -1,3 +1,38 @@
 ---
 title: 'API Reference - RichTextEditor'
 ---
+
+{/* import */}
+import {
+    PAGE_HEADING_BOTTOM,
+    HEADING_TOP_SPACER___COMPONENT, 
+    HEADING_BOTTOM_SPACER___COMPONENT
+} from '../../components/spacer.tsx'
+
+
+{/* Page Heading */}
+### `RichTextEditor` - API Reference
+<PAGE_HEADING_BOTTOM/>
+
+
+Available props for `RichTextEditor` component:
+
+
+| **Name**                 | **Type** | **Requirement** | **Learn More** |
+| :----------------------- | :------: | :-------------: | :------------: |
+| toolbarOptions           |  Array   |    Required     |    [Link]()    |
+| customizeUI              |  Object  |    Required     |    [Link]()    |
+| fetchOutput              | Function |    Required     |    [Link]()    |
+| fetchUtils               | Function |    Optional     |    [Link]()    |
+| fetchEditorStatus        | Function |    Optional     |    [Link]()    |
+| initialValue             |  String  |    Optional     |    [Link]()    |
+| imageValidation          |  Object  |    Optional     |    [Link]()    |
+| cloudImageApiEndpoint    |  String  |   Conditional   |    [Link]()    |
+| isImageOperationsEnabled | Boolean  |   Conditional   |    [Link]()    |
+| fetchImageOperationsData | Function |   Conditional   |    [Link]()    |
+
+In this table, the values in the "Requirement" column indicate the following:
+
+* Required: The property is required and must be provided.
+* Optional: The property is optional and can be omitted.
+* Conditional: The property is required or optional based on the value of another property. 
