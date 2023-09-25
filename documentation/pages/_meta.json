@@ -7,14 +7,12 @@
         "newWindow": true
     },
 
-    "intro": "Introduction",
-
-    "index": "Installation",
+    "index": "Introduction",
 
     "guide": "Guide",
 
     "api-reference": "API Reference",
 
-    "common-errors": "Common Errors & Solution"  
+    "more":"More"
 }
  

@@ -1,44 +1,105 @@
 ---
-title: 'Installation'
+title: 'Introduction'
 ---
 
 {/* import */}
-import { Tab, Tabs } from 'nextra-theme-docs'
 import {
     PAGE_HEADING_BOTTOM,
-    HEADING_TOP_SPACER___COMPONENT
+    HEADING_TOP_SPACER___COMPONENT, 
+    HEADING_BOTTOM_SPACER___COMPONENT,
+    HALF_REM_SPACER___COMPONENT
 } from '../components/spacer.tsx'
 
+import { REDIRECT_BUTTON } from '../components/redirect-button.tsx'
 
 
-{/* Page Heading */}
-### Installation
+### Introduction
 <PAGE_HEADING_BOTTOM/>
+
+
+Built upon Quill, `rich-text-editor-for-react` is a sleek rich text editor, endowed with over 25 toolbar options straight off the bat and eliminates the hassle of extra package installations. Customization of the user interface is a breeze, enabling you to tailor it to your project's specific needs.
+
+
 
 <HEADING_TOP_SPACER___COMPONENT/>
 
+#### Demo & CodeSandboxes
 
-Run the following command in your React project:
-
-<Tabs items={['npm', 'yarn']}>
-
-
-  <Tab>
-
-   ```shell copy
-       npm install rich-text-editor-for-react
-   ```
-  </Tab>
+<HEADING_BOTTOM_SPACER___COMPONENT/>
 
 
 
-  <Tab>
+   <HALF_REM_SPACER___COMPONENT/>
 
-   ```shell copy
-       yarn add rich-text-editor-for-react
-   ```
+    <REDIRECT_BUTTON 
+        button_name='Demo'
+        href='https://rich-text-editor-for-react.rasaf-ibrahim.com'
+    />  
 
-  </Tab>
+    <HALF_REM_SPACER___COMPONENT/>
+    <HALF_REM_SPACER___COMPONENT/>
+    <HALF_REM_SPACER___COMPONENT/>
+
+    <REDIRECT_BUTTON 
+        button_name='CodeSandbox - React'
+        href='https://codesandbox.io/p/sandbox/rich-text-editor-for-react-vite-j5mxp2?file=/src/App.tsx:19,1'
+    />  
+
+    <HALF_REM_SPACER___COMPONENT/>
+    <HALF_REM_SPACER___COMPONENT/>
+    <HALF_REM_SPACER___COMPONENT/>
+
+    <REDIRECT_BUTTON 
+        button_name='CodeSandbox - Next.js'
+        href='https://codesandbox.io/p/sandbox/rich-text-editor-for-react-nextjs-56zgx4?file=/src/app/_rich-text-editor.tsx:30,1'
+    />  
 
 
-</Tabs>
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Underlaying Technologies
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+
+##### Used Technologies
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+`Quill.js`
+
+We are utilizing the popular JavaScript library Quill under the hood. However, you do not need to install Quill separately, as it is already integrated into and bundled with this library. 
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+`Material Design`
+
+
+For the UI, we are following Material Design.
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+##### Avoided Technologies
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+
+`quill-resize-image-module`
+
+
+Our editor comes with a native feature for resizing images. It's worth noting that we don't rely on external libraries like [quill-resize-image-module](https://www.npmjs.com/package/quill-image-resize-module) or [quill-resize-image](https://www.npmjs.com/package/quill-image-resize) for this functionality. While we initially considered integrating these libraries, we identified a couple of limitations:
+
+- They employ 'px' units for image resizing, which results in non-responsive images.
+  
+- Their resizing functionality is not compatible with touch screens, as they are designed to respond solely to mouse events.
+

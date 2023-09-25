@@ -33,7 +33,7 @@ If you've passed for the `image_base64` in the `toolbarOptions` prop, you're all
 
 - As you have choosen `image_cloud`, so now everytime user inserts an image on the editor, it will get inserted as a `blob` image.
 
-- Now, let's assume there's a "Submit" button that the user clicks after they've finished writing. At this point, all blob images in the output will be uploaded to your cloud storage. After a successful upload, each blob URL will be replaced with its corresponding cloud URL.
+- Now, let's assume there's a "Submit" REDIRECT_BUTTON that the user clicks after they've finished writing. At this point, all blob images in the output will be uploaded to your cloud storage. After a successful upload, each blob URL will be replaced with its corresponding cloud URL.
 
 <HALF_REM_SPACER___COMPONENT/>
 
@@ -138,10 +138,10 @@ export default function Demo() {
                 fetchImageOperationsData={fetchImageOperationsData}  
             />
  
-            {/* Submit button */}
-            <button onClick={handleSubmit}>
+            {/* Submit REDIRECT_BUTTON */}
+            <REDIRECT_BUTTON onClick={handleSubmit}>
                 Submit
-            </button>
+            </REDIRECT_BUTTON>
  
         </div>
     )
@@ -164,7 +164,7 @@ export default function Demo() {
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Line 72**: Notice the "Submit" button. When clicked, it triggers the `handleSubmit` function defined on line 19.
+- **Line 72**: Notice the "Submit" REDIRECT_BUTTON. When clicked, it triggers the `handleSubmit` function defined on line 19.
 
 <HALF_REM_SPACER___COMPONENT/>
 
