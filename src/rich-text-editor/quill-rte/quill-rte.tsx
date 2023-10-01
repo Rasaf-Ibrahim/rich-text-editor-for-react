@@ -330,16 +330,20 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
     })
 
 
-    //🍪 updating 'draft.editor_events_state.any_change' state on mount
+
+    //🍪 updating 'draft.editor_events_state.any_change' state 
+
+    const track_any_change = () => {
+
+        update_rte_state(draft => {
+            draft.editor_events_state.any_change = nanoid(8)
+        })
+    }
+
+
     useMount(() => {
 
-        const track_any_change = () => {
-
-            update_rte_state(draft => {
-                draft.editor_events_state.any_change = nanoid(8)
-            })
-        }
-
+        
         quillRef.current.on('editor-change', track_any_change);
 
         return () => {
@@ -347,6 +351,29 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         }
 
     })
+
+    /* 🔖 
+        - We update the 'draft.editor_events_state.any_change' state when the "editor-change" event is triggered.
+
+        - One might wonder why we need to update this state again when "quillRef?.current?.root?.innerHTML" changes.
+
+        - Initially, it seemed that updating the state based on the "editor-change" event would suffice.
+
+        - However, there are instances where the "editor-change" event doesn't trigger. For example:
+            1. An image is removed from the editor.
+            2. Without refocusing on the editor, a new image is added using the toolbar.
+            3. The new image appears, but the "editor-change" event isn't immediately triggered.
+            4. Despite this, the editor's innerHTML (quillRef?.current?.root?.innerHTML) does change.
+
+        - So, we are updating the 'draft.editor_events_state.any_change' even when the "quillRef?.current?.root?.innerHTML" changes
+    */
+
+
+    useUpdateEffect(()=>{
+
+        track_any_change()
+
+    },[quillRef?.current?.root?.innerHTML])
 
 
 

@@ -10,6 +10,7 @@ import React from 'react'
 // types
 import { type_of_rte_state, type_of_update_rte_state, type_of_display_these_toolbar_options } from '../../../types/types-for-the-library'
 import { defaultVisibleToolbarOptionsType, imageValidationType } from '../../../types/types-for-the-users'
+import { type_of_anything } from '../../../types/commonly-used-types'
 
 
 // hook

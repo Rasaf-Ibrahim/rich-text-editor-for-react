@@ -8,6 +8,9 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+// types
+import { type_of_func_prop_with_no_rule, type_of_single_element_jsx } from '../../../../types/commonly-used-types'
+
 
 // components
 import {

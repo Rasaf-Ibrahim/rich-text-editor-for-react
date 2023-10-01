@@ -166,7 +166,7 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
 
 
     // useLogger('🛑 rte_state', rte_state.images)
-
+   
 
     /* 🍪 (1/8) for user - indirectly updating "output" state when the user passes an initial value */
     useMount(() => {
@@ -371,7 +371,7 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
     useUpdateEffect(() => {
 
         // 🥔 function to update the image src and id
-        function updateImageSrcAndId(html: string, imageInfoArray: Array<{ public_id: string, src: string }>): string {
+        function updateImageSrcAndId(html: string, imageInfoArray: Array<{ publicID: string, src: string }>): string {
 
             // Use DOMParser to create a new Document from the HTML string
             const parser = new DOMParser()
@@ -387,12 +387,12 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
                 const currentImageId = img.getAttribute('data-image-id')
 
                 // Find the matching item in the image response array
-                const matchingItem = imageInfoArray.find(item => item.public_id.split('/')[1] === currentImageId)
+                const matchingItem = imageInfoArray.find(item => item.publicID.split('/')[1] === currentImageId)
 
                 // If a matching item was found, update the img tag's src and data-id attributes
                 if (matchingItem) {
                     img.setAttribute('src', matchingItem.src);
-                    img.setAttribute('data-image-id', matchingItem.public_id)
+                    img.setAttribute('data-image-id', matchingItem.publicID)
                 }
             }
 
@@ -442,9 +442,16 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
             updatingTheOutputWithImageLink: true
         }))
 
+       
 
         // 🥔 updating image src and data id of the editor's html
-        quillRef.current.root.innerHTML = updateImageSrcAndId(rte_state.quill_generated_html, data?.result)
+        if(data.result && Array.isArray(data.result)) {
+
+            // we are making sure that 'result' is passed and it's an array, before trying to update the innerHTML
+
+            quillRef.current.root.innerHTML = updateImageSrcAndId(rte_state.quill_generated_html, data.result)
+        }
+        
 
 
 
@@ -471,7 +478,7 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
 
             }))
 
-        }, 2000);
+        }, 2000)
 
 
 
