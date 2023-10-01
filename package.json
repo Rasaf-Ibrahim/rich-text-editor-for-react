@@ -1,6 +1,6 @@
 {
     "name": "rich-text-editor-for-react",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "A Rich Text Editor for React",
     "author": "Rasaf Ibrahim",
     "license": "MIT",
@@ -11,7 +11,7 @@
         "publish": "npm publish"
     },
     "dependencies": {
-        "rich-text-editor-for-react-dependencies": "^1.2.0"
+        "rich-text-editor-for-react-dependencies": "^1.2.2"
     },
     "devDependencies": {
         "@emotion/react": "^11.11.1",
