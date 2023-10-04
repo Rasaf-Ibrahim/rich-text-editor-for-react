@@ -10,10 +10,13 @@ import React from 'react'
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library';
 
 
-// hook
-import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
-import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+// nanoid
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
 
+
+// hook
+import { useEffect } from 'react'
+import { useImmer } from "../../../../dependencies/use-immer/use-immer"
 
 // icons
 import { YouTube } from '../../../../dependencies/mui/icons';
@@ -66,31 +69,36 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
 
         valid_link: true,
 
-        trigger_video_embed_process: false,
-
-
-        /* 🔖 Storing the cursor position in the next property because there is an issue with video embedding. 
-        
-        - When I am embedding a video, the cursor position in the editor is becoming NaN. (rte_state.editor_cursor.position = NaN)
-
-        - I have tried 4 different methods of video embedding but the same issue was occurring every time.  
-
-        - To fix this issue, the current cursor position is tracked and stored in the following `remembering_cursor_position` when the  modal of this component is opened. 
-
-        - Once the video is embedded, using this 'remembering_cursor_position' property to  restore the cursor position by updating 'rte_state.editor_cursor.position' */
+        trigger_video_embed_process: '',
 
         remembering_cursor_position: 0,
+
+        remembering_vertical_scroll_position: 0
+
+
+        /* 🔖 Why are we storing the cursor position & vertical scroll position?
+
+        
+            - After embedding a video the cursor position in the editor is becoming NaN. (rte_state.editor_cursor.position = NaN).
+
+            - Also, after embedding a video, screen is scrolling to the top.
+
+            - I tried to prevent the above 2 issues but I have failed to prevent
+
+
+            - So, to solve the above 2 issues, just before embedding the video, I am storing "cursor position" & "vertical scroll position" 
+
+            - And just before the video is embedded, updating the cursor position and scroll position from the stored value
+        */
     }
+
 
 
     const [video_state, update_video_state] = useImmer(initial_state)
 
 
-
-
     // regex to check valid video link
     const valid_url_regex = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/\S*)?$/
-
 
 
 
@@ -130,12 +138,12 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
     /*  when a user submits the link, the following function gets triggered */
     const handle_submit = (event) => {
 
-        // Prevent the default form submission behavior
+        // prevent the default form submission behavior
         event.preventDefault()
 
 
+        // validating the link
         function is_valid_video_link(link) {
-            /* as we are just accepting youtube video, we are just using regex which checks youtube's link */
 
             return valid_url_regex.test(link)
         }
@@ -143,8 +151,8 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
 
 
         /* 
-        - if the link is not a valid link, we will change the value of the 'valid_link' property of the 'video_state'. 
-        - We will also return from this 'handle_submit' function 
+            - if the link is not a valid link, we will change the value of the 'valid_link' property of the 'video_state'. 
+            - We will also return from this 'handle_submit' function 
         */
         if (!is_valid_video_link(video_state.link.trim())) {
 
@@ -156,15 +164,20 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
         }
 
 
+        // if the link is valid, we can embed the video. But before we embed the video, we must remember the cursor and scroll position.
+        update_video_state(draft => {
+            draft.remembering_cursor_position = rte_state.editor_cursor.position,
+
+            draft.remembering_vertical_scroll_position = window.scrollY
+        })
 
 
-        // if the link is valid, the following code will run 
-        // updating the state
+        // to embed the video, we must update the following state      
         update_video_state(draft => {
 
             draft.valid_link = true;
 
-            draft.trigger_video_embed_process = !draft.trigger_video_embed_process
+            draft.trigger_video_embed_process = nanoid(8)
 
             // closing the modal
             draft.open_modal = false;
@@ -185,79 +198,45 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
     }
 
 
-
-    /*
-        - updating the value of 'remembering_cursor_position' 'video_state' state
-        
-        - when 'open_modal' value of the 'video_state' state changes, the following effect occurs
-    */
-    useUpdateEffect(() => {
-
-        // only when the modal is open, we want to update the value
-        if (video_state.open_modal) {
-
-            update_video_state(draft => {
-                draft.remembering_cursor_position = rte_state.editor_cursor.position
-            })
-        }
-
-    }, [video_state.open_modal])
-
-
-
-
-
     /*
         - embedding the video on the editor 
         
-        - when the 'trigger_video_embed_process' value of the 'video_state' state, the following effect occurs 
+        - 'video_state.trigger_video_embed_process' is the dependency of the following effect  
     */
-    useUpdateEffect(() => {
+    useEffect(() => {
 
-        if (quillRef.current) {
+        if(video_state.trigger_video_embed_process === '') return
 
-
-            let value = {
-                url: video_state.link,
-            }
-
-            quillRef.current.insertEmbed(
-                rte_state.editor_cursor.position,
-                'iframe_custom_blot',
-                value
-            )
-
-
-
-            /* updating the cursor position */
-            update_rte_state(draft => {
-                draft.editor_cursor.position = video_state.remembering_cursor_position + 1
-            })
-
-            //  moving the cursor after the embedded video
-            quillRef.current.setSelection(video_state.remembering_cursor_position + 1)
-
-
-
-            /* after the video is embedded, cleaning the input field in the modal */
-
-            /* 🔖 Don't try to just update the whole state to the initial state when video is embedded successfully, 
-            
-  
-            update_video_state(initial_state)
-            
-            
-            If you do this, then the application will crash because, the above update will also update the dependency of this useUpdateEffect. 
-            
-            */
-            update_video_state(draft => {
-
-                draft.link = ''
-
-            })
-
-
+        
+        let value = {
+            url: video_state.link,
         }
+
+        quillRef.current.insertEmbed(
+            rte_state.editor_cursor.position,
+            'iframe_custom_blot',
+            value
+        )
+
+        // restore the scroll position 
+        window.scrollTo(0, video_state.remembering_vertical_scroll_position)
+
+
+        // updating the cursor position 
+        update_rte_state(draft => {
+            draft.editor_cursor.position = video_state.remembering_cursor_position + 1
+        })
+
+        // move the cursor after the embedded video
+        quillRef.current.setSelection(video_state.remembering_cursor_position + 1)
+
+
+
+
+        /* After the video is embedded, cleaning the input field in the modal */
+        update_video_state(draft => {
+            draft.link = ''
+        })
 
 
     }, [video_state.trigger_video_embed_process])
@@ -266,7 +245,7 @@ export default function EMBED_VIDEO___COMPONENT(props: type_of_toolbar_option_co
 
 
 
-
+    // TSX
     return (
         <>
             <Tooltip title="Embed Video" placement="top">

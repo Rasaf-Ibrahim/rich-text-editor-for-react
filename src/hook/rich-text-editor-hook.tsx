@@ -1,6 +1,8 @@
 
 import { useState } from 'react'
-import { editorStatusType, imageOperationsDataType, imageOperationsEnabledType, outputType, utilsType } from '../types/types-for-the-users'
+import { editorStatusType, imageOperationsDataType, enableImageOperationsType, outputType, utilsType } from '../types/types-for-the-users'
+import { nanoid } from '../dependencies/nanoid/nanoid';
+import { useLogger } from '../dependencies/react-use/react-use';
 
 
 export default function useRichTextEditor() {
@@ -27,14 +29,14 @@ export default function useRichTextEditor() {
     })
 
 
-    // 🍪 isImageOperationsEnabled state
-    const [isImageOperationsEnabled, setIsImageOperationsEnabled] = useState<imageOperationsEnabledType>(false)
+    // 🍪 enableImageOperations state
+    const [enableImageOperations, setEnableImageOperations] = useState<enableImageOperationsType>('') //// side effect trigger state
 
 
+    // 🍪 executeImageOperations function
+    const executeImageOperations = (): void => {
 
-    // 🍪 enableImageOperations function
-    const enableImageOperations = (): void => {
-        setIsImageOperationsEnabled(!isImageOperationsEnabled)
+        setEnableImageOperations(nanoid(8))
     }
 
 
@@ -46,7 +48,7 @@ export default function useRichTextEditor() {
         hasSucceed: false,
         hasFailed: false,
         updatingTheOutputWithImageLink: false,
-        outputUpdatedWithImageLink: '',
+        outputUpdatedWithImageLink: '', // side effect trigger state
         idsOfTheImages: []
     })
 
@@ -68,8 +70,8 @@ export default function useRichTextEditor() {
         utils,
         fetchUtils,
 
-        isImageOperationsEnabled,
         enableImageOperations,
+        executeImageOperations,
 
 
         imageOperationsData,

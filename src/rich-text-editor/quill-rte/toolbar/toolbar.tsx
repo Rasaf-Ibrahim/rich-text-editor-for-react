@@ -14,7 +14,7 @@ import { type_of_anything } from '../../../types/commonly-used-types'
 
 
 // hook
-import { useUpdateEffect } from '../../../dependencies/react-use/react-use'
+import { useMount } from '../../../dependencies/react-use/react-use'
 import { useImmer } from "../../../dependencies/use-immer/use-immer"
 import { useTheme, useMediaQuery } from '../../../dependencies/mui/hooks'
 
@@ -128,8 +128,12 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
 
 
     /* Updating the rte_state.formats_of_selected_text value on selection-change */
-    useUpdateEffect(() => {
+    useMount(() => {
 
+
+        /* 🔖 The toolbar components renders after quill is initialized, means when 'quillRef.current' is available. So, we can use useMount for the effect. */
+
+        
         // Add event listener to the Quill instance for selection changes
         quillRef.current.on('selection-change', (range, oldRange, source) => {
 
@@ -164,7 +168,7 @@ export default function TOOLBAR___COMPONENT(props: React.PropsWithChildren<type_
         })
 
 
-    }, [quillRef.current]);
+    })
 
 
 

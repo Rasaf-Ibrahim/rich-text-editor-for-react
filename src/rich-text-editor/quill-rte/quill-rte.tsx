@@ -13,7 +13,7 @@ import { customizeUiType, imageValidationType } from '../../types/types-for-the-
 
 
 // hook
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react'
 import { useLogger, useMount, useUpdateEffect } from '../../dependencies/react-use/react-use'
 
 
@@ -230,22 +230,35 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
+    //🍪 updating 'rte_state.is_quill_initialized' state
+    useEffect(() => {
+
+        if (!quillRef.current) return
+
+        update_rte_state(draft => {
+            draft.is_quill_initialized = true
+        })
+
+    }, [quillRef.current])
+
+
+
+
+
     //🍪 updating 'rte_state.editor_cursor' state
     useMount(() => {
-
 
         const update_cursor_position_on_selection_change = (range, oldRange, source) => {
 
             if (range) {
 
                 update_rte_state(draft => {
-                    draft.editor_cursor.position = range.index;
-                    draft.editor_cursor.selection_length = range.length;
+                    draft.editor_cursor.position = range.index
+                    draft.editor_cursor.selection_length = range.length
                 })
 
             }
         }
-
 
 
         const update_cursor_position_on_text_change = (delta, oldDelta, source) => {
@@ -286,18 +299,17 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
             quillRef.current.off('text-change', update_cursor_position_on_text_change);
         }
 
-
     })
 
 
 
-    //🍪 updating 'draft.editor_events_state.text_change' state on mount
+    //🍪 updating 'draft.editor_change_tracker.text_change' state on mount
     useMount(() => {
 
         const track_text_change = () => {
 
             update_rte_state(draft => {
-                draft.editor_events_state.text_change = nanoid(8)
+                draft.editor_change_tracker.text_change = nanoid(8)
             })
         }
 
@@ -311,13 +323,13 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🍪 updating 'draft.editor_events_state.selection_change' state on mount
+    //🍪 updating 'draft.editor_change_tracker.selection_change' state on mount
     useMount(() => {
 
         const track_selection_change = () => {
 
             update_rte_state(draft => {
-                draft.editor_events_state.selection_change = nanoid(8)
+                draft.editor_change_tracker.selection_change = nanoid(8)
             })
         }
 
@@ -331,19 +343,19 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-    //🍪 updating 'draft.editor_events_state.any_change' state 
+    //🍪 updating 'draft.editor_change_tracker.any_change' state 
 
     const track_any_change = () => {
 
         update_rte_state(draft => {
-            draft.editor_events_state.any_change = nanoid(8)
+            draft.editor_change_tracker.any_change = nanoid(8)
         })
     }
 
 
     useMount(() => {
 
-        
+
         quillRef.current.on('editor-change', track_any_change);
 
         return () => {
@@ -353,7 +365,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
     })
 
     /* 🔖 
-        - We update the 'draft.editor_events_state.any_change' state when the "editor-change" event is triggered.
+        - We update the 'draft.editor_change_tracker.any_change' state when the "editor-change" event is triggered.
 
         - One might wonder why we need to update this state again when "quillRef?.current?.root?.innerHTML" changes.
 
@@ -365,20 +377,23 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
             3. The new image appears, but the "editor-change" event isn't immediately triggered.
             4. Despite this, the editor's innerHTML (quillRef?.current?.root?.innerHTML) does change.
 
-        - So, we are updating the 'draft.editor_events_state.any_change' even when the "quillRef?.current?.root?.innerHTML" changes
+        - So, we are updating the 'draft.editor_change_tracker.any_change' even when the "quillRef?.current?.root?.innerHTML" changes
     */
 
 
-    useUpdateEffect(()=>{
+    useUpdateEffect(() => {
 
         track_any_change()
 
-    },[quillRef?.current?.root?.innerHTML])
+    }, [quillRef?.current?.root?.innerHTML])
 
 
 
     //🍪 updating 'rte_state.editor_status' state
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if (rte_state.editor_change_tracker.any_change === '') return
+
 
         function count_total_words(htmlString) {
             // Creating a new DOM Parser
@@ -443,24 +458,26 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         })
 
 
-    }, [rte_state.quill_generated_html, rte_state.editor_events_state.any_change])
+    }, [rte_state.editor_change_tracker.any_change])
 
 
 
     //🍪 updating 'rte_state.quill_generated_html' state
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if (rte_state.editor_change_tracker.any_change === '') return
 
         update_rte_state(draft => {
             draft.quill_generated_html = quillRef.current.root.innerHTML
         })
 
 
-    }, [rte_state.editor_events_state.any_change])
+    }, [rte_state.editor_change_tracker.any_change])
 
 
 
 
-    /* 🍪 updating image related properties of 'rte_state.editor_events_state' */
+    /* 🍪 updating image related properties of 'rte_state.editor_change_tracker' */
     const previous_html: any = useRef()
 
     useUpdateEffect(() => {
@@ -539,14 +556,14 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-        // 🥔image related properties of 'rte_state.editor_events_state' 
+        // 🥔image related properties of 'rte_state.editor_change_tracker' 
 
-        function update_editor_events_state_of_rte_state() {
+        function update_editor_change_tracker_of_rte_state() {
 
             if (image_has_been_inserted) {
 
                 update_rte_state(draft => {
-                    draft.editor_events_state.image_inserted = nanoid(8)
+                    draft.editor_change_tracker.image_inserted = nanoid(8)
                 })
 
 
@@ -554,14 +571,14 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
                 if (image_with_url_src_has_been_inserted) {
 
                     update_rte_state(draft => {
-                        draft.editor_events_state.image_with_url_src_inserted = nanoid(8)
+                        draft.editor_change_tracker.image_with_url_src_inserted = nanoid(8)
                     })
                 }
 
                 else if (image_with_blob_src_has_been_inserted) {
 
                     update_rte_state(draft => {
-                        draft.editor_events_state.image_with_blob_src_inserted = nanoid(8)
+                        draft.editor_change_tracker.image_with_blob_src_inserted = nanoid(8)
                     })
                 }
             }
@@ -570,14 +587,14 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
             else if (image_has_been_removed) {
 
                 update_rte_state(draft => {
-                    draft.editor_events_state.image_removed = nanoid(8)
+                    draft.editor_change_tracker.image_removed = nanoid(8)
                 })
 
 
                 if (image_with_url_src_has_been_removed) {
 
                     update_rte_state(draft => {
-                        draft.editor_events_state.image_with_url_src_removed = nanoid(8)
+                        draft.editor_change_tracker.image_with_url_src_removed = nanoid(8)
                     })
                 }
 
@@ -586,7 +603,7 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
                 else if (image_with_blob_src_has_been_removed) {
 
                     update_rte_state(draft => {
-                        draft.editor_events_state.image_with_blob_src_removed = nanoid(8)
+                        draft.editor_change_tracker.image_with_blob_src_removed = nanoid(8)
                     })
                 }
 
@@ -596,8 +613,8 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
 
-        // 🥔 update_editor_events_state_of_rte_state 
-        update_editor_events_state_of_rte_state()
+        // 🥔 update_editor_change_tracker_of_rte_state 
+        update_editor_change_tracker_of_rte_state()
 
 
 
@@ -610,7 +627,12 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
 
     //🍪 updating 'rte_state.images.all_inserted_blob_src_image_info' state
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if(
+            rte_state.editor_change_tracker.image_with_blob_src_inserted === '' && 
+            rte_state.editor_change_tracker.image_with_blob_src_removed === ''
+        ) return
 
 
         async function extract_blob_images(html: string): Promise<{ img_file: File, img_id: string }[]> {
@@ -658,13 +680,21 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         get_image_info_and_update_state()
 
 
-    }, [rte_state.editor_events_state.image_with_blob_src_inserted, rte_state.editor_events_state.image_with_blob_src_removed])
+    }, [rte_state.editor_change_tracker.image_with_blob_src_inserted, rte_state.editor_change_tracker.image_with_blob_src_removed])
 
 
 
 
     //🍪 updating 'rte_state.images.all_removed_url_src_image_id' state
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+
+        if(
+            rte_state.editor_change_tracker.image_with_url_src_inserted === '' &&
+            rte_state.editor_change_tracker.image_with_url_src_removed === ''
+        ) return
+
+
 
         // 🥔 find_missing_image_ids util
         function find_missing_image_ids(payload: { old_html: string, new_html: string }): string[] {
@@ -743,7 +773,9 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
         /*🔖 This effect only works when an user edit the note. */
 
 
-    }, [rte_state.editor_events_state.image_with_url_src_inserted, rte_state.editor_events_state.image_with_url_src_removed])
+    }, [rte_state.editor_change_tracker.image_with_url_src_inserted, rte_state.editor_change_tracker.image_with_url_src_removed])
+
+
 
 
 
@@ -765,17 +797,23 @@ export default function QUILL_RTE___COMPONENT(props: type_of_rte_props) {
 
             <Box sx={customizeUI.stickyToolbarOnScroll ? { position: 'sticky', top: 0, zIndex: 999 } : {}}>
 
-                <TOOLBAR___COMPONENT
-                    quillRef={quillRef}
-                    display_these_toolbar_options={display_these_toolbar_options}
+                {/* 🔖 We must render Toolbar after quill initializes, otherwise, we will need to check in each toolbar component whether quill has initialized or not before performing any quill operation */}
 
-                    rte_initial_state={rte_initial_state}
-                    rte_state={rte_state}
-                    update_rte_state={update_rte_state}
-                    imageValidation={imageValidation}
-                    defaultVisibleToolbarOptions={customizeUI.defaultVisibleToolbarOptions}
-                    dividerInToolbar={customizeUI.dividerInToolbar}
-                />
+                {rte_state.is_quill_initialized && (
+
+                    <TOOLBAR___COMPONENT
+                        quillRef={quillRef}
+                        display_these_toolbar_options={display_these_toolbar_options}
+
+                        rte_initial_state={rte_initial_state}
+                        rte_state={rte_state}
+                        update_rte_state={update_rte_state}
+                        imageValidation={imageValidation}
+                        defaultVisibleToolbarOptions={customizeUI.defaultVisibleToolbarOptions}
+                        dividerInToolbar={customizeUI.dividerInToolbar}
+                    />
+
+                )}
 
             </Box>
 

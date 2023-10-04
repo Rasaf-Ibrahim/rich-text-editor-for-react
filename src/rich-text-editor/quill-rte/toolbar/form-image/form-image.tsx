@@ -5,12 +5,14 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+// nanoid
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
+
 // types
 import { type_of_anything, type_of_obj_with_any_values } from '../../../../types/commonly-used-types'
 
 // hook
-import { useState, useRef } from "react";
-import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
+import { useState, useEffect, useRef } from "react";
 
 // utils
 import { form_empty_field_func } from "../form-management/form-empty-field-func";
@@ -26,6 +28,7 @@ import { Box, Button, InputLabel, Typography } from '../../../../dependencies/mu
 
 import SELECTED_IMAGE___REUSABLE from "./_selected-image"
 import ERROR_MESSAGE___REUSABLE from "./_error-message"
+
 
 
 
@@ -66,7 +69,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
     // 🍪 state to trigger validation  🍪 
-    const [state_trigger_validation, set_state_trigger_validation_check] = useState(false)
+    const [trigger_validation_check_state, set_trigger_validation_check] = useState('')
 
 
 
@@ -115,7 +118,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
         /* 🥔 Triggering validation check on input change 🥔 */
-        set_state_trigger_validation_check(!state_trigger_validation)
+        set_trigger_validation_check(nanoid(8))
     }
 
 
@@ -172,8 +175,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
         /* 🥔 Required Field Validation 🥔 */
         //  only proceed to required field validation if this field is a required field.
 
-
-
+     
         if (validation_info[input_name].is_required) {
 
 
@@ -269,11 +271,13 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 
 
     // 🍪 executing validation function 🍪
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if(trigger_validation_check_state === '') return
 
         validation_func()
 
-    }, [state_trigger_validation])
+    }, [trigger_validation_check_state])
 
 
 
@@ -333,7 +337,7 @@ export default function FORM_IMAGE___REUSABLE(props: types_of_mui_image) {
 /*__________________________________________
 
  ✅ Sections of 
- <FORM_IMAGE___REUSABLE/>
+ <MUI_IMAGE___COMPONENT/>
 ____________________________________________*/
 
 

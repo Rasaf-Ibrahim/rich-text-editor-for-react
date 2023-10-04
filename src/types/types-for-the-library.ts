@@ -5,17 +5,20 @@ import { ToolbarNonConditionalOptionsType, ToolbarImageCloudOptionType, ToolbarI
 
 export type type_of_rte_state = {
 
+    is_quill_initialized: boolean
+
+
     quill_generated_html: string
 
 
     quill_generated_html_fetched_from_database: string
 
 
-
     editor_cursor: {
         position: number
         selection_length: number
     },
+
 
     editor_status: {
         has_focus: boolean,
@@ -24,7 +27,8 @@ export type type_of_rte_state = {
         total_characters_excluding_spacing: number
     },
 
-    editor_events_state: {
+
+    editor_change_tracker: {
 
         // unique string every time with nanoid()
 
@@ -60,11 +64,7 @@ export type type_of_rte_state = {
 
         all_removed_url_src_image_id: string[],
 
-
-        // unique string every time with nanoid()
-        trigger_replacement_of_blob_with_url: string
     }
-
 
 
     formats_of_selected_text: {

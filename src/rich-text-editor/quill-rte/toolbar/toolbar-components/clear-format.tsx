@@ -8,13 +8,16 @@ ____________________________________________*/
 import React from 'react'
 
 
+// nanoid
+import { nanoid } from 'nanoid'
+
+
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
 
 // hook
-import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
-import { useImmer } from "../../../../dependencies/use-immer/use-immer"
+import { useState, useEffect } from 'react'
 
 
 // icons
@@ -58,14 +61,11 @@ export default function CLEAR_FORMAT___COMPONENT(props: type_of_toolbar_option_c
 
      To fix this issue, we are having the following state. We will trigger the following state after removing format of the selected text.
 
-     The state change will trigger a useUpdateEffect, where I am getting the format of the selected text after removing its format, then we are updating 'rte_state.formats_of_selected_text'  state so that all the toolbar options' buttons reflects true state of the selected text.
+     The state change will trigger a effect, where I am getting the format of the selected text after removing its format, then we are updating 'rte_state.formats_of_selected_text'  state so that all the toolbar options' buttons reflects true state of the selected text.
     
     */
 
-
-    const [remove_format_state, update_remove_format_state] = useImmer({
-        trigger_format_checking: false
-    })
+    const [trigger_format_checking, set_trigger_format_checking] = useState('')
 
 
 
@@ -77,16 +77,16 @@ export default function CLEAR_FORMAT___COMPONENT(props: type_of_toolbar_option_c
         }
 
 
-        update_remove_format_state(draft => {
-            draft.trigger_format_checking = !draft.trigger_format_checking
-        })
+        set_trigger_format_checking(nanoid(8))
     }
 
 
 
-
     /* Updating the rte_state.formats_of_selected_text */
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if(trigger_format_checking === '') return
+
 
         // getting the format after using removeFormat
         const format = quillRef.current.getFormat(rte_state.editor_cursor.position, rte_state.editor_cursor.selection_length)
@@ -98,11 +98,13 @@ export default function CLEAR_FORMAT___COMPONENT(props: type_of_toolbar_option_c
         })
 
 
-    }, [remove_format_state.trigger_format_checking]);
+    }, [trigger_format_checking])
 
 
 
+    // TSX
     return (
+
         <Tooltip title="Clear Format" placement="top">
             <FormControl margin='dense'>
 

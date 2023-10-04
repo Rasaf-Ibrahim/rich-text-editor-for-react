@@ -104,8 +104,8 @@ export type editorStatusType = {
 }
 
 
-// 🥔 imageOperationsEnabledType
-export type imageOperationsEnabledType = boolean
+// 🥔 enableImageOperationsType
+export type enableImageOperationsType = string //side effect triggerer state
 
 
 
@@ -124,7 +124,7 @@ export type imageOperationsDataType = {
     totalUploading: number,
     totalDeleting: number,
     updatingTheOutputWithImageLink: boolean
-    outputUpdatedWithImageLink: string, //unique
+    outputUpdatedWithImageLink: string, // side effect trigger state
     idsOfTheImages: string[]
 }
 
@@ -153,7 +153,7 @@ type RichTextEditorConditionalPropsType = {
 
     cloudImageApiEndpoint?: never
 
-    isImageOperationsEnabled?: never
+    enableImageOperations?: never
 
     fetchImageOperationsData?: never
 
@@ -165,7 +165,7 @@ type RichTextEditorConditionalPropsType = {
 
     cloudImageApiEndpoint: string
 
-    isImageOperationsEnabled?: imageOperationsEnabledType
+    enableImageOperations?: enableImageOperationsType
 
     fetchImageOperationsData?: React.Dispatch<React.SetStateAction<imageOperationsDataType>>
 }

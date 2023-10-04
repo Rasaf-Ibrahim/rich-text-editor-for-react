@@ -5,19 +5,18 @@ ____________________________________________*/
 // react
 import React from 'react'
 
+// nanoid
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
+
 
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
 
 // hook
+import { useEffect } from 'react'
 import { useImmer } from "../../../../dependencies/use-immer/use-immer"
 import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
-
-
-// nonoid
-import { nanoid } from '../../../../dependencies/nanoid/nanoid'
-
 
 // form management
 import useFormManagement, { type_of_form_configuration } from "../form-management/use-form-management"
@@ -64,7 +63,6 @@ ____________________________________________*/
 export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_component_props) {
 
 
-
     // 🍪 props
     const { quillRef, rte_state, update_rte_state, imageValidation } = props
 
@@ -73,14 +71,14 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
     const initial_state = {
         open_image_insert_modal: false,
 
-        trigger_quill_to_insert_the_image: false,
+        trigger_quill_to_insert_the_image: '',
 
-        // the necessity of the following property is discussed in the embed-youtube-video option's component.
+        // the necessity of the following property is discussed in the embed-youtube-video option's component
         remembering_cursor_position: 0,
     }
 
-
     const [image_state, update_image_state] = useImmer(initial_state)
+
 
 
     // 🍪 handle_click_on_the_image_button
@@ -92,27 +90,15 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
     }
 
 
+    // 🍪 handle_close_modal
+    const handle_close_modal = () => {
 
+        update_image_state(draft => {
+            draft.open_image_insert_modal = false
 
+        })
 
-
-
-    /* 🍪 on change of the 'image_state.open_image_insert_modal' state,
-
-        - updating 'image_state.remembering_cursor_position' state
-        
-    */
-    useUpdateEffect(() => {
-
-        // only when the modal is open, we want to update the value
-        if (image_state.open_image_insert_modal) {
-
-            update_image_state(draft => {
-                draft.remembering_cursor_position = rte_state.editor_cursor.position
-            })
-        }
-
-    }, [image_state.open_image_insert_modal])
+    }
 
 
 
@@ -129,7 +115,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
                 preview_link: null
             },
 
-            is_required: true,
+            is_required: false,
 
             validation: {
 
@@ -143,7 +129,7 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
 
                     return (
 
-                        `Image must have one of these extensions: ${JSON.stringify(this.accepted_file_formats)}. 
+                        `Image must have one of these extensions: ${JSON.stringify(this.accepted_file_formats.join(" , "))}.  
                             
                         Image size must be lower than ${this.accepted_maximum_file_size}kb.`
                     )
@@ -173,33 +159,32 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
     // 🍪 form state management (3/3 Steps) - handleSubmit 
     const handleSubmit = (event) => {
 
-        // 🥔 stop refreshing the page on reload
+        // stop refreshing the page on reload
         event.preventDefault();
 
 
-        /* 🥔 if 'validation_before_form_submission_func' function returns true, that means there is at least one validation error in the form and we can not submit the form */
+        /* if 'validation_before_form_submission_func' function returns true, that means there is at least one validation error in the form and we can not submit the form */
         if (validation_before_form_submission_func() === true) return;
 
 
-        // 🥔 close the modal & trigger quill to insert the image 
+        // before we try to insert the image, we need to remember the cursor position
+        update_image_state(draft => {
+            draft.remembering_cursor_position = rte_state.editor_cursor.position
+        })
+
+
+        // close the modal & trigger quill to insert the image 
         update_image_state(draft => {
             draft.open_image_insert_modal = false
 
-            draft.trigger_quill_to_insert_the_image = !draft.trigger_quill_to_insert_the_image
+            draft.trigger_quill_to_insert_the_image = nanoid(8)
         })
 
     }
 
 
-    // 🍪 handle_close_modal
-    const handle_close_modal = () => {
 
-        update_image_state(draft => {
-            draft.open_image_insert_modal = false
 
-        })
-
-    }
 
 
 
@@ -213,42 +198,41 @@ export default function IMAGE_CLOUD___COMPONENT(props: type_of_toolbar_option_co
       3. updating the 'rte_state.editor_cursor' state
 
     */
-    useUpdateEffect(() => {
+    useEffect(() => {
 
-        if (quillRef.current) {
-
-            let nano_id = nanoid(12)
+        if(image_state.trigger_quill_to_insert_the_image === '') return
 
 
-            // 🥔 inserting the image in the right position
-            quillRef.current.editor.insertEmbed(
+        let nano_id = nanoid(12)
 
-                rte_state.editor_cursor.position,
+        // 🥔 inserting the image in the right position
+        quillRef.current.editor.insertEmbed(
 
-                'cloud_image_custom_blot',
+            rte_state.editor_cursor.position,
 
-                {
-                    url: formState.form_data.selected_image.additionally_tracking.preview_link,
-                    image_id: nano_id,
-                    width: 250
-                },
+            'cloud_image_custom_blot',
 
-                'user'
+            {
+                url: formState.form_data.selected_image.additionally_tracking.preview_link,
+                image_id: nano_id,
+                width: 250
+            },
 
-            )
+            'user'
 
-
-            // 🥔 updating the 'rte_state.editor_cursor' state
-            update_rte_state(draft => {
-                draft.editor_cursor.position = image_state.remembering_cursor_position + 1
-            })
+        )
 
 
-            // 🥔  moving the cursor after the embedded image
-            quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
+        // 🥔 updating the 'rte_state.editor_cursor' state
+        update_rte_state(draft => {
+            draft.editor_cursor.position = image_state.remembering_cursor_position + 1
+        })
 
-        }
 
+        // 🥔  moving the cursor after the embedded image
+        quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
+
+    
 
     }, [image_state.trigger_quill_to_insert_the_image])
 

@@ -7,13 +7,17 @@ ____________________________________________*/
 import React from 'react'
 
 
+// nanoid
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
+
+
 // types
 import { type_of_toolbar_option_component_props } from '../../../../types/types-for-the-library'
 
 
 // hook
+import { useEffect } from 'react'
 import { useImmer } from "../../../../dependencies/use-immer/use-immer"
-import { useUpdateEffect } from '../../../../dependencies/react-use/react-use'
 
 
 // form management
@@ -65,12 +69,11 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
     const { quillRef, rte_state, update_rte_state, imageValidation } = props
 
 
+    // 🍪 image_state
     const initial_state = {
         open_image_insert_modal: false,
 
-        trigger_quill_to_insert_the_image: false,
-
-
+        trigger_quill_to_insert_the_image: '',
 
         // the necessity of the following property is discussed in the embed-youtube-video option's component.
         remembering_cursor_position: 0,
@@ -80,7 +83,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
     const [image_state, update_image_state] = useImmer(initial_state)
 
 
-
+    // 🍪 handle_click_on_the_image_button
     const handle_click_on_the_image_button = () => {
 
         update_image_state(draft => {
@@ -89,6 +92,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
     }
 
 
+    // 🍪 handle_close_modal
     const handle_close_modal = () => {
 
         update_image_state(draft => {
@@ -96,25 +100,6 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
         })
     }
 
-
-
-
-    /*
-        - updating the value of 'remembering_cursor_position' 'video_state' state
-        
-        - when 'open_modal' value of the 'video_state' state changes, the following effect occurs
-    */
-    useUpdateEffect(() => {
-
-        // only when the modal is open, we want to update the value
-        if (image_state.open_image_insert_modal) {
-
-            update_image_state(draft => {
-                draft.remembering_cursor_position = rte_state.editor_cursor.position
-            })
-        }
-
-    }, [image_state.open_image_insert_modal])
 
 
 
@@ -131,7 +116,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
                 preview_link: null
             },
 
-            is_required: true,
+            is_required: false,
 
             validation: {
 
@@ -145,7 +130,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
                     return (
 
-                        `Image must have one of these extensions: ${JSON.stringify(this.accepted_file_formats)}. 
+                        `Image must have one of these extensions: ${JSON.stringify(this.accepted_file_formats.join(" , "))}.  
                             
                         Image size must be lower than ${this.accepted_maximum_file_size}kb.`
                     )
@@ -175,25 +160,26 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
     // 🍪 form state management (7/7 Steps) - handleSubmit 🍪
     const handleSubmit = (event) => {
 
-        // 🥔🥔 stop refreshing the page on reload 🥔🥔
+        // stop refreshing the page on reload 
         event.preventDefault();
 
 
-        /* 🥔🥔 if 'validation_before_form_submission_func' function returns true, that means there is at least one validation error in the form and we can not submit the form🥔🥔 */
+        /* if 'validation_before_form_submission_func' function returns true, that means there is at least one validation error in the form and we can not submit the form */
         if (validation_before_form_submission_func() === true) return;
 
 
-        /* 🥔🥔 submit the form's all the inputted data 🥔🥔 */
-        // console.log('😃 submitting data', {
-        //     ...formState.form_data
-        // })
+        
+        // before we try to insert the image, we need to remember the cursor position
+        update_image_state(draft => {
+            draft.remembering_cursor_position = rte_state.editor_cursor.position
+        })
 
 
-        // 🥔🥔 Trigger quill to insert the image 🥔🥔
+         // close the modal & trigger quill to insert the image 
         update_image_state(draft => {
             draft.open_image_insert_modal = false
 
-            draft.trigger_quill_to_insert_the_image = !draft.trigger_quill_to_insert_the_image
+            draft.trigger_quill_to_insert_the_image = nanoid(8)
         })
 
 
@@ -201,14 +187,16 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-
     // inserting image on the editor after successfully uploading and fetching  it
-    useUpdateEffect(() => {
+    useEffect(() => {
+
+        if(image_state.trigger_quill_to_insert_the_image === '') return
 
 
         let base64String
         const reader = new FileReader()
         reader.readAsDataURL(formState.form_data.selected_image.value);
+
 
         reader.onload = () => {
             base64String = reader.result
@@ -216,30 +204,24 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
             // inserting in the right position
-            if (quillRef.current) {
+            quillRef.current.clipboard.dangerouslyPasteHTML(
+                rte_state.editor_cursor.position,
 
-                quillRef.current.clipboard.dangerouslyPasteHTML(
-                    rte_state.editor_cursor.position,
-
-                    // when we insert an image, initially the image's width would be 250px
-                    `<img width="250" 
-                        src="${base64String}">`
-                )
+                // when we insert an image, initially the image's width would be 250px
+                `<img width="250" 
+                    src="${base64String}">`
+            )
 
 
-                /* updating the cursor position */
-                update_rte_state(draft => {
-                    draft.editor_cursor.position = image_state.remembering_cursor_position + 1
-                })
+            /* updating the cursor position */
+            update_rte_state(draft => {
+                draft.editor_cursor.position = image_state.remembering_cursor_position + 1
+            })
 
-                //  moving the cursor after the embedded video
-                quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
-
-            }
-
+            //  moving the cursor after the embedded video
+            quillRef.current.setSelection(image_state.remembering_cursor_position + 1)
 
         }
-
 
 
     }, [image_state.trigger_quill_to_insert_the_image])
@@ -247,7 +229,7 @@ export default function IMAGE_BASE64___COMPONENT(props: type_of_toolbar_option_c
 
 
 
-
+    // TSX
     return (
 
         <>
