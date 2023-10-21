@@ -1,5 +1,5 @@
 ---
-title: 'Upload Image in Cloudinary'
+title: 'Upload Image in Cloud'
 ---
 
 {/* import */}
@@ -18,32 +18,9 @@ import { Callout } from 'nextra/components'
 <PAGE_HEADING_BOTTOM/>
 
 
-If you have read about [toolbarOptions](/render-rich-text-editor#toolbaroptions), you may already know you have two choices for handling images. The first is embedding images as base64 strings directly in the editor. The second is uploading images to cloud storage and using the image URL in the editor.
+If you have read about [toolbarOptions](/render-rich-text-editor#toolbaroptions), you may already know you have two choices for handling images. The first is inserting images as base64 strings directly in the editor. The second is uploading images to cloud storage and using the image URL in the editor.
 
 If you've passed for the `image_base64` in the `toolbarOptions` prop, you're all set—no further configuration is needed. However, if you've passed `image_cloud` because you prefer to store images in the cloud and use URLs in the editor, then this guide is for you.
-
-
-
-
-<HEADING_TOP_SPACER___COMPONENT/>
-
-#### How the Image Upload to Cloud Happens: A Quick Overview
-
-<HEADING_BOTTOM_SPACER___COMPONENT/>
-
-- As you have choosen `image_cloud`, so now everytime user inserts an image on the editor, it will get inserted as a `blob` image.
-
-- Now, let's assume there's a "Submit" REDIRECT_BUTTON that the user clicks after they've finished writing. At this point, all blob images in the output will be uploaded to your cloud storage. After a successful upload, each blob URL will be replaced with its corresponding cloud URL.
-
-<HALF_REM_SPACER___COMPONENT/>
-
-> *Why Have We Decided to Upload Images All at Once Instead of One by One?*
->
-> - When users are writing, they often insert multiple images just to try them out. If we upload images one by one as they're added, we risk uploading images that the user might eventually remove. Even if we track these removed images and delete them from cloud storage, this approach still consumes extra time and bandwidth unnecessarily.
-> - Moreover, If the user upload couple of images individually and closes the browser or uninstalls the browser, we lose the ability to track the images that has already been uploaded.
-> - Conversely, by waiting for a "Submit" action and only uploading the images that the user has finalized, we can optimize both time and bandwidth usage.
-
-
 
 
 
@@ -55,7 +32,89 @@ If you've passed for the `image_base64` in the `toolbarOptions` prop, you're all
 
 You'll need a backend server to manage cloud uploads. You can use any programming language or framework of your choice for the backend server.
 
-Below, we'll walk through setting up both the frontend and backend.
+Below, we'll first understand the image lifeclycle and then set up both the frontend and backend.
+
+
+
+
+<HEADING_TOP_SPACER___COMPONENT/>
+
+#### Understanding the Image Lifecycle: From Editor Insertion to Cloud Management
+
+<HEADING_BOTTOM_SPACER___COMPONENT/>
+
+
+##### A Quick Overview
+
+<HALF_REM_SPACER___COMPONENT/>
+
+- As you have chosen `image_cloud`, so now everytime user inserts an image on the editor, it will get inserted as a `blob` image.
+
+- Now, let's assume there's a "Submit" button that the user clicks after they've finished writing. At this point, all blob images in the output will be uploaded to your cloud storage. After a successful upload, each blob URL will be replaced with its corresponding cloud URL.
+
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+##### A Detailed Breakdown
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+*1. Frontend - Image Insertion in the Editor:*
+- Images are initially inserted in the editor as blobs.
+- A unique `data-image-id` attribute is attached to each blob image.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+*2. Frontend - Content Submission*
+- Upon content submission:
+   - The unique `data-image-id` assigned to every blob image is set as the name of its associated file.
+  - Blob-associated files are sent to the backend as formData. 
+
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+*3. Backend - Operations and Response*
+- The backend uploads the images in the cloud storage.
+- After successful uploads, the backend responses with:
+  - The cloud storage link (`src`) for each image.
+  - A unique identifier (`publicID`) for each image.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+*4. Frontend - Response Handling*
+- The Rich Text Editor:
+  - Swaps blob `src` attributes with the corresponding cloud URLs.
+  - Updates the blob's `data-image-id` to match the `publicID`.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+*5. Image Deletion Mechanism*
+- While editing, the user may delete images. After deleting when they submit the content:
+  - The Rich Text Editor pushes the `data-image-id` attribute, holding the `publicID`, into an array of strings to send to the backend.
+  - Using the `publicID`, the backend deletes the image from cloud storage.
+
+
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+> *Why Have We Decided to Upload Images All at Once Instead of One by One?*
+>
+> - When users are writing, they often insert multiple images just to try them out. If we upload images one by one as they're added, we risk uploading images that the user might eventually remove. Even if we track these removed images and delete them from cloud storage, this approach still consumes extra time and bandwidth unnecessarily.
+> - Moreover,If a user uploads images then closes or uninstalls the browser, we can't track those images.
+> - Conversely, by waiting for a "Submit" action and only uploading the images that the user has finalized, we can optimize both time and bandwidth usage.
+
+
+
+
 
 
 
@@ -67,10 +126,10 @@ Below, we'll walk through setting up both the frontend and backend.
 
 Initially, we'll go through the code, followed by an in-depth explanation
 
-```tsx showLineNumbers /isImageOperationsEnabled/ /enableImageOperations/ /imageOperationsData/  /fetchImageOperationsData/ /cloudImageApiEndpoint/ copy
-import { useEffect, useRef } from 'react'
+```tsx showLineNumbers /enableImageOperations/ /executeImageOperations/ /imageOperationsData/  /fetchImageOperationsData/ /cloudImageApiEndpoint/ copy
+import { useEffect } from 'react'
  
-// import RichTextEditor component & useRichTextEditor hook/
+// import RichTextEditor component & useRichTextEditor hook
 // ...
  
 export default function Demo() {
@@ -79,31 +138,24 @@ export default function Demo() {
     const {
         output,
         fetchOutput, 
-        isImageOperationsEnabled,  
-        enableImageOperations,  
-        imageOperationsData,  
+        enableImageOperations,
+        executeImageOperations,
+        imageOperationsData,
         fetchImageOperationsData  
     } = useRichTextEditor()
  
     // handleSubmit function
     const handleSubmit = () => {
-        enableImageOperations() 
+        executeImageOperations() 
     }
- 
-    //Using useRef for conditional useEffect execution
-    const notInitialRender = useRef(false)
- 
+
     // useEffect hook
     useEffect(() => {
- 
-        if (notInitialRender.current) {
-            // Custom code placeholder
-            // Put your code here. The code will only run when the dependency changes, not on the initial render of the component
-        } 
 
-        else {
-            notInitialRender.current = true  
-        }
+        if (imageOperationsData.outputUpdatedWithImageLink === '') return
+ 
+        // Custom code placeholder
+        // Put your code here. The code will only run when the dependency changes, not on the initial render of the component
  
     }, [imageOperationsData.outputUpdatedWithImageLink])  
  
@@ -133,15 +185,15 @@ export default function Demo() {
  
                 cloudImageApiEndpoint="https://your-server-domain.com/api/v1/rte/manage-image"  
  
-                isImageOperationsEnabled={isImageOperationsEnabled}  
+                enableImageOperations={enableImageOperations}  
  
                 fetchImageOperationsData={fetchImageOperationsData}  
             />
  
             {/* Submit REDIRECT_BUTTON */}
-            <REDIRECT_BUTTON onClick={handleSubmit}>
+            <button onClick={handleSubmit}>
                 Submit
-            </REDIRECT_BUTTON>
+            </button>
  
         </div>
     )
@@ -149,34 +201,35 @@ export default function Demo() {
 
 ```
 
-**Code Explanation:**
+*Code Explanation:*
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Lines 12-15**: Here, we're destructuring several properties from the `useRichTextEditor` hook. These include `isImageOperationsEnabled`, `enableImageOperations`, `imageOperationsData`, and `fetchImageOperationsData`.
+- **Lines 12-15**: Here, we're destructuring several properties from the `useRichTextEditor` hook. These include `enableImageOperations`, `executeImageOperations`, `imageOperationsData`, and `fetchImageOperationsData`.
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Line 46**: Here, in our 'RichTextEditor' component, we are passing 3 new props that are specific to cloud image upload:
+- **Line 39**: Here, in our 'RichTextEditor' component, we are passing 3 new props that are specific to cloud image upload:
    - Prop `cloudImageApiEndpoint`: We are passing the backend server's API endpoint which manages image operations.
-   - Prop `isImageOperationsEnabled`: We are passing "isImageOperationsEnabled" which we have destructured from useRichTextEditor hook
+   - Prop `enableImageOperations`: We are passing "enableImageOperations" which we have destructured from useRichTextEditor hook
    - Prop `fetchImageOperationsData`: We are passing the "fetchImageOperationsData" which we have destructured from useRichTextEditor hook 
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Line 72**: Notice the "Submit" REDIRECT_BUTTON. When clicked, it triggers the `handleSubmit` function defined on line 19.
+- **Line 65**: Notice the "Submit" button. When clicked, it triggers the `handleSubmit` function defined on line 19.
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **handleSubmit Function**: This function calls `enableImageOperations`, which sends a request to the backend to initiate image-related operations.
+- **handleSubmit Function**: This function calls `executeImageOperations`, which sends a request to the backend to initiate image-related operations.
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Line 27**: We employ `useEffect` with a dependency of `imageOperationsData.outputUpdatedWithImageLink`. This `imageOperationsData.outputUpdatedWithImageLink` changes only when the image operations are complete, and blob images in the output are replaced with their cloud URLs.
+- **Line 24**: We employ `useEffect` with a dependency of `imageOperationsData.outputUpdatedWithImageLink`. This `imageOperationsData.outputUpdatedWithImageLink` changes only when the image operations are complete, and blob images in the output are replaced with their cloud URLs.
 
 <HALF_REM_SPACER___COMPONENT/>
 
-- **Conditional useEffect Execution**: We use `useRef` to ensure that the `useEffect` logic is skipped during the component's initial render. This is why you see `notInitialRender.current` being checked and updated within the `useEffect`.
+- **Bypassing Initial useEffect Execution**: Inside our useEffect, there's a check against the dependency, `imageOperationsData.outputUpdatedWithImageLink`. If found to be an empty string, which is its initial value, we return from the effect. Inside the `useEffect`, we are checking the value of the dependency. This ensures that the logic inside the useEffect only runs when the dependency changes. not when the component initially renders. 
+
 
 <HALF_REM_SPACER___COMPONENT/>
 
@@ -187,170 +240,179 @@ export default function Demo() {
 
 
 
-
-
-
 <HEADING_TOP_SPACER___COMPONENT/>
 
-#### Setting Up the Backend
+#### Setting Up the Backend 
 
 <HEADING_BOTTOM_SPACER___COMPONENT/>
 
-In this guide, we'll walk you through setting up an Express server and using Cloudinary for cloud storage. Keep in mind, you're not restricted to using Express or Cloudinary. You can choose any backend framework and cloud storage service that suits your needs.
+While various programming languages, frameworks, or cloud storage solutions can be employed for backend image management, the example code that we will provide in this section will be exclusively utilizing Express.js and Cloudinary.
 
-The key requirement is to ensure that the API endpoint responsible for handling the rich text editor's images should return an array that includes both the `secure_url` and `public_id` for each uploaded image:
+However, the detailed guide below can help you to use your desired framework or cloud storage solution
+
+<HALF_REM_SPACER___COMPONENT/>
+
+##### Guide of Backend Image Management
+
+<HALF_REM_SPACER___COMPONENT/>
 
 
-> Here is the full code for the backend server with `Express`, for uploading image, we are using `express-fileupload` package.
+1. *Define the Endpoint*
+    - Create a specific endpoint for image management on the backend.
+    - Ensure this endpoint matches the one provided to the `RichTextEditor` component as a prop.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+2. *Configure the Request*
+    - The endpoint should be configured to handle POST requests.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+3. *Understand Request Payload* 
+   - The backend will receive a `formData` containing images under the `imagesToUpload` field.
+   - Additionally, A field named `imagesToDelete` might be present in the request body. This lists the publicIDs of images intended for removal from cloud storage.
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+4. *Handle Image Upload*
+   - Upload image files received in the `imagesToUpload` to your cloud storage.
+   - Post-upload, retrieve the necessary details from each image, specifically:
+       - src: URL where the image is hosted.
+       -  publicID: A unique identifier for the image..
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+5. *Image Deletion* 
+   - If `imagesToDelete` exists in the request body, it lists the publicID for each image you should delete from storage.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
+6. *Response Formation*
+   - The frontend expects a response containing an array named `result`. Each element within this array should be an object with the following structure:
+        - `src`: URL to retrieve the uploaded image.
+        - `publicID`: Unique ID for the image, formatted as `anything/fileName`.
+
+            - `anything`: Represents any data or string that helps identify the image within your storage solution. This part is crucial as it should allow the backend to locate the image in the cloud storage for any subsequent operations, like deletions.
+            
+            - `fileName`: This must be the exact file name provided by the frontend in the `imagesToUpload` array. 
+
+
+            > **Note**: If you're using Cloudinary as your cloud storage solution, you don't need to manually structure the `publicId`. Just provide the `publicID` you receive directly from Cloudinary.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+##### Example Code
+
+<HALF_REM_SPACER___COMPONENT/>
+
+Building upon our understanding of backend image management, let's dive deeper into its practical implementation. As highlighted earlier, our demonstration will center on Express.js in combination with Cloudinary. To facilitate this, we'll be making use of the [express-cloudinary-image-handler](https://express-cloudinary-image-handler.rasaf-ibrahim.com) package.
+
+
+<HALF_REM_SPACER___COMPONENT/>
+
+To begin, ensure you have the required packages:
+
+```bash
+npm install express express-cloudinary-image-handler
+```
+
+<HALF_REM_SPACER___COMPONENT/>
+
+
 ```js copy
+// importing express & dotenv
+const express = require('express')
 
-// import built-in node modules 
-import fs from 'fs'
+// importing express-cloudinary-image-handler
+const { 
+    cloudinaryConfig,
+    imageUploadMiddleware,
+    uploadImagesToCloudinary,
+    deleteImagesFromCloudinary 
+} = require('express-cloudinary-image-handler')
 
-// import packages
-import express from 'express'
-import dotenv from 'dotenv'
-import fileUpload from 'express-fileupload'
-import { v2 as cloudinary } from 'cloudinary'
-
-
-// express app
+// app
 const app = express()
 
-// dotenv
-dotenv.config()
-
-// port
-const PORT = process.env.PORT || 3000
-
-// cloudinary configuration
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
-
-// middleware to parse the request body
+// parse incoming JSON data in the request body
 app.use(express.json())
 
-// middleware to upload files
-app.use(
-    fileUpload({ useTempFiles: true })
-)
+// Configure Cloudinary settings (Use .env file to keep the following cloudinary credentials secret)
+cloudinaryConfig({
+    cloudName: '...',
+    apiKey: '...',
+    apiSecret: '...'
+})
+ 
+// Initialize the imageUploadMiddleware with the express app instance 
+imageUploadMiddleware(app)
 
 
-// upload and delete images
-app.post('/api/v1/rte/manage-image', async (req, res) => {
-
+// Managing Image Operations
+app.post('/api/v1/rte/manage-image', async (req, res, next) => {
 
     try {
 
-        // 🫓 configuration object
-        const configuration = {
-            imagesToUploadFieldName: 'imagesToUpload',
-            imagesToDeleteFieldName: 'imagesToDelete',
-            cloudinaryFolderName: config_obj.env.cloudinary_folder_name
-        }
-
-
-        // 🫓 getting the temporarily uploaded images 
-        let temporarilyUploadedImages = []
-
-        if (req.files?.hasOwnProperty(configuration.imagesToUploadFieldName)) {
-
-            temporarilyUploadedImages = req.files[configuration.imagesToUploadFieldName]
-
-
-            // if "temporarilyUploadedImages" is already not an array, make it an array
-            if (!Array.isArray(temporarilyUploadedImages)) {
-                temporarilyUploadedImages = [temporarilyUploadedImages]
-            } 
-
-        }
-
-
-        // 🫓 getting the ids of the images which we need to delete 
-        let idsOfImagesToDelete = []
-
-
-        if(req.body.hasOwnProperty(configuration.imagesToDeleteFieldName)) {
-            
-            idsOfImagesToDelete = req.body[configuration.imagesToDeleteFieldName]
-
-
-            // if "idsOfImagesToDelete" is already not an array, make it an array
-            if (!Array.isArray(idsOfImagesToDelete)) {
-
-                idsOfImagesToDelete = [idsOfImagesToDelete]
-            } 
-        }
-
-
-        // 🫓 now, we will update the images
-
-        // after uploading the images, we we will store their public_id and link in the following array. 
-        let result = []
-
-        // the following loop will upload the images to the cloudinary and push their info in the "result array"   
-        if (temporarilyUploadedImages.length > 0) {
-
-            for (let i = 0; i < temporarilyUploadedImages.length; i++) {
-                /* To upload an image, cloudinary needs a temporary path of the image from the server. So, let's first get that */
-                const image_temp_path = temporarilyUploadedImages[i].tempFilePath
-
-                /*  uploading the image on cloudinary*/
-                try {
-                    const uploaded_image_on_cloudinary = await cloudinary.uploader.upload(
-                        // temporary image's path
-                        image_temp_path,
-
-                        {
-                            /* specifying the folder in which the image would get uploaded   */
-                            folder: configuration.cloudinaryFolderName,
-
-                            /* setting the name of the image */
-                            public_id: temporarilyUploadedImages[i].name,
-
-                            /* we don't want cloudinary to change the name automatically it order to try to make it unique*/
-                            unique_filename: false,
-                        }
-                    )
-
-                    /* Deleting the temporary image from the server after it has been uploaded to cloudinary*/
-                    fs.unlinkSync(image_temp_path)
-
-                    /* pushing the image info to the result array */
-                    result.push({
-                        src: uploaded_image_on_cloudinary.secure_url,
-                        public_id: uploaded_image_on_cloudinary.public_id
-                    })
-                } 
-                
-                catch (error) {
-                    return res.status(500).json({ error: 'An error occurred while uploading images.' })
-                }
+        // Now, we will update the images
+        const upload_report = await uploadImagesToCloudinary({
+            req: req,
+            configuration: {
+                formDataFieldName: 'imagesToUpload',
+                cloudinaryFolderName: 'images',
+                maxFileSizeInKB: 1024,
+                maxNumberOfUploads: 30,
+                deleteAllTempFiles: true,
+                useSourceFileName: true
             }
+        })
+
+        
+        if (upload_report.isError) {
+            return res.json({
+                status_code: upload_report.errorInfo.statusCode,
+                message: upload_report.errorInfo.message
+            })
         }
 
 
-        // 🫓 now, we will delete the images
-        if (idsOfImagesToDelete.length > 0) {
 
-            // iterating over the 'public_id_of_images'
-            for (const public_id of idsOfImagesToDelete) {
-
-                try {
-                    await cloudinary.uploader.destroy(public_id)
-                } 
-                
-                catch (error) {
-                    return res.status(500).json({ error: 'An error occurred while deleting images.' })
-                }
+        let result = upload_report.imagesInfo.map((image)=>{
+            return {
+                src: image.imageSrc,
+                publicID: image.imagePublicId,
             }
+        })
+
+
+        // Getting the ids of the images which we need to delete 
+        let idsOfImagesToDelete:any = req.body.imagesToDelete
+
+
+        // Now, we will delete the images
+        if (idsOfImagesToDelete && idsOfImagesToDelete.length > 0) {
+
+            const delete_report = await deleteImagesFromCloudinary({
+                publicIds: idsOfImagesToDelete
+            })
+
+            if (delete_report.isError) {
+                return res.json({
+                    status_code: upload_report.errorInfo.statusCode,
+                    message: upload_report.errorInfo.message
+                })
+            }
+
         }
 
-
+       
+        // Sending JSON response
         return res.json({
             status: 'success',
             message: "All the images are successfully uploaded on the cloudinary",
@@ -362,15 +424,11 @@ app.post('/api/v1/rte/manage-image', async (req, res) => {
     catch (error) {
         return res.status(500).json({ error: 'An error occurred while processing your request.' })
     }
+
+}
+
+
+app.listen(3000, () => {
+    console.log(`Server is running`)
 })
-
-
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
 ```
-
-
