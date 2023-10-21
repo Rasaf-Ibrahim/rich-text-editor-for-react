@@ -6,5 +6,6 @@
     "utils": "Utils",
     "editor-status": "Editor Status",
     "upload-image-in-cloud": "Upload Image in Cloud",
-    "display-generated-html": "Display Generated HTML"
+    "display-generated-html": "Display Generated HTML",
+    "edit-generated-html": "Edit Generated HTML"
 }

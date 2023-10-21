@@ -22,15 +22,15 @@ const config: DocsThemeConfig = {
     },
 
     // banner
-    banner: {
-        dismissible: false,
-        key: 'under_construction', // for localStorage
-        text: (
-          <p className='body2'>
-            🚧 This site is under construction.
-          </p>
-        )
-    },  
+    // banner: {
+    //     dismissible: false,
+    //     key: 'under_construction', // for localStorage
+    //     text: (
+    //       <p className='body2'>
+    //         🚧 This site is under construction.
+    //       </p>
+    //     )
+    // },  
 
     
     // logo
@@ -68,7 +68,8 @@ const config: DocsThemeConfig = {
                 © {new Date().getFullYear()} rich-text-editor-for-react
             </p>
         )
-    },
+ 
+  },
 
 
 
