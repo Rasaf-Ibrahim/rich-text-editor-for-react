@@ -6,52 +6,96 @@ import { Tab, Tabs } from 'nextra-theme-docs'
 import {
     PAGE_HEADING_BOTTOM,
     HEADING_TOP_SPACER___COMPONENT, 
-    HEADING_BOTTOM_SPACER___COMPONENT
+    HEADING_BOTTOM_SPACER___COMPONENT,
+    HALF_REM_SPACER___COMPONENT
 } from '../../components/spacer.tsx'
-
+import { Callout } from 'nextra/components'
+ 
 
 
 {/* Page Heading */}
 ### How to Import
 <PAGE_HEADING_BOTTOM/>
 
-
-<HEADING_TOP_SPACER___COMPONENT/>
-
-<Tabs items={['Next.js', 'React+Vite']}>
+<Tabs items={['No SSR', 'SSR']}>
 
 
-  <Tab>
+    <Tab> 
+        For applications that don't utilize server-side rendering, such as those built with `React + Vite`, you can import directly:
 
-   ```ts showLineNumbers copy
+        ```js copy
+        import RichTextEditor from 'rich-text-editor-for-react'
+        import useRichTextEditor from 'rich-text-editor-for-react/hook'
+        ```
+
+        > For lazy loading, you can also utilize React.lazy and React.Suspense.
+
+    </Tab>
+
+
+    <Tab>
+
+    For applications utilizing server-side rendering, like those built with `Next.js`, the implementation of the "rich-text-editor-for-react" package should be handled slightly differently to sidestep a common error.
+
+    The "rich-text-editor-for-react" uses `Quill` under the hood, which relies on the `document` object. This object is not available during Server Side Rendering (SSR), which can cause a `document is not defined` error.
+
+    To address this error, we recommend the following steps: 
+
+        <HALF_REM_SPACER___COMPONENT/>
+
+        **1. Create a Separate Component for the Editor**
+
+        In a different component file, import and render the `RichTextEditor` component:
+
+        >MyRichTextEditor.js
+        ```ts copy
         'use client'
 
+        import RichTextEditor from 'rich-text-editor-for-react'
+        import useRichTextEditor from 'rich-text-editor-for-react/hook'
+
+        export default function MyRichTextEditor() {
+            
+            //render the component
+        }
+        ```
+
+        <HALF_REM_SPACER___COMPONENT/>
+
+        **2. Use Dynamic Imports in Your Page**
+
+        When you need to use the editor component in a Next.js page or another component, utilize dynamic imports with the `ssr` option set to `false`.
+
+        >page.js
+        ```ts copy
         import dynamic from 'next/dynamic'
-        const RichTextEditor = dynamic(
-            () => import('rich-text-editor-for-react'),
+
+        const MyRichTextEditor = dynamic(
+            () => import('./path-to-your-component/MyRichTextEditor'), 
             {
                 ssr: false,
-                loading: () => <p>Loading...</p>, // Anything can be used here as a loading component
+                loading: () => <p>Loading...</p>  // Optional: Display during component loading
             }
         )
-        import useRichTextEditor from 'rich-text-editor-for-react/hook'
-   ```
-  </Tab>
 
 
+        export default function MyPage() {
+            
+            return (
+                <MyRichTextEditor/>
+            )
+        }
+        ```
 
-  <Tab>
+        <HALF_REM_SPACER___COMPONENT/>
 
-    ```ts showLineNumbers copy
-        import RichTextEditor from 'rich-text-editor-for-react'
-        import useRichTextEditor  from 'rich-text-editor-for-react/hook'
-    ```
+        <Callout type="warning">
+            SEO: Components dynamically imported with `ssr: false` are not rendered during the initial server-side pass, making their content invisible to search engines on first load. For your Next.js application, this means any content within the `MyRichTextEditor` component won't contribute to SEO. Therefore, refrain from placing SEO-critical content within this component.
+        </Callout>
 
-    > If you want to use `React.lazy` and `React.Suspense`. You can use them.
-
-  </Tab>
-
-    
+    </Tab>
 
 </Tabs>
+
+
 
