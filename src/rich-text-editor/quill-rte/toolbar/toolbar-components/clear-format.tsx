@@ -9,7 +9,8 @@ import React from 'react'
 
 
 // nanoid
-import { nanoid } from 'nanoid'
+import { nanoid } from '../../../../dependencies/nanoid/nanoid'
+
 
 
 // types

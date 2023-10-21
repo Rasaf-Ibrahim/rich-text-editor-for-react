@@ -306,9 +306,10 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
 
     useEffect(() => {
 
-
         if (enableImageOperations === '') return
 
+        // if user doesn't want operations data, return
+        if (!fetchImageOperationsData) return
 
 
         // first, update the "imageOperationsData" to let the user know how many images are being uploaded
@@ -339,6 +340,7 @@ export default function RichTextEditor(props: RichTextEditorPropsType) {
 
         // if there is image to upload or delete, run the "upload_and_delete_image" function
         else {
+            console.log('Operation has started')
             upload_and_delete_image()
         }
 
